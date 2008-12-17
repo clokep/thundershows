@@ -70,6 +70,7 @@ var calThunderShowsModule = {
 
         const kSUNBIRD_UID = "{718e30fb-e89b-41dd-9da7-e25a45638b28}";
         const kLIGHTNING_UID = "{e2fda1a4-762b-4020-b5ad-a41df1933103}";
+		const kTHUNDERBIRD_UID = "{3550f703-e582-4d05-9a08-453d09bdfdc6}";
 		const baseScripts = ["calUtils.js", "calProviderBase.js"];
 		const scripts = ["calThunderShows.js", "calThunderShowsUtils.js"];
 
@@ -77,8 +78,10 @@ var calThunderShowsModule = {
 								.getService(Components.interfaces.nsIXULAppInfo);
 		var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 									   .getService(Components.interfaces.nsIVersionComparator);
-		if (versionChecker.compare(appInfo.version, "1.0") >= 0) {
-			// Running Sunbird/Lightning 1.0 or later
+		// get pref general.useragent.extra.lightning
+		if ((appInfo.ID == kSUNBIRD_UID && versionChecker.compare(appInfo.version, "1.0") >= 0) ||
+			(appInfo.ID == kLIGHTNING_UID) && versionChecker.compare()) {
+			// Running Sunbird 1.0 or later
 			Components.utils.import("resource://calendar/modules/calUtils.jsm");
 			cal.loadScripts(baseScripts,
 							this.__parent__);

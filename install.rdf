@@ -50,9 +50,9 @@
         <em:name>ThunderShows Provider</em:name>
         <em:description>Display tv shows as events in Lightning/Sunbird.</em:description>
         <em:creator>Patrick Cloke</em:creator>
-        <!--<em:homepageURL>http://addons.mozilla.org/???</em:homepageURL>//-->
+        <em:homepageURL>http://code.google.com/p/thundershows/</em:homepageURL>
 
-		<em:iconURL>chrome://thundershows/content/thundershows.png</em:iconURL>
+		<!--<em:iconURL>chrome://thundershows/content/thundershows.png</em:iconURL>//-->
 		<!--<em:optionsURL>chrome://thundershows/content/options.xul</em:optionsURL>//-->
 		
 		<em:contributor>B. Agricola (XML Feed) [http://on-my.tv/]</em:contributor>
