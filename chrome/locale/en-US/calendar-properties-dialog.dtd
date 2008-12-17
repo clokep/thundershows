@@ -1,0 +1,6 @@
+<!ENTITY default-options.label "Basic">
+<!ENTITY thundershows-options.label "ThunderShows Provider">
+<!ENTITY thundershows-filter-list.label "Show Names Filter">
+<!ENTITY thundershows-add-filter.label "Add filter">
+<!ENTITY thundershows-edit-filter.label "Edit filter">
+<!ENTITY thundershows-remove-filter.label "Remove filter">

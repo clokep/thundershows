@@ -1,0 +1,4 @@
+content thundershows chrome/content/
+overlay chrome://calendar/content/calendarCreation.xul chrome://thundershows/content/calendarCreation.xul
+overlay chrome://calendar/content/calendar-properties-dialog.xul chrome://thundershows/content/calendar-properties-dialog.xul
+locale thundershows en-US chrome/locale/en-US/
