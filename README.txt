@@ -46,6 +46,8 @@ Possible new features
 * Support for saving a history (all shows, only shows on watchlist, none)
 	Possibly cache?
 
+* Export to "timeline" grid? (http://www.nu.nl/tvgids/)
+
 * If you read this and have any ideas, suggestions, critics or
   whatsoever, please let me know!
 
