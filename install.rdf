@@ -48,7 +48,7 @@
         
 		<!-- Front End MetaData //-->
         <em:name>ThunderShows Provider</em:name>
-        <em:description>Display tv shows as events in Lightning/Sunbird.</em:description>
+        <em:description>Display TV shows as events in Lightning/Sunbird.</em:description>
         <em:creator>Patrick Cloke</em:creator>
         <em:homepageURL>http://code.google.com/p/thundershows/</em:homepageURL>
 
@@ -72,7 +72,7 @@
 			<Description>
 				<!-- Sunbird //-->
 				<em:id>{718e30fb-e89b-41dd-9da7-e25a45638b28}</em:id>
-				<em:minVersion>0.9</em:minVersion>
+				<em:minVersion>1.0pre</em:minVersion>
 				<em:maxVersion>1.0pre</em:maxVersion>
 			</Description>
 		</em:targetApplication>
@@ -82,7 +82,7 @@
             <Description>
                 <!-- Lightning -->
                 <em:id>{e2fda1a4-762b-4020-b5ad-a41df1933103}</em:id>
-                <em:minVersion>0.9</em:minVersion>
+                <em:minVersion>1.0pre</em:minVersion>
                 <em:maxVersion>1.0pre</em:maxVersion>
             </Description>
         </em:requires>
