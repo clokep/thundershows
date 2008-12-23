@@ -43,7 +43,7 @@
     <Description about="urn:mozilla:install-manifest">
 		<!-- Extension Information //-->
         <em:id>{11b7da5a-8458-4cf6-a067-f75c19562317}</em:id>
-        <em:version>0.1pre</em:version>
+        <em:version>0.1</em:version>
         <em:type>2</em:type>
         
 		<!-- Front End MetaData //-->
