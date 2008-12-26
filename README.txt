@@ -28,7 +28,7 @@ Usage
 2.  Go into the options of that calendar (right click > "Properties")
 3.  Choose the "ThunderShows Provider" tab
 4.  Add the shows you would like to have appear as events (shows must exactly
-	match the name of the show -- see http://on-my.tv/show-select
+	match the name of the show -- see http://on-my.tv/show-select)
 
 
 ------------------------------------------
@@ -45,6 +45,8 @@ Possible new features
 
 * Support for saving a history (all shows, only shows on watchlist, none)
 	Possibly cache?
+
+* Export to "timeline" grid? (http://www.nu.nl/tvgids/)
 
 * If you read this and have any ideas, suggestions, critics or
   whatsoever, please let me know!
