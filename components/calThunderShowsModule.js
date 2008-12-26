@@ -60,81 +60,115 @@ var cTS_classInfo = {
     }
 };
 
-function ComponentsUtilsImport(aFile) {
-    var iosvc = Components.classes["@mozilla.org/network/io-service;1"]
-                          .getService(Components.interfaces.nsIIOService);
-
-    var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
-                           .getService(Components.interfaces.mozIJSSubScriptLoader);
-
-    try {
-        var scriptUri = iosvc.newFileURI(aFile);
-        loader.loadSubScript(scriptUri.spec, null);
-    } catch (e) {
-        Components.utils.reportError("Error while loading " + aFile.path);
-        throw e;
-    }
-}
-
 var calThunderShowsModule = {
 
     mUtilsLoaded: false,
 
     loadUtils: function cTSM_loadUtils() {
-        if (this.mUtilsLoaded)
-            return;
+		if (this.mUtilsLoaded)
+				return;
 
-        const kSUNBIRD_UID = "{718e30fb-e89b-41dd-9da7-e25a45638b28}";
-        const kLIGHTNING_UID = "{e2fda1a4-762b-4020-b5ad-a41df1933103}";
-        const scripts = ["calThunderShows.js", "calThunderShowsUtils.js"];
-        const baseScripts = ["calUtils.js", "calProviderBase.js"];
+		const kSUNBIRD_UID = "{718e30fb-e89b-41dd-9da7-e25a45638b28}";
+		const kLIGHTNING_UID = "{e2fda1a4-762b-4020-b5ad-a41df1933103}";
+		const kTHUNDERBIRD_UID = "{3550f703-e582-4d05-9a08-453d09bdfdc6}";
+		const baseScripts = ["calUtils.js", "calProviderBase.js"];
+		const scripts = ["calThunderShows.js", "calThunderShowsUtils.js"];
 
-        // First, load script from the application dir
-        var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].
-                      getService(Components.interfaces.nsIXULAppInfo);
-        if (appInfo.ID == kSUNBIRD_UID) {
-            // On sunbird, the application dir is the GRE Application Directory
-            var dirsvc = Components.classes["@mozilla.org/file/directory_service;1"]
-                                   .getService(Components.interfaces.nsIProperties);
-            try {
-                var appdir = dirsvc.get("GreD", Components.interfaces.nsIFile);
-                appdir.append("js");
-            } catch (e) {
-                Components.utils.reportError("Error getting GRE Application Directory");
-                throw(e);
-            }
-        } else {
-            // Otherwise, the application directory is the lightning extension directory
-            var extman = Components.classes["@mozilla.org/extensions/manager;1"]
-                                   .getService(Components.interfaces.nsIExtensionManager);
-            try {
-                var appdir = extman.getInstallLocation(kLIGHTNING_UID)
-                                   .getItemLocation(kLIGHTNING_UID);
-                appdir.append("js");
-            } catch (e) {
-                Components.utils.reportError("Error getting Lightning Extension Directory");
-                throw(e);
-            }
-        }
+		var appInfo = Components.classes["@mozilla.org/xre/app-info;1"]
+								.getService(Components.interfaces.nsIXULAppInfo);
 
-        for each (var script in baseScripts) {
-            var scriptFile = appdir.clone();
-            scriptFile.append(script);
+		// Get version info
+		var version;
+		if (appInfo.ID == kTHUNDERBIRD_UID) {
+			// Use Lightning version
+			const nsIPrefBranch = Components.interfaces.nsIPrefBranch;
+			const prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
+									.getService(nsIPrefBranch);
+			// Preferences is in the form of "Lightning/0.9"
+			version = prefBranch.getCharPref("general.useragent.extra.lightning").slice(10);
+		} else {
+			// Use Sunbird version
+			version = appInfo.version;
+		}
+		
+		var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+									   .getService(Components.interfaces.nsIVersionComparator);
+		if (versionChecker.compare(version, "0.9") == 0) {
+			// Lightning / Sunbird 0.9
+			function ComponentsUtilsImport(aFile) {
+				var iosvc = Components.classes["@mozilla.org/network/io-service;1"]
+									  .getService(Components.interfaces.nsIIOService);
 
-            ComponentsUtilsImport(scriptFile);
-        }
+				var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"]
+									   .getService(Components.interfaces.mozIJSSubScriptLoader);
 
-        // Now load gdata extension scripts. Note that unintuitively,
-        // __LOCATION__.parent == . We expect to find the subscripts in ./../js
-        appdir = __LOCATION__.parent.parent;
-        appdir.append("js");
+				try {
+					var scriptUri = iosvc.newFileURI(aFile);
+					loader.loadSubScript(scriptUri.spec, null);
+				} catch (e) {
+					Components.utils.reportError("Error while loading " + aFile.path);
+					throw e;
+				}
+			}
 
-        for each (var script in scripts) {
-            var scriptFile = appdir.clone();
-            scriptFile.append(script);
+			// First, load script from the application dir
+			if (appInfo.ID == kSUNBIRD_UID) {
+				// On Sunbird, the application dir is the GRE Application Directory
+				var dirsvc = Components.classes["@mozilla.org/file/directory_service;1"]
+									   .getService(Components.interfaces.nsIProperties);
+				try {
+					var appdir = dirsvc.get("GreD", Components.interfaces.nsIFile);
+					appdir.append("js");
+				} catch (e) {
+					Components.utils.reportError("Error getting GRE Application Directory");
+					throw(e);
+				}
+			} else {
+				// Otherwise, the application directory is the lightning extension directory
+				var extman = Components.classes["@mozilla.org/extensions/manager;1"]
+									   .getService(Components.interfaces.nsIExtensionManager);
+				try {
+					var appdir = extman.getInstallLocation(kLIGHTNING_UID)
+									   .getItemLocation(kLIGHTNING_UID);
+					appdir.append("js");
+				} catch (e) {
+					Components.utils.reportError("Error getting Lightning Extension Directory");
+					throw(e);
+				}
+			}
 
-            ComponentsUtilsImport(scriptFile);
-        }
+			for each (var script in baseScripts) {
+				var scriptFile = appdir.clone();
+				scriptFile.append(script);
+
+				ComponentsUtilsImport(scriptFile);
+			}
+
+			// Now load gdata extension scripts. Note that unintuitively,
+			// __LOCATION__.parent == . We expect to find the subscripts in ./../js
+			appdir = __LOCATION__.parent.parent;
+			appdir.append("js");
+
+			for each (var script in scripts) {
+				var scriptFile = appdir.clone();
+				scriptFile.append(script);
+
+				ComponentsUtilsImport(scriptFile);
+			}
+		} else {
+			// Lightning / Sunbird 1.0pre
+			Components.utils.import("resource://calendar/modules/calUtils.jsm");
+			cal.loadScripts(baseScripts,
+							this.__parent__);
+
+			// Now load the extension scripts. Note that unintuitively,
+			// __LOCATION__.parent == . We expect to find the subscripts in ./../js
+			let thisDir = __LOCATION__.parent.parent.clone();
+			thisDir.append("js");
+			cal.loadScripts(scripts,
+							this.__parent__,
+							thisDir);
+		}
 
         this.mUtilsLoaded = true;
     },
