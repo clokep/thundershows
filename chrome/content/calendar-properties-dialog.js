@@ -137,7 +137,8 @@ function cTS_addFilter() {
 	if (editFilter.value != "" && !doesFilterExist(editFilter.value)) {
 		// Only add the filter if it isn't empty && doesn't exist already
 		filterList.appendItem(editFilter.value, editFilter.value);
-		editFilter.reset();
+		//editFilter.reset();
+		editFilter.value = ""; // Fix for Gecko 1.8.1
 		// Select last item
 		filterList.selectedIndex = filterList.getRowCount() - 1;
 		// Show last item
@@ -173,7 +174,8 @@ function cTS_removeFilter() {
 	filterList.removeItemAt(selectedIndex);
 	
 	// Clear the edit box
-	document.getElementById("thundershows-edit-filter-textbox").reset();
+	//document.getElementById("thundershows-edit-filter-textbox").reset();
+	document.getElementById("thundershows-edit-filter-textbox").value = ""; // Fix for Gecko 1.8.1
 
 	// Choose a new item to select
 	if (selectedIndex > 0) {
