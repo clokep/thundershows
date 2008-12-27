@@ -55,6 +55,8 @@ Possible new features
 Change Log
 ------------------------------------------
 
+0.2 -- Compatible with Lightning/Sunbird 0.9
+
 0.1 -- Initial Release
   
 ------------------------------------------
