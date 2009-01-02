@@ -37,7 +37,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://thundershows/locale/calendar-properties-dialog.dtd">
 <overlay id="cTS_calendar-properties-dialog"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<dialog id="calendar-properties-dialog"
+	<dialog id="calendar-properties-dialog-2"
 			ondialogaccept="cTS_onAcceptDialog(); return onAcceptDialog();"
 			onload="cTS_onLoad(); onLoad(); cTS_sizeToContent();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
 

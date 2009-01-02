@@ -213,5 +213,5 @@ function cTS_sizeToContent() {
 		newHeight += box.height;
 	}
 	// Apply the new height to the dialog
-	document.getElementById("calendar-properties-dialog").height = newHeight;
+	document.getElementById("calendar-properties-dialog-2").height = newHeight;
 }
