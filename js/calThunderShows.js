@@ -258,22 +258,21 @@ calThunderShows.prototype = {
 		var wantEvents = ((aItemFilter &
 				Components.interfaces.calICalendar.ITEM_FILTER_TYPE_EVENT) != 0);
 
-		if (wantEvents) {
+		var filters = this.getProperty("thundershows.filters");
+
+		if (filters == null) {
+			aListener.onOperationComplete(this.superCalendar,
+										  Components.results.NS_OK,
+										  Components.interfaces.calIOperationListener.GET,
+										  null,
+										  "Not looking for any shows.");
+		} else if (wantEvents) {
 			// Use xpath to get all elements with class vevent
 			var vevents = dom.evaluate("//*[@_class='TVEpisode']", dom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 
 			var vevent;
 			var items = new Array();
-			
-			var filters = this.getProperty("thundershows.filters");
-			
-			if (filters == null) {
-				aListener.onOperationComplete(this.superCalendar,
-											  Components.results.NS_OK,
-											  Components.interfaces.calIOperationListener.GET,
-											  null,
-											  "Not looking for any shows.");
-			}
+
 			filters = filters.split("\u001A");
 			
 			while ((vevent = vevents.iterateNext())) {
