@@ -39,7 +39,7 @@
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<dialog id="calendar-properties-dialog-2"
 			ondialogaccept="cTS_onAcceptDialog(); return onAcceptDialog();"
-			onload="cTS_onLoad(); onLoad(); cTS_sizeToContent();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
+			onload="cTS_onLoad(); onLoad();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
 
 		<script type="application/x-javascript" src="chrome://thundershows/content/calendar-properties-dialog.js">
 			//Let my editor syntax highlight
@@ -57,6 +57,7 @@
 				<tabpanel id="thundershows-properties-panel" orient="vertical">
 					<listbox id="calendar-filter-list"
 							 rows="5"
+							 flex="1"
 							 onclick="cTS_selectFilter();"
 							 disable-with-calendar="true"
 							 thundershows-only-property="true">
