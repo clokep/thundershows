@@ -3,7 +3,7 @@
    - Version: MPL 1.1/GPL 2.0/LGPL 2.1
    -
    - The contents of this file are subject to the Mozilla Public License Version
-   - 1.		(the "License"); you may not use this file except in compliance with
+   - 1.1 (the "License"); you may not use this file except in compliance with
    - the License. You may obtain a copy of the License at
    - http://www.mozilla.org/MPL/
    -
@@ -22,8 +22,8 @@
    - Contributor(s):
    -
    - Alternatively, the contents of this file may be used under the terms of
-   - either the GNU General Public License Version 		or later (the "GPL"), or
-   - the GNU Lesser General Public License Version 2.		or later (the "LGPL"),
+   - either the GNU General Public License Version or later (the "GPL"), or
+   - the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
    - in which case the provisions of the GPL or the LGPL are applicable instead
    - of those above. If you wish to allow use of your version of this file only
    - under the terms of either the GPL or the LGPL, and not to allow others to
@@ -37,6 +37,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://thundershows/locale/calendar-properties-dialog.dtd">
 <overlay id="cTS_calendar-properties-dialog"
 		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<!-- Lightning/Sunbird 0.9 //-->
 	<dialog id="calendar-properties-dialog"
 			ondialogaccept="cTS_onAcceptDialog(); return onAcceptDialog();"
 			onload="cTS_onLoad(); onLoad(); cTS_sizeToContent();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
@@ -57,6 +58,61 @@
 				<tabpanel id="thundershows-properties-panel" orient="vertical">
 					<listbox id="calendar-filter-list"
 							 rows="5"
+							 flex="1"
+							 onclick="cTS_selectFilter();"
+							 disable-with-calendar="true"
+							 thundershows-only-property="true">
+						<listhead>
+							<listheader label="&thundershows-filter-list.label;"/>
+						</listhead>
+					</listbox>
+					<hbox>
+						<textbox id="thundershows-edit-filter-textbox"
+								 flex="1"
+								 disable-with-calendar="true"
+								 thundershows-only-property="true"/>
+						<button id="thundershows-add-filter"
+								label="&thundershows-add-filter.label;"
+								oncommand="cTS_addFilter();"
+								disable-with-calendar="true"
+								thundershows-only-property="true"/>
+						<button id="thundershows-edit-filter"
+								label="&thundershows-edit-filter.label;"
+								oncommand="cTS_editFilter();"
+								disable-with-calendar="true"
+								thundershows-only-property="true"/>
+						<button id="thundershows-remove-filter"
+								label="&thundershows-remove-filter.label;"
+								oncommand="cTS_removeFilter();"
+								disable-with-calendar="true"
+								thundershows-only-property="true"/>
+					</hbox>
+				</tabpanel>
+			</tabpanels>
+		</tabbox>
+	</dialog>
+	<!-- Lightning/Sunbird 1.0pre //-->
+	<dialog id="calendar-properties-dialog-2"
+			ondialogaccept="cTS_onAcceptDialog(); return onAcceptDialog();"
+			onload="cTS_onLoad(); onLoad();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
+
+		<script type="application/x-javascript" src="chrome://thundershows/content/calendar-properties-dialog.js">
+			//Let my editor syntax highlight
+		</script>
+
+		<tabbox id="calendar-properties-tabbox" selectedIndex="0">
+			<tabs>
+				<tab label="&default-options.label;"/>
+				<tab label="&thundershows-options.label;"/>
+			</tabs>
+			<tabpanels>
+				<tabpanel id="default-properties-panel" orient="vertical">
+					<!-- We're not editing anything here cTS_onLoad() moves the "default" content here.  //-->
+				</tabpanel>
+				<tabpanel id="thundershows-properties-panel" orient="vertical">
+					<listbox id="calendar-filter-list"
+							 rows="5"
+							 flex="1"
 							 onclick="cTS_selectFilter();"
 							 disable-with-calendar="true"
 							 thundershows-only-property="true">
