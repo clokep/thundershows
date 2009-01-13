@@ -47,7 +47,6 @@ function dump(aMessage) {
  * This function was taken from the Provider for Google Calendar
  *
  * @param aStr		  The RFC3339 compliant Date String
- * @param aTimezone	 The timezone this date string is most likely in
  * @return			  A calIDateTime object
  */
 function fromRFC3339(aStr) {
