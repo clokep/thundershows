@@ -69,8 +69,9 @@ var calThunderShowsModule = {
 			return;
 
 		Components.utils.import("resource://calendar/modules/calUtils.jsm");
-		cal.loadScripts(["calUtils.js", "calProviderBase.js"],
-						this.__parent__);
+		Components.utils.import("resource://calendar/modules/calProviderUtils.jsm");
+		Components.utils.import("resource://calendar/modules/calAuthUtils.jsm");
+		cal.loadScripts(["calUtils.js"], this.__parent__);
 
 		// Now load the extension scripts. Note that unintuitively,
 		// __LOCATION__.parent == . We expect to find the subscripts in ./../js
