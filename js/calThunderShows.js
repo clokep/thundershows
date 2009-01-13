@@ -333,14 +333,19 @@ calThunderShows.prototype = {
 					
 					// Genres (Categories)
 					var categories = new Array();
-					// Find all genres
+					categories.push("TV show");
+					// Handle individual genre
+					var genre = dom.evaluate(".//genres/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					if (genre) {
+						categories.push(genre.stringValue);
+					}
+					// Handle multiple genres
 					var genres = dom.evaluate(".//genres/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 					while ((genre = genres.iterateNext())) {
 						categories.push(genre.textContent );
 					}
-					if (categories.length > 0) {
-						item.setCategories(categories.length, categories);
-					}
+					// Set genres to item
+					item.setCategories(categories.length, categories);
 
 					item.makeImmutable();
 					items.push(item);
