@@ -306,11 +306,11 @@ calThunderShows.prototype = {
 						item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
 						item.setProperty("DTSTAMP", now()); // calUtils.js
 
-						// Show times are from EST, if PST or MST we must change this
-						if (westCoast()) {
-							// Offsets PST/MST 2 hours
-							item.startDate = increment2Hours(item.startDate);
-							item.endDate = increment2Hours(item.endDate);
+						// Show times are from EST, if PST or MST we must offset this
+						var offset = this.getProperty("thundershows.offset");
+						if (offset != null) {
+							item.startDate = offsetDateTime(item.startDate, parseInt(offset));
+							item.endDate = offsetDateTime(item.endDate, parseInt(offset));
 						}
 					} catch (e) {
 						WARN("Event was skipped, could not convert dates: " + e);

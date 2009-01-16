@@ -96,9 +96,11 @@
 									disable-with-calendar="true"
 									thundershows-only-property="true">
 							<radio id="thundershows-west-coast-offset"
-								   label="&thundershows-west-coast-offset.label;"/>
+								   label="&thundershows-west-coast-offset.label;"
+								   value="10800"/> <!-- 3 Hours in seconds //-->
 							<radio id="thundershows-east-coast-offset"
-								   label="&thundershows-east-coast-offset.label;"/>
+								   label="&thundershows-east-coast-offset.label;"
+								   value="0"/>
 						</radiogroup>
 					</groupbox>
 				</tabpanel>

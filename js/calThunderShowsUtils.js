@@ -129,32 +129,25 @@ function fromRFC3339(aStr) {
 	return dateTime;
 }
 
-function westCoast() {
-	/*var dateTime = cal.createDateTime();
-	dateTime.timezone = calendarDefaultTimezone();
-	var offset = dateTime.timezoneOffset;*/
-	var offset = Math.floor((new Date()).getTimezoneOffset() / -60);
-	switch (offset) { // Minutes to hours
-		case -5: // EST
-		case -6: // CST
-			return false;
-		case -7: // MST
-		case -8: // PST
-			return true;
-	}
-	return false;
-}
-
-function increment2Hours(aDate) {
-	if (!aDate.isDate && false) {
+/**
+ * offsetDateTime
+ * Offset a calIDateTime object by aOffset number of seconds
+ *
+ * @param aDateTime	  The DateTime object
+ * @param aOffset	  The offset (in seconds)
+ * @return			  A calIDateTime object
+ */
+function offsetDateTime(aDateTime, aOffset) {
+	dump(aOffset);
+	if (!aDateTime.isDate && aOffset != 0) {
 		// Only if it has a time component
-		aDate.resetTo(aDate.year,
-					  aDate.month,
-					  aDate.day,
-					  aDate.hour + 2,
-					  aDate.minute,
-					  aDate.second,
-					  aDate.timezone);
+		aDateTime.resetTo(aDateTime.year,
+						  aDateTime.month,
+						  aDateTime.day,
+						  aDateTime.hour,
+						  aDateTime.minute,
+						  aDateTime.second + aOffset,
+						  aDateTime.timezone);
 	}
-	return aDate;
+	return aDateTime;
 }

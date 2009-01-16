@@ -56,11 +56,6 @@ function cTS_onLoad() {
 	gCalendar = window.arguments[0].calendar;
 	// We only want to run if its a ThunderShows Provider calendar
 	if (gCalendar.type == "thundershows") {
-		// Hide elements that can't be changed
-		//document.getElementById("calendar-email-identity-row").hidden = true;
-		//document.getElementById("read-only").hidden = true;
-		//document.getElementById("calendar-cache-row").hidden = true;
-
 		// Populate filter list
 		var filterList = document.getElementById("calendar-filter-list");
 		var filters = gCalendar.getProperty("thundershows.filters");
@@ -77,6 +72,22 @@ function cTS_onLoad() {
 
 			// Go back to the first item
 			filterList.ensureIndexIsVisible(0);
+		}
+
+		// Set offset setting
+		var offsetGroup = document.getElementById("thundershows-offset-selector");
+		var offset = gCalendar.getProperty("thundershows.offset");
+		if (offset == null) {
+			// Default value is no offset
+			offset = "0";
+		}
+		for (var i = 0; i < offsetGroup.itemCount; i++) {
+			if (offsetGroup.getItemAtIndex(i).value == offset) {
+				// Set the selected item to this item
+				offsetGroup.selectedIndex = i;
+				// There can only be one selected item
+				break;
+			}
 		}
 	} else {
 		// Disable elements that are only available to ThunderShows Provider
@@ -107,6 +118,10 @@ function cTS_onAcceptDialog() {
 			}
 		}
 		gCalendar.setProperty("thundershows.filters", filters);
+		
+		// Save offset settings
+		var offsetGroup = document.getElementById("thundershows-offset-selector");
+		gCalendar.setProperty("thundershows.offset", offsetGroup.selectedItem.value);
 	}
 
 	return true;
