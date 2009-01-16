@@ -274,7 +274,7 @@ calThunderShows.prototype = {
 			var items = new Array();
 
 			filters = filters.split("\u001A");
-			
+
 			while ((vevent = vevents.iterateNext())) {
 				// Must get the show name
 				var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
@@ -300,11 +300,18 @@ calThunderShows.prototype = {
 
 					// Parse dates
 					try {
-						item.startDate = fromRFC3339(dtstart.stringValue.replace(" ", "T") + "Z"); // Assume UTC time
+						item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Assume UTC time
 						// Seems to be UTC even though EST in XML file, manually set it to UTC
 						//item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
-						item.endDate = (dtend ? fromRFC3339(dtend.stringValue.replace(" ", "T") + "Z") : item.startDate.clone()); // Assume UTC time
+						item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
 						item.setProperty("DTSTAMP", now()); // calUtils.js
+
+						// Show times are from EST, if PST or MST we must change this
+						if (westCoast()) {
+							// Offsets PST/MST 2 hours
+							item.startDate = increment2Hours(item.startDate);
+							item.endDate = increment2Hours(item.endDate);
+						}
 					} catch (e) {
 						WARN("Event was skipped, could not convert dates: " + e);
 						continue;

@@ -35,40 +35,15 @@ Usage
 Known issues
 ------------------------------------------
 
-None at the moment
+See: http://code.google.com/p/thundershows/issues/list?can=2&q=label%3AType-Defect
 
 ------------------------------------------
 Possible new features
 ------------------------------------------
 
-* Support for regular expressions in show names
+See: http://code.google.com/p/thundershows/issues/list?can=2&q=label%3AType-Enhancement
 
-* Support for saving a history (all shows, only shows on watchlist, none)
-	Possibly cache?
 
-* Export to "timeline" grid? (http://www.nu.nl/tvgids/)
-
-* If you read this and have any ideas, suggestions, critics or
-  whatsoever, please let me know!
-
-------------------------------------------
-Change Log
-------------------------------------------
-
-0.2.2	xx/xx/2009
- = Fixed bug when only one genre
- = Updated to newest version of comm-central code
- = Fix for timezones
-
-0.2.1	01/03/2009
- = Fixed bug in Lightning/Sunbird 1.0pre caused by Bug 46609
-   (https://bugzilla.mozilla.org/show_bug.cgi?id=466009)
-
-0.2	12/30/2008
- + Compatible with Lightning/Sunbird 0.9
-
-0.1	12/22/2008
- + Initial Release
 
 ------------------------------------------
 Resources for developers
