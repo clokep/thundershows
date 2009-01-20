@@ -43,7 +43,7 @@
     <Description about="urn:mozilla:install-manifest">
 		<!-- Extension Information //-->
         <em:id>{11b7da5a-8458-4cf6-a067-f75c19562317}</em:id>
-        <em:version>0.2.1</em:version>
+        <em:version>0.2.2</em:version>
         <em:type>2</em:type>
         
 		<!-- Front End MetaData //-->
@@ -72,7 +72,7 @@
 			<Description>
 				<!-- Sunbird //-->
 				<em:id>{718e30fb-e89b-41dd-9da7-e25a45638b28}</em:id>
-				<em:minVersion>0.9</em:minVersion>
+				<em:minVersion>1.0pre</em:minVersion>
 				<em:maxVersion>1.0pre</em:maxVersion>
 			</Description>
 		</em:targetApplication>
@@ -82,7 +82,7 @@
             <Description>
                 <!-- Lightning -->
                 <em:id>{e2fda1a4-762b-4020-b5ad-a41df1933103}</em:id>
-                <em:minVersion>0.9</em:minVersion>
+                <em:minVersion>1.0pre</em:minVersion>
                 <em:maxVersion>1.0pre</em:maxVersion>
             </Description>
         </em:requires>
