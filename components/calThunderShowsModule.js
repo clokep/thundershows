@@ -35,6 +35,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+var IS_CALENDAR_09 = false;
+
 var cTS_classInfo = {
      calThunderShows: {
         getInterfaces: function cI_cTS_getInterfaces (count) {
@@ -95,6 +97,8 @@ var calThunderShowsModule = {
 									   .getService(Components.interfaces.nsIVersionComparator);
 		if (versionChecker.compare(version, "0.9") == 0) {
 			// Lightning / Sunbird 0.9
+			IS_CALENDAR_09 = true;
+			
 			function ComponentsUtilsImport(aFile) {
 				var iosvc = Components.classes["@mozilla.org/network/io-service;1"]
 									  .getService(Components.interfaces.nsIIOService);
@@ -158,8 +162,9 @@ var calThunderShowsModule = {
 		} else {
 			// Lightning / Sunbird 1.0pre
 			Components.utils.import("resource://calendar/modules/calUtils.jsm");
-			cal.loadScripts(baseScripts,
-							this.__parent__);
+			Components.utils.import("resource://calendar/modules/calProviderUtils.jsm");
+			Components.utils.import("resource://calendar/modules/calAuthUtils.jsm");
+			cal.loadScripts(["calUtils.js"], this.__parent__);
 
 			// Now load the extension scripts. Note that unintuitively,
 			// __LOCATION__.parent == . We expect to find the subscripts in ./../js
@@ -241,3 +246,4 @@ var calThunderShowsModule = {
 function NSGetModule(aComponentManager, aFileSpec) {
     return calThunderShowsModule;
 }
+

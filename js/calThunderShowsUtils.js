@@ -47,7 +47,6 @@ function dump(aMessage) {
  * This function was taken from the Provider for Google Calendar
  *
  * @param aStr		  The RFC3339 compliant Date String
- * @param aTimezone	 The timezone this date string is most likely in
  * @return			  A calIDateTime object
  */
 function fromRFC3339(aStr) {
@@ -128,4 +127,27 @@ function fromRFC3339(aStr) {
 		}
 	}
 	return dateTime;
+}
+
+/**
+ * offsetDateTime
+ * Offset a calIDateTime object by aOffset number of seconds
+ *
+ * @param aDateTime	  The DateTime object
+ * @param aOffset	  The offset (in seconds)
+ * @return			  A calIDateTime object
+ */
+function offsetDateTime(aDateTime, aOffset) {
+	dump(aOffset);
+	if (!aDateTime.isDate && aOffset != 0) {
+		// Only if it has a time component
+		aDateTime.resetTo(aDateTime.year,
+						  aDateTime.month,
+						  aDateTime.day,
+						  aDateTime.hour,
+						  aDateTime.minute,
+						  aDateTime.second + aOffset,
+						  aDateTime.timezone);
+	}
+	return aDateTime;
 }

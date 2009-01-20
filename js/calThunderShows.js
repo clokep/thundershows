@@ -40,7 +40,7 @@ function calThunderShows() {
 }
 
 calThunderShows.prototype = {
-	__proto__: calProviderBase.prototype,
+	__proto__: (IS_CALENDAR_09 ? calProviderBase.prototype : cal.ProviderBase.prototype),
 
 	QueryInterface: function cTS_QueryInterface(aIID) {
 		return doQueryInterface(this,
@@ -274,7 +274,7 @@ calThunderShows.prototype = {
 			var items = new Array();
 
 			filters = filters.split("\u001A");
-			
+
 			while ((vevent = vevents.iterateNext())) {
 				// Must get the show name
 				var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
@@ -283,22 +283,35 @@ calThunderShows.prototype = {
 					item.calendar = this;
 					
 					// Required elements
+					// All times should be received in GMT (UTC)
 					var dtstart = dom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var timezone = dom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					// This seems to return the UTC time even though its EST in the XML
 					var dtend = dom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
 					if (!dtstart) {
 						WARN("Event was skipped, could not find dtstart/dtend");
 						continue;
 					}
+					
+					if (timezone.stringValue != "GMT") {
+						WARN("Event was skipped, cannot handle timezone ");
+						continue;
+					}
 
 					// Parse dates
 					try {
-						item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Using the UTC time
+						item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Assume UTC time
 						// Seems to be UTC even though EST in XML file, manually set it to UTC
-						item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
+						//item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
+						item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
 						item.setProperty("DTSTAMP", now()); // calUtils.js
+
+						// Show times are from EST, if PST or MST we must offset this
+						var offset = this.getProperty("thundershows.offset");
+						if (offset != null) {
+							item.startDate = offsetDateTime(item.startDate, parseInt(offset));
+							item.endDate = offsetDateTime(item.endDate, parseInt(offset));
+						}
 					} catch (e) {
 						WARN("Event was skipped, could not convert dates: " + e);
 						continue;
@@ -313,7 +326,6 @@ calThunderShows.prototype = {
 					// Optional Elements
 					var uid = dom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var network = dom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					//var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var episode_name = dom.evaluate(".//name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var season_number = dom.evaluate(".//season/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var episode_number = dom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
@@ -333,14 +345,19 @@ calThunderShows.prototype = {
 					
 					// Genres (Categories)
 					var categories = new Array();
-					// Find all genres
+					categories.push("TV show");
+					// Handle individual genre
+					var genre = dom.evaluate(".//genres/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					if (genre) {
+						categories.push(genre.stringValue);
+					}
+					// Handle multiple genres
 					var genres = dom.evaluate(".//genres/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 					while ((genre = genres.iterateNext())) {
 						categories.push(genre.textContent );
 					}
-					if (categories.length > 0) {
-						item.setCategories(categories.length, categories);
-					}
+					// Set genres to item
+					item.setCategories(categories.length, categories);
 
 					item.makeImmutable();
 					items.push(item);
