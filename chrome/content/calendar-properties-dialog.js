@@ -81,13 +81,17 @@ function cTS_onLoad() {
 			// Default value is no offset
 			offset = "0";
 		}
-		for (var i = 0; i < offsetGroup.itemCount; i++) {
-			if (offsetGroup.getItemAtIndex(i).value == offset) {
+		var currentItem = offsetGroup.firstChild;
+		var count = 0;
+		while (currentItem) {
+			if (currentItem.value == offset) {
 				// Set the selected item to this item
-				offsetGroup.selectedIndex = i;
+				offsetGroup.selectedIndex = count;
 				// There can only be one selected item
 				break;
 			}
+			currentItem = currentItem.nextSibling;
+			count++;
 		}
 	} else {
 		// Disable elements that are only available to ThunderShows Provider
@@ -121,7 +125,8 @@ function cTS_onAcceptDialog() {
 		
 		// Save offset settings
 		var offsetGroup = document.getElementById("thundershows-offset-selector");
-		gCalendar.setProperty("thundershows.offset", offsetGroup.selectedItem.value);
+		var offset = offsetGroup.selectedItem ? offsetGroup.selectedItem.value : "0";
+		gCalendar.setProperty("thundershows.offset", offset);
 	}
 
 	return true;

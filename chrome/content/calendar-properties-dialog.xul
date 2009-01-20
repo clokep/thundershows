@@ -56,37 +56,54 @@
 					<!-- We're not editing anything here cTS_onLoad() moves the "default" content here.  //-->
 				</tabpanel>
 				<tabpanel id="thundershows-properties-panel" orient="vertical">
-					<listbox id="calendar-filter-list"
-							 rows="5"
-							 flex="1"
-							 onclick="cTS_selectFilter();"
-							 disable-with-calendar="true"
-							 thundershows-only-property="true">
-						<listhead>
-							<listheader label="&thundershows-filter-list.label;"/>
-						</listhead>
-					</listbox>
-					<hbox>
-						<textbox id="thundershows-edit-filter-textbox"
+					<groupbox>
+						<caption label="&thundershows-filter-caption.label;"/>
+						<listbox id="calendar-filter-list"
+								 rows="5"
 								 flex="1"
+								 onclick="cTS_selectFilter();"
 								 disable-with-calendar="true"
-								 thundershows-only-property="true"/>
-						<button id="thundershows-add-filter"
-								label="&thundershows-add-filter.label;"
-								oncommand="cTS_addFilter();"
-								disable-with-calendar="true"
-								thundershows-only-property="true"/>
-						<button id="thundershows-edit-filter"
-								label="&thundershows-edit-filter.label;"
-								oncommand="cTS_editFilter();"
-								disable-with-calendar="true"
-								thundershows-only-property="true"/>
-						<button id="thundershows-remove-filter"
-								label="&thundershows-remove-filter.label;"
-								oncommand="cTS_removeFilter();"
-								disable-with-calendar="true"
-								thundershows-only-property="true"/>
-					</hbox>
+								 thundershows-only-property="true">
+							<listhead>
+								<listheader label="&thundershows-filter-list.label;"/>
+							</listhead>
+						</listbox>
+						<hbox>
+							<textbox id="thundershows-edit-filter-textbox"
+									 flex="1"
+									 disable-with-calendar="true"
+									 thundershows-only-property="true"/>
+							<button id="thundershows-add-filter"
+									label="&thundershows-add-filter.label;"
+									oncommand="cTS_addFilter();"
+									disable-with-calendar="true"
+									thundershows-only-property="true"/>
+							<button id="thundershows-edit-filter"
+									label="&thundershows-edit-filter.label;"
+									oncommand="cTS_editFilter();"
+									disable-with-calendar="true"
+									thundershows-only-property="true"/>
+							<button id="thundershows-remove-filter"
+									label="&thundershows-remove-filter.label;"
+									oncommand="cTS_removeFilter();"
+									disable-with-calendar="true"
+									thundershows-only-property="true"/>
+						</hbox>
+					</groupbox>
+					<groupbox>
+						<caption label="&thundershows-offset-caption.label;"/>
+						<radiogroup id="thundershows-offset-selector"
+									orient="horizontal"
+									disable-with-calendar="true"
+									thundershows-only-property="true">
+							<radio id="thundershows-west-coast-offset"
+								   label="&thundershows-west-coast-offset.label;"
+								   value="10800"/> <!-- 3 Hours in seconds //-->
+							<radio id="thundershows-east-coast-offset"
+								   label="&thundershows-east-coast-offset.label;"
+								   value="0"/>
+						</radiogroup>
+					</groupbox>
 				</tabpanel>
 			</tabpanels>
 		</tabbox>
