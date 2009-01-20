@@ -138,7 +138,6 @@ function fromRFC3339(aStr) {
  * @return			  A calIDateTime object
  */
 function offsetDateTime(aDateTime, aOffset) {
-	dump(aOffset);
 	if (!aDateTime.isDate && aOffset != 0) {
 		// Only if it has a time component
 		aDateTime.resetTo(aDateTime.year,

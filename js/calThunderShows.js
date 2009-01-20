@@ -347,12 +347,12 @@ calThunderShows.prototype = {
 					var categories = new Array();
 					categories.push("TV show");
 					// Handle individual genre
-					var genre = dom.evaluate(".//genres/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					if (genre) {
+					var genre = dom.evaluate(".//genres[@_type='string']/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					if (genre.stringValue.length > 0) {
 						categories.push(genre.stringValue);
 					}
 					// Handle multiple genres
-					var genres = dom.evaluate(".//genres/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+					var genres = dom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 					while ((genre = genres.iterateNext())) {
 						categories.push(genre.textContent );
 					}
