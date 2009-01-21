@@ -258,6 +258,9 @@ calThunderShows.prototype = {
 		var wantEvents = ((aItemFilter &
 				Components.interfaces.calICalendar.ITEM_FILTER_TYPE_EVENT) != 0);
 
+		// Keep track of all shows we've ever seen
+		var known_shows = this.getProperty("thundershows.known_shows");
+		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
 
 		if (filters == null) {
@@ -273,17 +276,25 @@ calThunderShows.prototype = {
 			var vevent;
 			var items = new Array();
 
+			// If property doesn't exist, create it
+			known_shows = known_shows ? known_shows.split("\u001A") : Array();
 			filters = filters.split("\u001A");
+			
+			dump(known_shows);
 
 			while ((vevent = vevents.iterateNext())) {
 				// Must get the show name
 				var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+				// If we've never seen it before add it to the list
+				if (known_shows.indexOf(show_name.stringValue) == "-1") {
+					known_shows.push(show_name.stringValue);
+				}
 				if (filters.indexOf(show_name.stringValue) != "-1") {
 					var item = createEvent();
 					item.calendar = this;
 					
 					// Required elements
-					// All times should be received in GMT (UTC)
+					// All times are received in GMT (UTC)
 					var dtstart = dom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var timezone = dom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					var dtend = dom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
@@ -363,6 +374,7 @@ calThunderShows.prototype = {
 					items.push(item);
 				}
 			}
+			this.setProperty("thundershows.known_shows", known_shows.join('\u001A'));
 			aListener.onGetResult(this.superCalendar,
 								  Components.results.NS_OK,
 								  Components.interfaces.calIEvent,

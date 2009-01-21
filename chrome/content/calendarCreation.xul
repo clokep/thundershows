@@ -38,9 +38,6 @@
 <!DOCTYPE overlay SYSTEM "chrome://thundershows/locale/calendarCreation.dtd">
 <overlay id="calendarCreation"
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="chrome://calendar/content/calendarCreation.js">
-		//Let my editor syntax highlight
-	</script>
 	<script type="application/x-javascript" src="chrome://thundershows/content/calendarCreation.js">
 		//Let my editor syntax highlight
 	</script>
