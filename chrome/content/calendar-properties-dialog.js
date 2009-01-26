@@ -89,6 +89,10 @@ function cTS_onLoad() {
 				break;
 			}
 		}
+		
+		// Populate autocomplete list
+		var editFilter = document.getElementById("thundershows-edit-filter-textbox");
+		editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
 	} else {
 		// Disable elements that are only available to ThunderShows Provider
 		var els = document.getElementsByAttribute("thundershows-only-property", "true");
@@ -105,19 +109,12 @@ function cTS_onLoad() {
 function cTS_onAcceptDialog() {
 	if (gCalendar.type == "thundershows") {
 		// Save filters
-		var filters;
+		var filters = new Array();
 		var filterList = document.getElementById("calendar-filter-list");
 		for (var i = 0; i < filterList.getRowCount(); i++) {
-			if (i > 0) {
-				// Add separator for all items but first
-				filters += "\u001A";
-				filters += filterList.getItemAtIndex(i).value;
-			} else {
-				// Create string (instead of adding to it) for first value
-				filters = filterList.getItemAtIndex(i).value;
-			}
+			filters.push(filterList.getItemAtIndex(i).value);
 		}
-		gCalendar.setProperty("thundershows.filters", filters);
+		gCalendar.setProperty("thundershows.filters", filters.join('\u001A'));
 		
 		// Save offset settings
 		var offsetGroup = document.getElementById("thundershows-offset-selector");

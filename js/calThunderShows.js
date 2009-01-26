@@ -34,7 +34,7 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
-
+ 
 function calThunderShows() {
 	this.initProviderBase();
 }
@@ -277,18 +277,19 @@ calThunderShows.prototype = {
 			var items = new Array();
 
 			// If property doesn't exist, create it
-			known_shows = known_shows ? known_shows.split("\u001A") : Array();
+			known_shows = known_shows ? known_shows.split("\u001A") : new Array();
 			filters = filters.split("\u001A");
-			
-			dump(known_shows);
 
 			while ((vevent = vevents.iterateNext())) {
 				// Must get the show name
 				var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+
 				// If we've never seen it before add it to the list
 				if (known_shows.indexOf(show_name.stringValue) == "-1") {
 					known_shows.push(show_name.stringValue);
 				}
+
+				// If we're looking for that show, add it as an event
 				if (filters.indexOf(show_name.stringValue) != "-1") {
 					var item = createEvent();
 					item.calendar = this;
@@ -374,7 +375,10 @@ calThunderShows.prototype = {
 					items.push(item);
 				}
 			}
+
+			// Set known shows property with all shows found
 			this.setProperty("thundershows.known_shows", known_shows.join('\u001A'));
+
 			aListener.onGetResult(this.superCalendar,
 								  Components.results.NS_OK,
 								  Components.interfaces.calIEvent,
