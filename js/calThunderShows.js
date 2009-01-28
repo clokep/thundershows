@@ -350,8 +350,8 @@ calThunderShows.prototype = {
 					}
 					if (show_name || episode_name || season_number || episode_number) {
 						item.title = show_name.stringValue + " - " + episode_name.stringValue +
-									 " (S" + leftPadString(season_number.stringValue, '0', 2) +
-									 "E" + leftPadString(episode_number.stringValue, '0', 2) + ")";
+									 " (S" + season_number.stringValue.padLeft('0', 2) +
+									 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
 					}
 					if (description) {
 						item.setProperty("DESCRIPTION", description.stringValue);
