@@ -19,7 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *  Patrick Cloke
+ *   Patrick Cloke
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -349,7 +349,9 @@ calThunderShows.prototype = {
 						item.setProperty("LOCATION", network.stringValue);
 					}
 					if (show_name || episode_name || season_number || episode_number) {
-						item.title = show_name.stringValue + " - " + episode_name.stringValue + " (S" + season_number.stringValue + "E" + episode_number.stringValue + ")";
+						item.title = show_name.stringValue + " - " + episode_name.stringValue +
+									 " (S" + leftPadString(season_number.stringValue, '0', 2) +
+									 "E" + leftPadString(episode_number.stringValue, '0', 2) + ")";
 					}
 					if (description) {
 						item.setProperty("DESCRIPTION", description.stringValue);

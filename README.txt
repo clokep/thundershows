@@ -23,13 +23,10 @@ B. Agricola
 Usage
 ------------------------------------------
 
-1.  Create a new calendar and choose a remote calendar with "ThunderShows"
-	as the provider
+1.  Create a new calendar and choose a remote calendar with "ThunderShows" as the provider
 2.  Go into the options of that calendar (right click > "Properties")
 3.  Choose the "ThunderShows Provider" tab
-4.  Add the shows you would like to have appear as events (shows must exactly
-	match the name of the show -- see http://on-my.tv/show-select)
-
+4.  Add the shows you would like to have appear as events (see http://on-my.tv/show-select)
 
 ------------------------------------------
 Known issues
@@ -42,8 +39,6 @@ Possible new features
 ------------------------------------------
 
 See: http://code.google.com/p/thundershows/issues/list?can=2&q=label%3AType-Enhancement
-
-
 
 ------------------------------------------
 Resources for developers

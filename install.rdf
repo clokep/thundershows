@@ -38,36 +38,37 @@
  - ***** END LICENSE BLOCK ***** -->
 
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-    
-    <Description about="urn:mozilla:install-manifest">
+	 xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	
+	<Description about="urn:mozilla:install-manifest">
 		<!-- Extension Information //-->
-        <em:id>{11b7da5a-8458-4cf6-a067-f75c19562317}</em:id>
-        <em:version>0.3pre</em:version>
-        <em:type>2</em:type>
-        
-		<!-- Front End MetaData //-->
-        <em:name>ThunderShows Provider</em:name>
-        <em:description>Display TV shows as events in Lightning/Sunbird.</em:description>
-        <em:creator>Patrick Cloke</em:creator>
-        <em:homepageURL>http://code.google.com/p/thundershows/</em:homepageURL>
+		<em:id>{11b7da5a-8458-4cf6-a067-f75c19562317}</em:id>
+		<em:version>0.3pre</em:version>
+		<em:type>2</em:type> <!-- Extension //-->
 
+		<!-- Front End MetaData //-->
+		<em:name>ThunderShows Provider</em:name>
+		<em:description>Display TV shows as events in Lightning/Sunbird.</em:description>
+		<em:creator>Patrick Cloke</em:creator>
+		<em:homepageURL>http://code.google.com/p/thundershows/</em:homepageURL>
+
+		<!--<em:aboutURL>chrome://thundershows/content/about.xul</em:aboutURL>//-->
 		<em:iconURL>chrome://thundershows/content/thundershows.png</em:iconURL>
 		<!--<em:optionsURL>chrome://thundershows/content/options.xul</em:optionsURL>//-->
 		
 		<em:contributor>B. Agricola (XML Feed) [http://on-my.tv/]</em:contributor>
 		<em:contributor>Chris Brousseau (Icon, Debugging)</em:contributor>
 		<em:contributor>Philipp Kewisch (function to convert RFC 3339 dates)</em:contributor>
-        
+
 		<!-- Target Applications //-->
-        <em:targetApplication>
-            <Description>
-                <!-- Thunderbird //-->
-                <em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
-                <em:minVersion>2.0.0.8</em:minVersion>
-                <em:maxVersion>3.0b1</em:maxVersion>
-            </Description>
-        </em:targetApplication>
+		<em:targetApplication>
+			<Description>
+				<!-- Thunderbird //-->
+				<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+				<em:minVersion>2.0.0.8</em:minVersion>
+				<em:maxVersion>3.0b1</em:maxVersion>
+			</Description>
+		</em:targetApplication>
 		<em:targetApplication>
 			<Description>
 				<!-- Sunbird //-->
@@ -76,15 +77,15 @@
 				<em:maxVersion>1.0pre</em:maxVersion>
 			</Description>
 		</em:targetApplication>
-        
+
 		<!-- Required Extensions //-->
-        <em:requires>
-            <Description>
-                <!-- Lightning -->
-                <em:id>{e2fda1a4-762b-4020-b5ad-a41df1933103}</em:id>
-                <em:minVersion>1.0pre</em:minVersion>
-                <em:maxVersion>1.0pre</em:maxVersion>
-            </Description>
-        </em:requires>
-    </Description>      
+		<em:requires>
+			<Description>
+				<!-- Lightning //-->
+				<em:id>{e2fda1a4-762b-4020-b5ad-a41df1933103}</em:id>
+				<em:minVersion>1.0pre</em:minVersion>
+				<em:maxVersion>1.0pre</em:maxVersion>
+			</Description>
+		</em:requires>
+	</Description>	  
 </RDF>

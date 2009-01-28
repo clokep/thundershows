@@ -150,3 +150,18 @@ function offsetDateTime(aDateTime, aOffset) {
 	}
 	return aDateTime;
 }
+
+/**
+ * leftPadString
+ * Pads a string by adding aPadding to the left of it
+ *
+ * @param aString	The String object to pad
+ * @param aPadding	A String object to pad with
+ * @param aLength	The total minimum length of the object
+ */
+function leftPadString(aString, aPadding, aLength) {
+	while (aString.length < aLength) {
+		aString = aPadding + aString;
+	}
+	return aString;
+}
