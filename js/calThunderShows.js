@@ -336,16 +336,22 @@ calThunderShows.prototype = {
 
 					// Parse uid, defaulting to a generic uid
 					item.id = (uid.stringValue ? uid.stringValue : getUUID());
-					if (network) { // channel
+
+					if (network) {
+						// Set the location to the channel
 						item.setProperty("LOCATION", network.stringValue);
 					}
+
 					if (show_name || episode_name || season_number || episode_number) {
 						item.title = show_name.stringValue + " - " + episode_name.stringValue +
 									 " (S" + season_number.stringValue.padLeft('0', 2) +
 									 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
 					}
+
 					if (description) {
-						item.setProperty("DESCRIPTION", description.stringValue);
+						// Set the description if it exists
+						// Replace HTML line breaks with Unicode line breaks
+						item.setProperty("DESCRIPTION", description.stringValue.replace("<br />", "\r\n"));
 					}
 
 					// Genres (Categories)

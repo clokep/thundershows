@@ -4,6 +4,9 @@
  + Formatting on Season and Episode numbers
  = Fixed bug where calendar XML file would be requested multiple times per update
    see Issue 15 (http://code.google.com/p/thundershows/issues/detail?id=15)
+ = Fixed bug where HTML linebreaks (<br />) were shown instead of being
+   converted to Unicode line breaks (\r\n), Issue 14
+   (http://code.google.com/p/thundershows/issues/detail?id=14)
 
 0.2.3	01/20/2009
  = Fixed bug where properties window would not render in Thunderbird 2, see
