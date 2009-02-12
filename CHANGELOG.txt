@@ -1,23 +1,30 @@
-0.3	xx/xx/2009
- + Added auto-complete suggestions for show filters
+0.3		xx/xx/2009
+ + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue
+   6 (http://code.google.com/p/thundershows/issues/detail?id=6)
  + Formatting on Season and Episode numbers
+ = Fixed bug where calendar XML file would be requested multiple times per update
+   see Issue 15 (http://code.google.com/p/thundershows/issues/detail?id=15)
 
 0.2.3	01/20/2009
- = Fixed bug where properties window would not render
+ = Fixed bug where properties window would not render in Thunderbird 2, see
+   Issue 7 (http://code.google.com/p/thundershows/issues/detail?id=7)
 
 0.2.2	01/19/2009
  = Fixed bug when only one genre
  = Updates to be compatible with newest version of comm-central code
- = Fix for West Coast timezones
+ = Fix for West Coast timezones, see Issue 3
+   (http://code.google.com/p/thundershows/issues/detail?id=3)
  = Moved changelog to individual file
  = Changed max version of Thunderbird to 3.0b1
 
 0.2.1	01/03/2009
  = Fixed bug in Lightning/Sunbird 1.0pre caused by Bug 466009
-   (https://bugzilla.mozilla.org/show_bug.cgi?id=466009)
+   (https://bugzilla.mozilla.org/show_bug.cgi?id=466009), see Issue 2
+   (http://code.google.com/p/thundershows/issues/detail?id=2)
 
-0.2	12/30/2008
- + Compatible with Lightning/Sunbird 0.9
+0.2		12/30/2008
+ + Compatible with Lightning/Sunbird 0.9, see Issue 1
+   (http://code.google.com/p/thundershows/issues/detail?id=1)
 
-0.1	12/22/2008
+0.1		12/22/2008
  + Initial Release

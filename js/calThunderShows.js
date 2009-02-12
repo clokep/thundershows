@@ -51,6 +51,13 @@ calThunderShows.prototype = {
 	},
 
 	/*
+	 * member variables
+	 * For use for only one session
+	 */
+	mItems: null,
+	mLastUpdate: 0, // Never updated yet
+
+	/*
 	 * implement calICalendar
 	 */
 	get type cTS_getType() {
@@ -171,77 +178,71 @@ calThunderShows.prototype = {
 			// events :-)
 			return;
 		}
-		
-		try {
-			// return occurrences? what does this do?
-			var itemReturnOccurrences = ((aItemFilter &
-				Components.interfaces.calICalendar.ITEM_FILTER_CLASS_OCCURRENCES) != 0);
 
-			// Use xmlHTTPRequest to retrieve the page. Do so asynchronously.
-			var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
-									.createInstance(Components.interfaces.nsIJSXMLHttpRequest);
+		var wantEvents = ((aItemFilter &
+				Components.interfaces.calICalendar.ITEM_FILTER_TYPE_EVENT) != 0);
+		if (wantEvents) {
+			var lastUpdate = this.mLastUpdate;
+			var currentTime = Math.floor(new Date().getTime() / 100); // Unix timestamp
 
-			// I'd like to handle the response outside of this function, just to
-			// make the code easier to read. When the request is completed, this
-			// object's readyStateChange function is called.
-			var self = this;
-			request.onreadystatechange = function() {
-				self.readyStateChange(request, aListener, aCount, aRangeStart, aRangeEnd, aItemFilter);
-			};
+			if ((lastUpdate + 60 * 29) < currentTime) {
+				dump("Been over 29 minutes");
+				this.mLastUpdate = currentTime;
 
-			// Send the request, forcing text/xml as a mime type. Until bug
-			// 102699 is fixed, this is needed to get a DOM tree. The downside
-			// is that pages that cannot be parsed as xml cannot be read, but
-			// since this is only a demo, thats ok.
-			request.open("GET", this.mUri.spec, true);
-			request.overrideMimeType('text/xml');
-			request.send(null);
-		} catch (e) {
-			aListener.onOperationComplete(this.superCalendar,
-										  e.result,
-										  Components.interfaces.calIOperationListener.GET,
-										  null,
-										  e.message);
-		}
-	},
+				//this.test_getItems(aCount, aRangeStart, aRangeEnd);
+				// Use xmlHTTPRequest to retrieve the page. Do so asynchronously.
+				var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+										.createInstance(Components.interfaces.nsIJSXMLHttpRequest);
 
-	readyStateChange: function cHC_readyStateChange(aRequest, aListener, aCount, aRangeStart, aRangeEnd, aItemFilter) {
-		if (aRequest.readyState != 4) {
-			// Only continue if loading is complete
-			return;
-		}
-		var status;
-		try {
-			// File urls will have status == 0, so default to 200.
-			status = aRequest.status || 200;
-		} catch (e) {
-			// If the status is not available, we are pre-response (redirect?).
-			// Just ignore this
-			return;
-		}
-
-		if (status / 100 == 2) {
-			if (aRequest.responseXML && aRequest.responseXML.documentElement.nodeName != "parsererror") {
-				// We have an xml document, just start converting
-				this.convertXmlToCalendar(aRequest.responseXML, aListener, aCount, aRangeStart, aRangeEnd, aItemFilter);
-			} else {
-				// Its html or garbage. We don't currently support html,
-				// although it would be possible with bug 102699 or a hidden
-				// iframe.
-				aListener.onOperationComplete(this.superCalendar,
-											  Components.results.NS_ERROR_FAILURE,
-											  Components.interfaces.calIOperationListener.GET,
-											  null,
-											  "Parser Error");
+				// I'd like to handle the response outside of this function, just to
+				// make the code easier to read. When the request is completed, this
+				// object's readyStateChange function is called.
+				var self = this;
+				request.onload = function() {
+					var items;
+					if (request.responseXML && request.responseXML.documentElement.nodeName != "parsererror") {
+						// We have an xml document, just start converting
+						items = self.convertXmlShowsToEvents(request.responseXML, aCount, aRangeStart, aRangeEnd);
+						self.mItems = items;
+						if (items != null && items.length > 0) {
+							aListener.onGetResult(this.superCalendar,
+												  Components.results.NS_OK,
+												  Components.interfaces.calIEvent,
+												  null,
+												  items.length,
+												  items);
+						}
+					}
+					aListener.onOperationComplete(this.superCalendar,
+												  Components.results.NS_OK,
+												  Components.interfaces.calIOperationListener.GET,
+												  null,
+												  null);
+					// should throw some sort of error?
+				}
+				request.open("GET", this.mUri.spec, true);
+				// Send the request, forcing text/xml as a mime type. Until bug
+				// 102699 is fixed, this is needed to get a DOM tree. The downside
+				// is that pages that cannot be parsed as xml cannot be read.
+				request.overrideMimeType('text/xml');
+				request.send(null);
+				return;
 			}
-		} else {
-			// An error happened, or something we don't handle.
-			aListener.onOperationComplete(this.superCalendar,
-										  Components.results.NS_ERROR_FAILURE,
-										  Components.interfaces.calIOperationListener.GET,
-										  null,
-										  "HTTP " + aRequest.status + " encountered");
+			var items = this.mItems;
+			if (items != null && items.length > 0) {
+				aListener.onGetResult(this.superCalendar,
+									  Components.results.NS_OK,
+									  Components.interfaces.calIEvent,
+									  null,
+									  items.length,
+									  items);
+			}
 		}
+		aListener.onOperationComplete(this.superCalendar,
+									  Components.results.NS_OK,
+									  Components.interfaces.calIOperationListener.GET,
+									  null,
+									  null);
 	},
 
 	refresh: function cTS_refresh() {
@@ -253,25 +254,15 @@ calThunderShows.prototype = {
 	/**
 	 * This function searches the result for ThunderShow events
 	 */
-	convertXmlToCalendar: function cTS_convertXmlToCalendar(dom, aListener, aCount, aRangeStart, aRangeEnd, aItemFilter) {
-		// some getItems calls only want todos, others only want events. Differentiate here.
-		var wantEvents = ((aItemFilter &
-				Components.interfaces.calICalendar.ITEM_FILTER_TYPE_EVENT) != 0);
-
+	convertXmlShowsToEvents: function cTS_convertXmlShowsToEvents(aDom, aCount, aRangeStart, aRangeEnd) {
 		// Keep track of all shows we've ever seen
 		var known_shows = this.getProperty("thundershows.known_shows");
 		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
 
-		if (filters == null) {
-			aListener.onOperationComplete(this.superCalendar,
-										  Components.results.NS_OK,
-										  Components.interfaces.calIOperationListener.GET,
-										  null,
-										  "Not looking for any shows.");
-		} else if (wantEvents) {
-			// Use xpath to get all elements with class vevent
-			var vevents = dom.evaluate("//*[@_class='TVEpisode']", dom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+		if (filters != null) {
+			// Use xpath to get all elements with class TVEpisode
+			var vevents = aDom.evaluate("//*[@_class='TVEpisode']", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 
 			var vevent;
 			var items = new Array();
@@ -282,7 +273,7 @@ calThunderShows.prototype = {
 
 			while ((vevent = vevents.iterateNext())) {
 				// Must get the show name
-				var show_name = dom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+				var show_name = aDom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
 				// If we've never seen it before add it to the list
 				if (known_shows.indexOf(show_name.stringValue) == "-1") {
@@ -296,9 +287,9 @@ calThunderShows.prototype = {
 					
 					// Required elements
 					// All times are received in GMT (UTC)
-					var dtstart = dom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var timezone = dom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var dtend = dom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var dtstart = aDom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var timezone = aDom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var dtend = aDom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
 					if (!dtstart) {
 						WARN("Event was skipped, could not find dtstart/dtend");
@@ -336,12 +327,12 @@ calThunderShows.prototype = {
 					}
 
 					// Optional Elements
-					var uid = dom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var network = dom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var episode_name = dom.evaluate(".//name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var season_number = dom.evaluate(".//season/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var episode_number = dom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var description = dom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var uid = aDom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var network = aDom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var episode_name = aDom.evaluate(".//name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var season_number = aDom.evaluate(".//season/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var episode_number = aDom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var description = aDom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
 					// Parse uid, defaulting to a generic uid
 					item.id = (uid.stringValue ? uid.stringValue : getUUID());
@@ -356,17 +347,17 @@ calThunderShows.prototype = {
 					if (description) {
 						item.setProperty("DESCRIPTION", description.stringValue);
 					}
-					
+
 					// Genres (Categories)
 					var categories = new Array();
 					categories.push("TV show");
 					// Handle individual genre
-					var genre = dom.evaluate(".//genres[@_type='string']/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+					var genre = aDom.evaluate(".//genres[@_type='string']/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 					if (genre.stringValue.length > 0) {
 						categories.push(genre.stringValue);
 					}
 					// Handle multiple genres
-					var genres = dom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+					var genres = aDom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 					while ((genre = genres.iterateNext())) {
 						categories.push(genre.textContent );
 					}
@@ -376,24 +367,11 @@ calThunderShows.prototype = {
 					item.makeImmutable();
 					items.push(item);
 				}
-			}
+			} // End items loop
 
 			// Set known shows property with all shows found
 			this.setProperty("thundershows.known_shows", known_shows.join('\u001A'));
-
-			aListener.onGetResult(this.superCalendar,
-								  Components.results.NS_OK,
-								  Components.interfaces.calIEvent,
-								  null,
-								  items.length,
-								  items);
-		}
-
-		// Signal successful completion
-		aListener.onOperationComplete(this.superCalendar,
-									  Components.results.NS_OK,
-									  Components.interfaces.calIOperationListener.GET,
-									  null,
-									  null);
+		} // End filters
+		return items;
 	}
 };
