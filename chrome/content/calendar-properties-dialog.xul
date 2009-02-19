@@ -70,6 +70,10 @@
 						</listbox>
 						<hbox>
 							<textbox id="thundershows-edit-filter-textbox"
+									 type="autocomplete"
+									 autocompletesearch="show-filters"
+									 autocompletesearchparam=""
+									 completedefaultindex="true"
 									 flex="1"
 									 disable-with-calendar="true"
 									 thundershows-only-property="true"/>
