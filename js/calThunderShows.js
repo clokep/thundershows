@@ -186,7 +186,6 @@ calThunderShows.prototype = {
 			var currentTime = Math.floor(new Date().getTime() / 100); // Unix timestamp
 
 			if ((lastUpdate + 60 * 29) < currentTime) {
-				dump("Been over 29 minutes");
 				this.mLastUpdate = currentTime;
 
 				//this.test_getItems(aCount, aRangeStart, aRangeEnd);

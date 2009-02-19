@@ -89,7 +89,7 @@ function cTS_onLoad() {
 				break;
 			}
 		}
-		
+
 		// Populate autocomplete list
 		var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 		editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");

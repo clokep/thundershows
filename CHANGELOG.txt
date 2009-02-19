@@ -1,4 +1,4 @@
-0.3		xx/xx/2009
+0.3	02/18/2009
  + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue
    6 (http://code.google.com/p/thundershows/issues/detail?id=6)
  + Formatting on Season and Episode numbers
@@ -25,9 +25,9 @@
    (https://bugzilla.mozilla.org/show_bug.cgi?id=466009), see Issue 2
    (http://code.google.com/p/thundershows/issues/detail?id=2)
 
-0.2		12/30/2008
+0.2	12/30/2008
  + Compatible with Lightning/Sunbird 0.9, see Issue 1
    (http://code.google.com/p/thundershows/issues/detail?id=1)
 
-0.1		12/22/2008
+0.1	12/22/2008
  + Initial Release

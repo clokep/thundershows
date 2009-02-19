@@ -68,7 +68,6 @@ nsAutoCompleteShowFilters.prototype = {
 	startSearch: function(aString, aParam, aResult, aListener) {
 		const ACR = Components.interfaces.nsIAutoCompleteResult;
 
-		//var known_shows = "Chuck\u001AChuckles\u001ANo match\u001AChuckkkkk".split("\u001A");
 		var known_shows = aParam.split("\u001A");
 		var matches = new Array();
 		for (var i = 0; i < known_shows.length; i++) {

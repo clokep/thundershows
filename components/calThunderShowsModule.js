@@ -77,7 +77,7 @@ var calThunderShowsModule = {
 		// __LOCATION__.parent == . We expect to find the subscripts in ./../js
 		let thisDir = __LOCATION__.parent.parent.clone();
 		thisDir.append("js");
-		cal.loadScripts(["calThunderShows.js", "calThunderShowsUtils.js"],
+		cal.loadScripts(["calThunderShows.js", "calThunderShowsUtils.js", "test.js"],
 						this.__parent__,
 						thisDir);
 
