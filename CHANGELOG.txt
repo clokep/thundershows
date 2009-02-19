@@ -1,4 +1,4 @@
-0.3	xx/xx/2009
+0.3	02/18/2009
  + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue
    6 (http://code.google.com/p/thundershows/issues/detail?id=6)
  + Formatting on Season and Episode numbers
