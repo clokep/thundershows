@@ -219,16 +219,14 @@ function doesFilterExist(aFilter) {
 	return false;
 }
 
-/**
- * Called on load
+/** * Called on load
  * Replaces window.sizeToContent() since that doesn't seem to work
  * Make sure the window is the correct size and everything is visible
  */
 function cTS_sizeToContent() {
 	// Get all the children of the window
 	var boxes = document.documentElement.childNodes;
-	var newHeight = 80; // Margins
-	var box;
+	var newHeight = 80; // Margins	var box;
 	// Add all the heights up of the children
 	for (var i = 0; i < boxes.length; i++) {
 		box = boxes[i].boxObject;
