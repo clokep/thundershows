@@ -165,3 +165,39 @@ String.prototype.padLeft = function(aPadding, aLength) {
 	}
 	return output;
 };
+
+/**
+ * Associate array object
+ * Make sure that the built in functions do not get overwritten
+ */
+function AssociativeArray() {}
+AssociativeArray.prototype = {
+	length: function _length() {
+		var count = 0;
+		for (ithObj in this) {
+			count++;
+		}
+		// This must be changed to the number of functions built into the class
+		count -= 2;
+		return count;
+	},
+
+	toString: function _toString() {
+		return this.toSource();
+	}
+/*
+concat()  	Joins two or more arrays and returns the result  	1  	4  	4
+join() 	Puts all the elements of an array into a string. The elements are separated by a specified delimiter 	1 	3 	4
+pop() 	Removes and returns the last element of an array 	1 	4 	5.5
+push() 	Adds one or more elements to the end of an array and returns the new length 	1 	4 	5.5
+reverse() 	Reverses the order of the elements in an array 	1 	3 	4
+shift() 	Removes and returns the first element of an array 	1 	4 	5.5
+slice() 	Returns selected elements from an existing array 	1 	4 	4
+sort() 	Sorts the elements of an array 	1 	3 	4
+splice() 	Removes and adds new elements to an array 	1 	4 	5.5
+toSource() 	Represents the source code of an object 	1 	4 	-
+toString() 	Converts an array to a string and returns the result 	1 	3 	4
+unshift() 	Adds one or more elements to the beginning of an array and returns the new length 	1 	4 	6
+valueOf() 	Returns the primitive value of an Array object 	1 	2 	4
+*/
+};

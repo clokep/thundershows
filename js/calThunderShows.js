@@ -54,7 +54,8 @@ calThunderShows.prototype = {
 	 * member variables
 	 * For use for only one session
 	 */
-	mItems: null,
+	mEvents: null,
+	mFilteredEvents: null,
 	mLastUpdate: 0, // Never updated yet
 
 	/*
@@ -201,8 +202,8 @@ calThunderShows.prototype = {
 					var items;
 					if (request.responseXML && request.responseXML.documentElement.nodeName != "parsererror") {
 						// We have an xml document, just start converting
-						items = self.convertXmlShowsToEvents(request.responseXML, aCount, aRangeStart, aRangeEnd);
-						self.mItems = items;
+						self.mEvents = self.convertXMLToEvents(request.responseXML, aCount, aRangeStart, aRangeEnd);
+						self.mFilteredEvents = self.filterEvents(self.mEvents);
 						if (items != null && items.length > 0) {
 							aListener.onGetResult(this.superCalendar,
 												  Components.results.NS_OK,
@@ -227,14 +228,14 @@ calThunderShows.prototype = {
 				request.send(null);
 				return;
 			}
-			var items = this.mItems;
-			if (items != null && items.length > 0) {
+			var events = this.mFilteredEvents;
+			if (events != null && events.length > 0) {
 				aListener.onGetResult(this.superCalendar,
 									  Components.results.NS_OK,
 									  Components.interfaces.calIEvent,
 									  null,
-									  items.length,
-									  items);
+									  events.length,
+									  events);
 			}
 		}
 		aListener.onOperationComplete(this.superCalendar,
@@ -253,130 +254,156 @@ calThunderShows.prototype = {
 	/**
 	 * This function searches the result for ThunderShow events
 	 */
-	convertXmlShowsToEvents: function cTS_convertXmlShowsToEvents(aDom, aCount, aRangeStart, aRangeEnd) {
-		// Keep track of all shows we've ever seen
-		var known_shows = this.getProperty("thundershows.known_shows");
+	filterEvents: function cTS_filterEvents(events) {
 		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
+		var filteredEvents = new Array();
 
 		if (filters != null) {
-			// Use xpath to get all elements with class TVEpisode
-			var vevents = aDom.evaluate("//*[@_class='TVEpisode']", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
-
-			var vevent;
-			var items = new Array();
-
-			// If property doesn't exist, create it
-			known_shows = known_shows ? known_shows.split("\u001A") : new Array();
 			filters = filters.split("\u001A");
-
-			while ((vevent = vevents.iterateNext())) {
-				// Must get the show name
-				var show_name = aDom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-
-				// If we've never seen it before add it to the list
-				if (known_shows.indexOf(show_name.stringValue) == "-1") {
-					known_shows.push(show_name.stringValue);
-				}
-
+			for (var ithEvent in events) {
 				// If we're looking for that show, add it as an event
-				if (filters.indexOf(show_name.stringValue) != "-1") {
-					var item = createEvent();
-					item.calendar = this;
-					
-					// Required elements
-					// All times are received in GMT (UTC)
-					var dtstart = aDom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var timezone = aDom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var dtend = aDom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-
-					if (!dtstart) {
-						WARN("Event was skipped, could not find dtstart/dtend");
-						continue;
-					}
-					
-					if (timezone.stringValue != "GMT") {
-						WARN("Event was skipped, cannot handle timezone ");
-						continue;
-					}
-
-					// Parse dates
-					try {
-						item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Assume UTC time
-						// Seems to be UTC even though EST in XML file, manually set it to UTC
-						//item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
-						item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
-						item.setProperty("DTSTAMP", now()); // calUtils.js
-
-						// Show times are from EST, if PST or MST we must offset this
-						var offset = this.getProperty("thundershows.offset");
-						if (offset != null) {
-							item.startDate = offsetDateTime(item.startDate, parseInt(offset));
-							item.endDate = offsetDateTime(item.endDate, parseInt(offset));
-						}
-					} catch (e) {
-						WARN("Event was skipped, could not convert dates: " + e);
-						continue;
-					}
-
-					if (!checkIfInRange(item, aRangeStart, aRangeEnd)) {
-						// calUtils has a nice range check for items, skip the item
-						// if it is not in range.
-						continue;
-					}
-
-					// Optional Elements
-					var uid = aDom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var network = aDom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var episode_name = aDom.evaluate(".//name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var season_number = aDom.evaluate(".//season/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var episode_number = aDom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					var description = aDom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-
-					// Parse uid, defaulting to a generic uid
-					item.id = (uid.stringValue ? uid.stringValue : getUUID());
-
-					if (network) {
-						// Set the location to the channel
-						item.setProperty("LOCATION", network.stringValue);
-					}
-
-					if (show_name || episode_name || season_number || episode_number) {
-						item.title = show_name.stringValue + " - " + episode_name.stringValue +
-									 " (S" + season_number.stringValue.padLeft('0', 2) +
-									 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
-					}
-
-					if (description) {
-						// Set the description if it exists
-						// Replace HTML line breaks with Unicode line breaks
-						item.setProperty("DESCRIPTION", description.stringValue.replace("<br />", "\r\n"));
-					}
-
-					// Genres (Categories)
-					var categories = new Array();
-					categories.push("TV show");
-					// Handle individual genre
-					var genre = aDom.evaluate(".//genres[@_type='string']/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
-					if (genre.stringValue.length > 0) {
-						categories.push(genre.stringValue);
-					}
-					// Handle multiple genres
-					var genres = aDom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
-					while ((genre = genres.iterateNext())) {
-						categories.push(genre.textContent );
-					}
-					// Set genres to item
-					item.setCategories(categories.length, categories);
-
-					item.makeImmutable();
-					items.push(item);
+				if (filters.indexOf(ithEvent) != "-1") {
+					dump(ithEvent);
+					filteredEvents = filteredEvents.concat(events[ithEvent]);
 				}
-			} // End items loop
+			}
+		}
+		return filteredEvents;
+	},
+	
+	/**
+	 * This function parses the XML and returns useful events
+	 */
+	convertXMLToEvents: function cTS_convertXMLToEvents(aDom, aCount, aRangeStart, aRangeEnd) {
+		// Keep track of all shows we've ever seen
+		var known_shows = this.getProperty("thundershows.known_shows");
+		known_shows = (known_shows != null) ? known_shows.split("\u001A") : new Array();
+		// Keep track of all networks
+		var known_networks = this.getProperty("thundershows.ksnown_networks");
+		known_networks = (known_networks != null) ? JSON.parse(known_networks) : new AssociativeArray();
 
-			// Set known shows property with all shows found
-			this.setProperty("thundershows.known_shows", known_shows.join('\u001A'));
-		} // End filters
-		return items;
+		// Use xpath to get all elements with class TVEpisode
+		var vevents = aDom.evaluate("//*[@_class='TVEpisode']", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+
+		var vevent;
+		var events = new AssociativeArray();
+
+		while ((vevent = vevents.iterateNext())) {
+			var item = createEvent();
+			item.calendar = this;
+
+			// Must get the show name
+			var show_name = aDom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+
+			// If we've never seen it before add it to the list
+			if (known_shows.indexOf(show_name.stringValue) == "-1") {
+				known_shows.push(show_name.stringValue);
+			}
+			
+			// Required elements
+			// All times are received in GMT (UTC)
+			var dtstart = aDom.evaluate(".//date/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var timezone = aDom.evaluate(".//timezone/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var dtend = aDom.evaluate(".//enddate/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+
+			if (!dtstart) {
+				WARN("Event was skipped, could not find dtstart/dtend");
+				continue;
+			}
+			
+			if (timezone.stringValue != "GMT") {
+				WARN("Event was skipped, cannot handle timezone ");
+				continue;
+			}
+
+			// Parse dates
+			try {
+				item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Assume UTC time
+				// Seems to be UTC even though EST in XML file, manually set it to UTC
+				//item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
+				item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
+				item.setProperty("DTSTAMP", now()); // calUtils.js
+
+				// Show times are from EST, if PST or MST we must offset this
+				var offset = this.getProperty("thundershows.offset");
+				if (offset != null) {
+					item.startDate = offsetDateTime(item.startDate, parseInt(offset));
+					item.endDate = offsetDateTime(item.endDate, parseInt(offset));
+				}
+			} catch (e) {
+				WARN("Event was skipped, could not convert dates: " + e);
+				continue;
+			}
+
+			if (!checkIfInRange(item, aRangeStart, aRangeEnd)) {
+				// calUtils has a nice range check for items, skip the item
+				// if it is not in range.
+				continue;
+			}
+
+			// Optional Elements
+			var uid = aDom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var network = aDom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var episode_name = aDom.evaluate(".//name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var season_number = aDom.evaluate(".//season/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var episode_number = aDom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			var description = aDom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+
+			// Parse uid, defaulting to a generic uid
+			item.id = (uid.stringValue ? uid.stringValue : getUUID());
+
+			if (network) {
+				// Set the location to the network
+				item.setProperty("LOCATION", network.stringValue);
+				
+				// If we've never seen the network before, keep track of it
+				if (!(network.stringValue in known_networks)) {
+					known_networks[network.stringValue] = 0;
+				}
+			}
+
+			if (show_name || episode_name || season_number || episode_number) {
+				item.title = show_name.stringValue + " - " + episode_name.stringValue +
+							 " (S" + season_number.stringValue.padLeft('0', 2) +
+							 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
+			}
+
+			if (description) {
+				// Set the description if it exists
+				// Replace HTML line breaks with Unicode line breaks
+				item.setProperty("DESCRIPTION", description.stringValue.replace("<br />", "\r\n"));
+			}
+
+			// Genres (Categories)
+			var categories = new Array();
+			categories.push("TV show");
+			// Handle individual genre
+			var genre = aDom.evaluate(".//genres[@_type='string']/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
+			if (genre.stringValue.length > 0) {
+				categories.push(genre.stringValue);
+			}
+			// Handle multiple genres
+			var genres = aDom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+			while ((genre = genres.iterateNext())) {
+				categories.push(genre.textContent );
+			}
+			// Set genres to item
+			item.setCategories(categories.length, categories);
+
+			item.makeImmutable();
+			if (show_name.stringValue in events) {
+				// Don't want to overwrite shows that may be in there already
+				events[show_name.stringValue].push(item);
+			} else {
+				events[show_name.stringValue] = new Array(item);
+			}
+		}
+
+		// Set known shows property with all shows found
+		this.setProperty("thundershows.known_shows", known_shows.sort().join('\u001A'));
+		// Set known networks property with all networks found
+		this.setProperty("thundershows.known_networks", JSON.stringify(known_networks));
+		return events;
 	}
 };
