@@ -55,7 +55,6 @@ calThunderShows.prototype = {
 	 * For use for only one session
 	 */
 	mEvents: null,
-	mFilteredEvents: null,
 	mLastUpdate: 0, // Never updated yet
 
 	/*
@@ -203,14 +202,15 @@ calThunderShows.prototype = {
 					if (request.responseXML && request.responseXML.documentElement.nodeName != "parsererror") {
 						// We have an xml document, just start converting
 						self.mEvents = self.convertXMLToEvents(request.responseXML, aCount, aRangeStart, aRangeEnd);
-						self.mFilteredEvents = self.filterEvents(self.mEvents);
-						if (items != null && items.length > 0) {
+						//self.mFilteredEvents = self.filterEvents(self.mEvents);
+						var filteredEvents = self.filterEvents(self.mEvents);
+						if (filteredEvents != null && filteredEvents.length > 0) {
 							aListener.onGetResult(this.superCalendar,
 												  Components.results.NS_OK,
 												  Components.interfaces.calIEvent,
 												  null,
-												  items.length,
-												  items);
+												  filteredEvents.length,
+												  filteredEvents);
 						}
 					}
 					aListener.onOperationComplete(this.superCalendar,
@@ -228,14 +228,14 @@ calThunderShows.prototype = {
 				request.send(null);
 				return;
 			}
-			var events = this.mFilteredEvents;
-			if (events != null && events.length > 0) {
+			var filteredEvents = this.filterEvents(this.mEvents);
+			if (filteredEvents != null && filteredEvents.length > 0) {
 				aListener.onGetResult(this.superCalendar,
 									  Components.results.NS_OK,
 									  Components.interfaces.calIEvent,
 									  null,
-									  events.length,
-									  events);
+									  filteredEvents.length,
+									  filteredEvents);
 			}
 		}
 		aListener.onOperationComplete(this.superCalendar,
@@ -264,7 +264,6 @@ calThunderShows.prototype = {
 			for (var ithEvent in events) {
 				// If we're looking for that show, add it as an event
 				if (filters.indexOf(ithEvent) != "-1") {
-					dump(ithEvent);
 					filteredEvents = filteredEvents.concat(events[ithEvent]);
 				}
 			}
