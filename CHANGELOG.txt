@@ -1,6 +1,7 @@
 0.4 xx/xx/2009
  = Version bump for Thunderbird 3.0 Beta 2
  + Sort auto-complete suggestions alphabetically
+ + Ability to always display pilot (S01E01) episodes
 
 0.3	02/18/2009
  + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue

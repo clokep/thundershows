@@ -254,17 +254,37 @@ calThunderShows.prototype = {
 	/**
 	 * This function searches the result for ThunderShow events
 	 */
-	filterEvents: function cTS_filterEvents(events) {
+	filterEvents: function cTS_filterEvents(shows) {
 		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
 		var filteredEvents = new Array();
+		
+		var displayPilots = this.getProperty("thundershows.display_pilots");
+		var needle = "(S01E01)";
 
 		if (filters != null) {
 			filters = filters.split("\u001A");
-			for (var ithEvent in events) {
-				// If we're looking for that show, add it as an event
-				if (filters.indexOf(ithEvent) != "-1") {
-					filteredEvents = filteredEvents.concat(events[ithEvent]);
+			for (var ithShow in shows) {
+				if (filters.indexOf(ithShow) != "-1") {
+					// If we're looking for that show, add it as an event
+					filteredEvents = filteredEvents.concat(shows[ithShow]);
+				} else if (displayPilots) {
+					// If we're not looking for it but its a pilot (S01E01) and
+					// we're looking for all pilots than check and add if
+					// necessary
+					for (var ithEvent in shows[ithShow]) {
+						var event = shows[ithShow][ithEvent];
+						if (!event.title) {
+							// Item is not an event
+							continue;
+						}
+						var length = event.title.length;
+						if (event.title.substr(length - needle.length) == needle) {
+							filteredEvents.push(event);
+							// Assume there can only be one pilot for a show
+							break;
+						}
+					}
 				}
 			}
 		}
@@ -366,6 +386,8 @@ calThunderShows.prototype = {
 				item.title = show_name.stringValue + " - " + episode_name.stringValue +
 							 " (S" + season_number.stringValue.padLeft('0', 2) +
 							 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
+			} else {
+				dump(network.stringValue + " " + uid);
 			}
 
 			if (description) {
