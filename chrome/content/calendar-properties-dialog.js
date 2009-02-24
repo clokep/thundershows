@@ -56,8 +56,16 @@ function cTS_onLoad() {
 	gCalendar = window.arguments[0].calendar;
 	// We only want to run if its a ThunderShows Provider calendar
 	if (gCalendar.type == "thundershows") {
+		// Always show pilots
+		var displayPilots = gCalendar.getProperty("thundershows.display_pilots");
+		document.getElementById("thundershows-display-pilots-checkbox").checked = displayPilots;
+
+		// Use exceptions
+		var useExceptions = gCalendar.getProperty("thundershows.use_exceptions");
+		document.getElementById("thundershows-use-exceptions-checkbox").checked = useExceptions;
+	
 		// Populate filter list
-		var filterList = document.getElementById("calendar-filter-list");
+		var filterList = document.getElementById("thundershows-filter-list");
 		var filters = gCalendar.getProperty("thundershows.filters");
 		if (filters != null) {
 			// Can only do it if filters exist
@@ -90,6 +98,12 @@ function cTS_onLoad() {
 			}
 		}
 
+		// All day events
+		var allDayEvents = gCalendar.getProperty("thundershows.all_day_events");
+		document.getElementById("thundershows-all-day-events-checkbox").checked = allDayEvents;
+		offsetGroup.disabled = allDayEvents;
+		cTS_toggleAllDayEvents();
+
 		// Populate autocomplete list
 		var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 		editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
@@ -108,9 +122,17 @@ function cTS_onLoad() {
  */
 function cTS_onAcceptDialog() {
 	if (gCalendar.type == "thundershows") {
+		// Save display pilot episodes settings
+		var displayPilots = document.getElementById("thundershows-display-pilots-checkbox");
+		gCalendar.setProperty("thundershows.display_pilots", displayPilots.checked);
+
+		// Save use exceptions settings
+		var useExceptions = document.getElementById("thundershows-use-exceptions-checkbox");
+		gCalendar.setProperty("thundershows.use_exceptions", useExceptions.checked);
+
 		// Save filters
 		var filters = new Array();
-		var filterList = document.getElementById("calendar-filter-list");
+		var filterList = document.getElementById("thundershows-filter-list");
 		for (var i = 0; i < filterList.getRowCount(); i++) {
 			filters.push(filterList.getItemAtIndex(i).value);
 		}
@@ -119,6 +141,10 @@ function cTS_onAcceptDialog() {
 		// Save offset settings
 		var offsetGroup = document.getElementById("thundershows-offset-selector");
 		gCalendar.setProperty("thundershows.offset", offsetGroup.selectedItem.value);
+
+		// Save all day events setting
+		var allDayEvents = document.getElementById("thundershows-all-day-events-checkbox");
+		gCalendar.setProperty("thundershows.all_day_events", allDayEvents.checked);
 	}
 
 	return true;
@@ -129,7 +155,7 @@ function cTS_onAcceptDialog() {
  * Sets the textbox text to the list item's value
  */
 function cTS_selectFilter() {
-	var filterList = document.getElementById("calendar-filter-list");
+	var filterList = document.getElementById("thundershows-filter-list");
 	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 	// Set the edit filter textbox to the selected value
 	editFilter.value = filterList.selectedItem.value;
@@ -142,7 +168,7 @@ function cTS_selectFilter() {
  * Selects newest item
  */
 function cTS_addFilter() {
-	var filterList = document.getElementById("calendar-filter-list");
+	var filterList = document.getElementById("thundershows-filter-list");
 	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 
 	// Add filter
@@ -163,7 +189,7 @@ function cTS_addFilter() {
  * Sets the currently selected list item's value to the textbox value
  */
 function cTS_editFilter() {
-	var filterList = document.getElementById("calendar-filter-list");
+	var filterList = document.getElementById("thundershows-filter-list");
 	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 	var selectedItem = filterList.selectedItem;
 
@@ -179,7 +205,7 @@ function cTS_editFilter() {
  * Selects the item above it
  */
 function cTS_removeFilter() {
-	var filterList = document.getElementById("calendar-filter-list");
+	var filterList = document.getElementById("thundershows-filter-list");
 	// Remove the selected item
 	var selectedIndex = filterList.selectedIndex;
 	filterList.removeItemAt(selectedIndex);
@@ -200,11 +226,21 @@ function cTS_removeFilter() {
  * Returns true or false
  */
 function doesFilterExist(aFilter) {
-	var filterList = document.getElementById("calendar-filter-list");
+	var filterList = document.getElementById("thundershows-filter-list");
 	for (var i = 0; i < filterList.getRowCount(); i++) {
 		if (filterList.getItemAtIndex(i).value == aFilter) {
 			return true;
 		}
 	}
 	return false;
+}
+
+/**
+ * Called when the all day events checkbox is clicked
+ * Enables/Disables the offset selector
+ */
+function cTS_toggleAllDayEvents() {
+	var allDayEvents = document.getElementById("thundershows-all-day-events-checkbox").checked;
+	var offsetGroup = document.getElementById("thundershows-offset-selector");
+	offsetGroup.disabled = allDayEvents;
 }

@@ -52,12 +52,20 @@
 			</tabs>
 			<tabpanels>
 				<tabpanel id="default-properties-panel" orient="vertical">
-					<!-- We're not editing anything here cTS_onLoad() moves the "default" content here.  //-->
+					<!-- We're not adding anything here cTS_onLoad() moves the "default" content here.  //-->
 				</tabpanel>
 				<tabpanel id="thundershows-properties-panel" orient="vertical">
 					<groupbox>
 						<caption label="&thundershows-filter-caption.label;"/>
-						<listbox id="calendar-filter-list"
+						<checkbox id="thundershows-display-pilots-checkbox"
+								  label="&thundershows-display-pilots.label;"
+								  disable-with-calendar="true"
+								  thundershows-only-property="true"/>
+						<checkbox id="thundershows-use-exceptions-checkbox"
+								  label="&thundershows-use-exceptions.label;"
+								  disable-with-calendar="true"
+								  thundershows-only-property="true"/>
+						<listbox id="thundershows-filter-list"
 								 rows="5"
 								 flex="1"
 								 onclick="cTS_selectFilter();"
@@ -106,6 +114,11 @@
 								   label="&thundershows-east-coast-offset.label;"
 								   value="0"/>
 						</radiogroup>
+						<checkbox id="thundershows-all-day-events-checkbox"
+								  label="&thundershows-all-day-events.label;"
+								  oncommand="cTS_toggleAllDayEvents()"
+								  disable-with-calendar="true"
+								  thundershows-only-property="true"/>
 					</groupbox>
 				</tabpanel>
 			</tabpanels>

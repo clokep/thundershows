@@ -1,6 +1,8 @@
 <!ENTITY default-options.label "Basic">
 <!ENTITY thundershows-options.label "ThunderShows Provider">
 <!ENTITY thundershows-filter-caption.label "Filter Settings">
+<!ENTITY thundershows-display-pilots.label "Always Shows Pilot Episodes (S01E01)">
+<!ENTITY thundershows-use-exceptions.label "Show All Shows (Except Those Listed Below)">
 <!ENTITY thundershows-filter-list.label "Show Name Filter">
 <!ENTITY thundershows-add-filter.label "Add filter">
 <!ENTITY thundershows-edit-filter.label "Edit filter">
@@ -8,3 +10,4 @@
 <!ENTITY thundershows-offset-caption.label "Offset Settings">
 <!ENTITY thundershows-west-coast-offset.label "West Coast (Pacific/Mountain Time)">
 <!ENTITY thundershows-east-coast-offset.label "East Coast (Eastern/Central Time)">
+<!ENTITY thundershows-all-day-events.label "Use &quot;All Day&quot; Events">
