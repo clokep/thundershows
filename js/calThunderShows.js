@@ -261,12 +261,18 @@ calThunderShows.prototype = {
 		
 		var displayPilots = this.getProperty("thundershows.display_pilots");
 		var needle = "(S01E01)";
+		
+		var useExceptions = this.getProperty("thundershows.use_exceptions");
+		
+		var allDayEvents = this.getProperty("thundershows.all_day_events");
 
 		if (filters != null) {
 			filters = filters.split("\u001A");
 			for (var ithShow in shows) {
-				if (filters.indexOf(ithShow) != "-1") {
+				if ((filters.indexOf(ithShow) != "-1" && !useExceptions) ||
+					(useExceptions && filters.indexOf(ithShow) == "-1")) {
 					// If we're looking for that show, add it as an event
+					// If we're using exceptions and it isn't found, add it
 					filteredEvents = filteredEvents.concat(shows[ithShow]);
 				} else if (displayPilots) {
 					// If we're not looking for it but its a pilot (S01E01) and
@@ -287,6 +293,16 @@ calThunderShows.prototype = {
 					}
 				}
 			}
+		}
+		
+		// Handle all day events
+		if (allDayEvents) {
+			/*for (var ithEvent in filteredEvents) {
+				filteredEvents[ithEvent].startDate = offsetDateTime(filteredEvents[ithEvent].startDate, -24*60*60);
+				filteredEvents[ithEvent].endDate = offsetDateTime(filteredEvents[ithEvent].endDate, -24*60*60);
+				filteredEvents[ithEvent].startDate.isDate = true;
+				filteredEvents[ithEvent].endDate.isDate = true;
+			}*/
 		}
 		return filteredEvents;
 	},

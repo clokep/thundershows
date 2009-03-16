@@ -103,17 +103,16 @@
 					</groupbox>
 					<groupbox>
 						<caption label="&thundershows-offset-caption.label;"/>
-						<radiogroup id="thundershows-offset-selector"
-									orient="horizontal"
-									disable-with-calendar="true"
-									thundershows-only-property="true">
-							<radio id="thundershows-west-coast-offset"
-								   label="&thundershows-west-coast-offset.label;"
-								   value="10800"/> <!-- 3 Hours in seconds //-->
-							<radio id="thundershows-east-coast-offset"
-								   label="&thundershows-east-coast-offset.label;"
-								   value="0"/>
-						</radiogroup>
+						<menulist id="thundershows-offset-selector"
+								  disable-with-calendar="true"
+								  thundershows-only-property="true">
+							<menupopup>
+								<menuitem label="&thundershows-west-coast-offset.label;"
+										  value="10800"/>  <!-- 3 Hours in seconds //-->
+								<menuitem label="&thundershows-east-coast-offset.label;"
+										  value="0"/>
+							</menupopup>
+						</menulist>
 						<checkbox id="thundershows-all-day-events-checkbox"
 								  label="&thundershows-all-day-events.label;"
 								  oncommand="cTS_toggleAllDayEvents()"

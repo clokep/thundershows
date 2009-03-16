@@ -83,16 +83,17 @@ function cTS_onLoad() {
 		}
 
 		// Set offset setting
-		var offsetGroup = document.getElementById("thundershows-offset-selector");
+		// All day events have an offset of ""
+		var offsetList = document.getElementById("thundershows-offset-selector");
 		var offset = gCalendar.getProperty("thundershows.offset");
 		if (offset == null) {
 			// Default value is no offset
 			offset = "0";
 		}
-		for (var i = 0; i < offsetGroup.itemCount; i++) {
-			if (offsetGroup.getItemAtIndex(i).value == offset) {
+		for (var i = 0; i < offsetList.itemCount; i++) {
+			if (offsetList.getItemAtIndex(i).value == offset) {
 				// Set the selected item to this item
-				offsetGroup.selectedIndex = i;
+				offsetList.selectedIndex = i;
 				// There can only be one selected item
 				break;
 			}
@@ -101,8 +102,7 @@ function cTS_onLoad() {
 		// All day events
 		var allDayEvents = gCalendar.getProperty("thundershows.all_day_events");
 		document.getElementById("thundershows-all-day-events-checkbox").checked = allDayEvents;
-		offsetGroup.disabled = allDayEvents;
-		cTS_toggleAllDayEvents();
+		offsetList.disabled = allDayEvents;
 
 		// Populate autocomplete list
 		var editFilter = document.getElementById("thundershows-edit-filter-textbox");
@@ -137,7 +137,7 @@ function cTS_onAcceptDialog() {
 			filters.push(filterList.getItemAtIndex(i).value);
 		}
 		gCalendar.setProperty("thundershows.filters", filters.join('\u001A'));
-		
+
 		// Save offset settings
 		var offsetGroup = document.getElementById("thundershows-offset-selector");
 		gCalendar.setProperty("thundershows.offset", offsetGroup.selectedItem.value);
