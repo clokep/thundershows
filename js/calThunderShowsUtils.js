@@ -167,6 +167,69 @@ String.prototype.padLeft = function(aPadding, aLength) {
 };
 
 /**
+ * convertHTMLToString
+ * Replaces HTML entities with string equivalents
+ */
+String.prototype.convertHTMLToString = function() {
+	var superscriptDictionary = { "0" : "\u2070",
+								  "1" : "\u00B9",
+								  "2" : "\u00B2",
+								  "3" : "\u00B3",
+								  "4" : "\u2074",
+								  "5" : "\u2075",
+								  "6" : "\u2076",
+								  "7" : "\u2077",
+								  "8" : "\u2078",
+								  "9" : "\u2079",
+								  "i" : "\u2071",
+								  "n" : "\u207F"
+								  };
+	var subscriptDictionary = { "0" : "\u2080",
+								"1" : "\u2081",
+								"2" : "\u2082",
+								"3" : "\u2083",
+								"4" : "\u2084",
+								"5" : "\u2085",
+								"6" : "\u2086",
+								"7" : "\u2087",
+								"8" : "\u2088",
+								"9" : "\u2089",
+								"a" : "\u2090",
+								"e" : "\u2091",
+								"o" : "\u2092",
+								"x" : "\u2093",
+							  };
+
+	var output = this.toString();
+	// HTML Tags
+	output = output.replace(/<br *\/?>/g, "\r\n"); // Line breaks
+	output = output.replace(/<(em|i)>(.+)<\/\1>/g, "/$2/"); // Italics
+	output = output.replace(/<(strong|b)>(.+)<\/\1>/g, "*$2*"); // Bold
+	output = output.replace(/<u>(.+)<\/\1>/g, "_$2_"); // Underline
+	output = output.replace(/<a.+(?:href="(.+)")?.+>(.+)<\/a>/g, "$2 (Source: $1)"); // Links
+
+	while ((substring = /<sup>(.+?)<\/sup>/.exec(output)) != null) {
+		var replace_substring = "";
+		for (var character in substring[1]) {
+			// Replace each character with superscript version
+			replace_substring += superscriptDictionary[character];
+		}
+		output = output.replace("<sup>" + substring[1] + " </sup>", replace_substring);
+	}
+	
+	// HTML Entities
+	output = output.replace(/&mdash;/, "\u2014"); // Em Dash
+	output = output.replace(/&amp;/, "&"); // Ampersand
+
+	// Clean up a bit
+	output = output.replace(/[\r\n]{3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
+	if (output == "") {
+		output = "No information available.";
+	]
+	return output;
+};
+
+/**
  * Associate array object
  * Make sure that the built in functions do not get overwritten
  */

@@ -409,7 +409,7 @@ calThunderShows.prototype = {
 			if (description) {
 				// Set the description if it exists
 				// Replace HTML line breaks with Unicode line breaks
-				item.setProperty("DESCRIPTION", description.stringValue.replace("<br />", "\r\n"));
+				item.setProperty("DESCRIPTION", description.stringValue.convertHTMLToString());
 			}
 
 			// Genres (Categories)
