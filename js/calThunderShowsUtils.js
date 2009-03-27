@@ -168,37 +168,15 @@ String.prototype.padLeft = function(aPadding, aLength) {
 
 /**
  * convertHTMLToString
- * Replaces HTML entities with string equivalents
+ * Replaces HTML tags and entities with plaintext/unicode equivalents
  */
 String.prototype.convertHTMLToString = function() {
-	var superscriptDictionary = { "0" : "\u2070",
-								  "1" : "\u00B9",
-								  "2" : "\u00B2",
-								  "3" : "\u00B3",
-								  "4" : "\u2074",
-								  "5" : "\u2075",
-								  "6" : "\u2076",
-								  "7" : "\u2077",
-								  "8" : "\u2078",
-								  "9" : "\u2079",
-								  "i" : "\u2071",
-								  "n" : "\u207F"
-								  };
-	var subscriptDictionary = { "0" : "\u2080",
-								"1" : "\u2081",
-								"2" : "\u2082",
-								"3" : "\u2083",
-								"4" : "\u2084",
-								"5" : "\u2085",
-								"6" : "\u2086",
-								"7" : "\u2087",
-								"8" : "\u2088",
-								"9" : "\u2089",
-								"a" : "\u2090",
-								"e" : "\u2091",
-								"o" : "\u2092",
-								"x" : "\u2093",
-							  };
+	var lookup = "012345789";
+	lookup += "aeionx";
+	var superscripts = "\u2070\u00B9\u00B2\u00B3\u2074\u2075\u2076\u2077\u2078\u2079"; // Numbers
+	superscripts += "ae\u2071o\u207Fx"; // Lowercase letters
+	var subscript ="\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088u2089"; // Numbers
+	subscript += "\u2090\u2091i\u2092n\u2093"; // Lowercase letters
 
 	var output = this.toString();
 	// HTML Tags
@@ -212,7 +190,7 @@ String.prototype.convertHTMLToString = function() {
 		var replace_substring = "";
 		for (var character in substring[1]) {
 			// Replace each character with superscript version
-			replace_substring += superscriptDictionary[character];
+			replace_substring += superscript[lookup.indexOf(character)];
 		}
 		output = output.replace("<sup>" + substring[1] + " </sup>", replace_substring);
 	}
@@ -248,19 +226,4 @@ AssociativeArray.prototype = {
 	toString: function _toString() {
 		return this.toSource();
 	}
-/*
-concat()  	Joins two or more arrays and returns the result  	1  	4  	4
-join() 	Puts all the elements of an array into a string. The elements are separated by a specified delimiter 	1 	3 	4
-pop() 	Removes and returns the last element of an array 	1 	4 	5.5
-push() 	Adds one or more elements to the end of an array and returns the new length 	1 	4 	5.5
-reverse() 	Reverses the order of the elements in an array 	1 	3 	4
-shift() 	Removes and returns the first element of an array 	1 	4 	5.5
-slice() 	Returns selected elements from an existing array 	1 	4 	4
-sort() 	Sorts the elements of an array 	1 	3 	4
-splice() 	Removes and adds new elements to an array 	1 	4 	5.5
-toSource() 	Represents the source code of an object 	1 	4 	-
-toString() 	Converts an array to a string and returns the result 	1 	3 	4
-unshift() 	Adds one or more elements to the beginning of an array and returns the new length 	1 	4 	6
-valueOf() 	Returns the primitive value of an Array object 	1 	2 	4
-*/
 };
