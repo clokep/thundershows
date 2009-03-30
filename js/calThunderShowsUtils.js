@@ -167,17 +167,10 @@ String.prototype.padLeft = function(aPadding, aLength) {
 };
 
 /**
- * convertHTMLToString
+ * convertHTMLToPlainText
  * Replaces HTML tags and entities with plaintext/unicode equivalents
  */
-String.prototype.convertHTMLToString = function() {
-	var lookup = "012345789";
-	lookup += "aeionx";
-	var superscripts = "\u2070\u00B9\u00B2\u00B3\u2074\u2075\u2076\u2077\u2078\u2079"; // Numbers
-	superscripts += "ae\u2071o\u207Fx"; // Lowercase letters
-	var subscript ="\u2080\u2081\u2082\u2083\u2084\u2085\u2086\u2087\u2088u2089"; // Numbers
-	subscript += "\u2090\u2091i\u2092n\u2093"; // Lowercase letters
-
+String.prototype.convertHTMLToPlainText = function() {
 	var output = this.toString();
 	// HTML Tags
 	output = output.replace(/<br *\/?>/g, "\r\n"); // Line breaks
@@ -185,16 +178,10 @@ String.prototype.convertHTMLToString = function() {
 	output = output.replace(/<(strong|b)>(.+)<\/\1>/g, "*$2*"); // Bold
 	output = output.replace(/<u>(.+)<\/\1>/g, "_$2_"); // Underline
 	output = output.replace(/<a.+(?:href="(.+)")?.+>(.+)<\/a>/g, "$2 (Source: $1)"); // Links
-
-	while ((substring = /<sup>(.+?)<\/sup>/.exec(output)) != null) {
-		var replace_substring = "";
-		for (var character in substring[1]) {
-			// Replace each character with superscript version
-			replace_substring += superscript[lookup.indexOf(character)];
-		}
-		output = output.replace("<sup>" + substring[1] + " </sup>", replace_substring);
-	}
 	
+	output = output.replace(/<sup>(.+)<\/\1>/g, "\u02C4$2\u02C4"); // Superscript
+	output = output.replace(/<sup>(.+)<\/\1>/g, "\u02C5$2\u02C5"); // Subscript
+
 	// HTML Entities
 	output = output.replace(/&mdash;/, "\u2014"); // Em Dash
 	output = output.replace(/&amp;/, "&"); // Ampersand
@@ -227,3 +214,86 @@ AssociativeArray.prototype = {
 		return this.toSource();
 	}
 };
+
+/**
+ * Show object
+ */
+function Show(uid, name, start_time, timezone, end_time, network, episode_name,
+			  season_number, episode_number, description, /* Array */ genres) {
+	this.uid = uid;
+	this.name = name;
+	this.start_time = start_time;
+	this.end_time = end_time;
+	this.network = network;
+	this.episode_name = episode_name;
+	this.season_number = season_number;
+	this.episode_number = episode_number;
+	this.description = description;
+	this.genres = genres;
+}
+Show.prototype {
+	toCalIEvent : function _toCalIEvent(calendar, isAllDayEvent) {
+		var item = createEvent();
+		item.calendar = calendar;
+
+		// Parse dates
+		try {
+			item.startDate = fromRFC3339(dtstart + "Z"); // Assume UTC time
+			// Seems to be UTC even though EST in XML file, manually set it to UTC
+			//item.endDate = (dtend ? fromRFC3339(dtend + "Z").getInTimezone(UTC()) : item.startDate.clone());
+			item.endDate = (dtend ? fromRFC3339(dtend + "Z") : item.startDate.clone()); // Assume UTC time
+			item.setProperty("DTSTAMP", now()); // calUtils.js
+
+			// Show times are from EST, if PST or MST we must offset this
+			var offset = this.getProperty("thundershows.offset");
+			if (offset != null) {
+				item.startDate = offsetDateTime(item.startDate, parseInt(offset));
+				item.endDate = offsetDateTime(item.endDate, parseInt(offset));
+			}
+		} catch (e) {
+			WARN("Event was skipped, could not convert dates: " + e);
+			continue;
+		}
+
+		if (!checkIfInRange(item, aRangeStart, aRangeEnd)) {
+			// calUtils has a nice range check for items, skip the item
+			// if it is not in range.
+			continue;
+		}
+
+		// Parse uid, defaulting to a generic uid
+		item.id = (uid ? uid : getUUID());
+		
+		if (network) {
+			// Set the location to the network
+			item.setProperty("LOCATION", network);
+		}
+
+		if (show_name || episode_name || season_number || episode_number) {
+			item.title = show_name + " - " + episode_name +
+						 " (S" + season_number.padLeft('0', 2) +
+						 "E" + episode_number.padLeft('0', 2) + ")";
+		}
+
+		if (description) {
+			// Set the description if it exists
+			// Replace HTML line breaks with Unicode line breaks
+			item.setProperty("DESCRIPTION", description.convertHTMLToPlainText());
+		}
+
+		// Set genres to item
+		item.setCategories(categories.length, categories);
+
+		item.makeImmutable();
+	}
+};
+
+/**
+ * Filter object
+ * @parameter type is a property of Show
+ */
+function Filter(what, type, filter) {
+	this.what = what;
+	this.type = type;
+	this.filter = filter;
+}

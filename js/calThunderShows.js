@@ -322,12 +322,9 @@ calThunderShows.prototype = {
 		var vevents = aDom.evaluate("//*[@_class='TVEpisode']", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 
 		var vevent;
-		var events = new AssociativeArray();
+		var shows = new Array();
 
 		while ((vevent = vevents.iterateNext())) {
-			var item = createEvent();
-			item.calendar = this;
-
 			// Must get the show name
 			var show_name = aDom.evaluate(".//show_name/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
@@ -352,31 +349,6 @@ calThunderShows.prototype = {
 				continue;
 			}
 
-			// Parse dates
-			try {
-				item.startDate = fromRFC3339(dtstart.stringValue + "Z"); // Assume UTC time
-				// Seems to be UTC even though EST in XML file, manually set it to UTC
-				//item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z").getInTimezone(UTC()) : item.startDate.clone());
-				item.endDate = (dtend ? fromRFC3339(dtend.stringValue + "Z") : item.startDate.clone()); // Assume UTC time
-				item.setProperty("DTSTAMP", now()); // calUtils.js
-
-				// Show times are from EST, if PST or MST we must offset this
-				var offset = this.getProperty("thundershows.offset");
-				if (offset != null) {
-					item.startDate = offsetDateTime(item.startDate, parseInt(offset));
-					item.endDate = offsetDateTime(item.endDate, parseInt(offset));
-				}
-			} catch (e) {
-				WARN("Event was skipped, could not convert dates: " + e);
-				continue;
-			}
-
-			if (!checkIfInRange(item, aRangeStart, aRangeEnd)) {
-				// calUtils has a nice range check for items, skip the item
-				// if it is not in range.
-				continue;
-			}
-
 			// Optional Elements
 			var uid = aDom.evaluate(".//id/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 			var network = aDom.evaluate(".//network/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
@@ -385,31 +357,10 @@ calThunderShows.prototype = {
 			var episode_number = aDom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 			var description = aDom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
-			// Parse uid, defaulting to a generic uid
-			item.id = (uid.stringValue ? uid.stringValue : getUUID());
-
-			if (network) {
-				// Set the location to the network
-				item.setProperty("LOCATION", network.stringValue);
-				
+			if (network && !(network.stringValue in known_networks)
 				// If we've never seen the network before, keep track of it
-				if (!(network.stringValue in known_networks)) {
 					known_networks[network.stringValue] = 0;
 				}
-			}
-
-			if (show_name || episode_name || season_number || episode_number) {
-				item.title = show_name.stringValue + " - " + episode_name.stringValue +
-							 " (S" + season_number.stringValue.padLeft('0', 2) +
-							 "E" + episode_number.stringValue.padLeft('0', 2) + ")";
-			} else {
-				dump(network.stringValue + " " + uid);
-			}
-
-			if (description) {
-				// Set the description if it exists
-				// Replace HTML line breaks with Unicode line breaks
-				item.setProperty("DESCRIPTION", description.stringValue.convertHTMLToString());
 			}
 
 			// Genres (Categories)
@@ -425,16 +376,11 @@ calThunderShows.prototype = {
 			while ((genre = genres.iterateNext())) {
 				categories.push(genre.textContent );
 			}
-			// Set genres to item
-			item.setCategories(categories.length, categories);
 
-			item.makeImmutable();
-			if (show_name.stringValue in events) {
-				// Don't want to overwrite shows that may be in there already
-				events[show_name.stringValue].push(item);
-			} else {
-				events[show_name.stringValue] = new Array(item);
-			}
+			// These need .stringValue or it must be added above
+			shows.push(new Show(uid, name, dtstart, timezone, dtend,
+					   network, episode_name, season_number, episode_number,
+					   description, categories);
 		}
 
 		// Set known shows property with all shows found
