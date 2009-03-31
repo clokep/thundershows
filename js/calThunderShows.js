@@ -188,7 +188,6 @@ calThunderShows.prototype = {
 			if ((lastUpdate + 60 * 29) < currentTime) {
 				this.mLastUpdate = currentTime;
 
-				//this.test_getItems(aCount, aRangeStart, aRangeEnd);
 				// Use xmlHTTPRequest to retrieve the page. Do so asynchronously.
 				var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
 										.createInstance(Components.interfaces.nsIJSXMLHttpRequest);
@@ -201,9 +200,9 @@ calThunderShows.prototype = {
 					var items;
 					if (request.responseXML && request.responseXML.documentElement.nodeName != "parsererror") {
 						// We have an xml document, just start converting
-						self.mEvents = self.convertXMLToEvents(request.responseXML, aCount, aRangeStart, aRangeEnd);
+						self.mEvents = self.convertXMLToShows(request.responseXML);
 						//self.mFilteredEvents = self.filterEvents(self.mEvents);
-						var filteredEvents = self.filterEvents(self.mEvents);
+						var filteredEvents = self.filterEvents(self.mEvents, aCount, aRangeStart, aRangeEnd);
 						if (filteredEvents != null && filteredEvents.length > 0) {
 							aListener.onGetResult(this.superCalendar,
 												  Components.results.NS_OK,
@@ -228,7 +227,7 @@ calThunderShows.prototype = {
 				request.send(null);
 				return;
 			}
-			var filteredEvents = this.filterEvents(this.mEvents);
+			var filteredEvents = this.filterEvents(self.mEvents, aCount, aRangeStart, aRangeEnd);
 			if (filteredEvents != null && filteredEvents.length > 0) {
 				aListener.onGetResult(this.superCalendar,
 									  Components.results.NS_OK,
@@ -254,63 +253,42 @@ calThunderShows.prototype = {
 	/**
 	 * This function searches the result for ThunderShow events
 	 */
-	filterEvents: function cTS_filterEvents(shows) {
+	filterEvents: function cTS_filterEvents(shows, aCount, aRangeStart, aRangeEnd) {
 		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
 		var filteredEvents = new Array();
-		
+/*
 		var displayPilots = this.getProperty("thundershows.display_pilots");
-		var needle = "(S01E01)";
-		
 		var useExceptions = this.getProperty("thundershows.use_exceptions");
-		
-		var allDayEvents = this.getProperty("thundershows.all_day_events");
+		var isAllDayEvent = this.getProperty("thundershows.all_day_events");
+		var offset = this.getProperty("thundershows.offset");
 
 		if (filters != null) {
 			filters = filters.split("\u001A");
 			for (var ithShow in shows) {
-				if ((filters.indexOf(ithShow) != "-1" && !useExceptions) ||
-					(useExceptions && filters.indexOf(ithShow) == "-1")) {
+				var show = shows[ithShow];
+
+				if ((!useExceptions && filters.indexOf(show.name) != "-1") ||
+					(useExceptions && filters.indexOf(show.name) == "-1") ||
+					(displayPilots && show.season = "1" && show.episode = "1") {
 					// If we're looking for that show, add it as an event
 					// If we're using exceptions and it isn't found, add it
-					filteredEvents = filteredEvents.concat(shows[ithShow]);
-				} else if (displayPilots) {
-					// If we're not looking for it but its a pilot (S01E01) and
-					// we're looking for all pilots than check and add if
-					// necessary
-					for (var ithEvent in shows[ithShow]) {
-						var event = shows[ithShow][ithEvent];
-						if (!event.title) {
-							// Item is not an event
-							continue;
-						}
-						var length = event.title.length;
-						if (event.title.substr(length - needle.length) == needle) {
-							filteredEvents.push(event);
-							// Assume there can only be one pilot for a show
-							break;
-						}
-					}
+					// If we want pilots and it is one (S01E01), add it
+					filteredEvents.push(show.toICalEvent(this,
+														 aRangeStart,
+														 aRangeEnd,
+														 offset,
+														 isAllDayEvent));
 				}
 			}
-		}
-		
-		// Handle all day events
-		if (allDayEvents) {
-			/*for (var ithEvent in filteredEvents) {
-				filteredEvents[ithEvent].startDate = offsetDateTime(filteredEvents[ithEvent].startDate, -24*60*60);
-				filteredEvents[ithEvent].endDate = offsetDateTime(filteredEvents[ithEvent].endDate, -24*60*60);
-				filteredEvents[ithEvent].startDate.isDate = true;
-				filteredEvents[ithEvent].endDate.isDate = true;
-			}*/
-		}
+		}*/
 		return filteredEvents;
 	},
 	
 	/**
 	 * This function parses the XML and returns useful events
 	 */
-	convertXMLToEvents: function cTS_convertXMLToEvents(aDom, aCount, aRangeStart, aRangeEnd) {
+	convertXMLToShows: function cTS_convertXMLToEvents(aDom) {
 		// Keep track of all shows we've ever seen
 		var known_shows = this.getProperty("thundershows.known_shows");
 		known_shows = (known_shows != null) ? known_shows.split("\u001A") : new Array();
@@ -357,10 +335,9 @@ calThunderShows.prototype = {
 			var episode_number = aDom.evaluate(".//episode/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 			var description = aDom.evaluate(".//episode_summary/child::text()", vevent, null, Components.interfaces.nsIDOMXPathResult.STRING_TYPE, null);
 
-			if (network && !(network.stringValue in known_networks)
+			if (network && !(network.stringValue in known_networks)) {
 				// If we've never seen the network before, keep track of it
-					known_networks[network.stringValue] = 0;
-				}
+				known_networks[network.stringValue] = 0;
 			}
 
 			// Genres (Categories)
@@ -380,7 +357,7 @@ calThunderShows.prototype = {
 			// These need .stringValue or it must be added above
 			shows.push(new Show(uid, name, dtstart, timezone, dtend,
 					   network, episode_name, season_number, episode_number,
-					   description, categories);
+					   description, categories));
 		}
 
 		// Set known shows property with all shows found

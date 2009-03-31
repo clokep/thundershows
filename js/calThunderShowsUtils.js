@@ -188,9 +188,6 @@ String.prototype.convertHTMLToPlainText = function() {
 
 	// Clean up a bit
 	output = output.replace(/[\r\n]{3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
-	if (output == "") {
-		output = "No information available.";
-	]
 	return output;
 };
 
@@ -231,66 +228,72 @@ function Show(uid, name, start_time, timezone, end_time, network, episode_name,
 	this.description = description;
 	this.genres = genres;
 }
-Show.prototype {
-	toCalIEvent : function _toCalIEvent(calendar, isAllDayEvent) {
+Show.prototype = {
+	toICalEvent: function _toCalIEvent(calendar, aRangeStart, aRangeEnd, offset, isAllDayEvent) {
 		var item = createEvent();
 		item.calendar = calendar;
 
 		// Parse dates
 		try {
-			item.startDate = fromRFC3339(dtstart + "Z"); // Assume UTC time
+			item.startDate = fromRFC3339(this.dtstart + "Z"); // Assume UTC time
 			// Seems to be UTC even though EST in XML file, manually set it to UTC
 			//item.endDate = (dtend ? fromRFC3339(dtend + "Z").getInTimezone(UTC()) : item.startDate.clone());
-			item.endDate = (dtend ? fromRFC3339(dtend + "Z") : item.startDate.clone()); // Assume UTC time
+			item.endDate = (this.dtend ? fromRFC3339(this.dtend + "Z") : item.startDate.clone()); // Assume UTC time
 			item.setProperty("DTSTAMP", now()); // calUtils.js
 
-			// Show times are from EST, if PST or MST we must offset this
-			var offset = this.getProperty("thundershows.offset");
-			if (offset != null) {
+			if (isAllDayEvent) {
+				// Handle all day events
+				item.startDate = offsetDateTime(item.startDate, -24*60*60);
+				item.endDate = offsetDateTime(item.endDate, -24*60*60);
+				item.startDate.isDate = true;
+				item.endDate.isDate = true;
+			} else if (offset != null) {
+				// Show times are from EST, if PST or MST we must offset this
 				item.startDate = offsetDateTime(item.startDate, parseInt(offset));
 				item.endDate = offsetDateTime(item.endDate, parseInt(offset));
 			}
 		} catch (e) {
 			WARN("Event was skipped, could not convert dates: " + e);
-			continue;
+			return null;
 		}
 
 		if (!checkIfInRange(item, aRangeStart, aRangeEnd)) {
 			// calUtils has a nice range check for items, skip the item
 			// if it is not in range.
-			continue;
+			return null;
 		}
 
 		// Parse uid, defaulting to a generic uid
-		item.id = (uid ? uid : getUUID());
+		item.id = (this.uid ? this.uid : getUUID());
 		
-		if (network) {
+		if (this.network) {
 			// Set the location to the network
-			item.setProperty("LOCATION", network);
+			item.setProperty("LOCATION", this.network);
 		}
 
-		if (show_name || episode_name || season_number || episode_number) {
-			item.title = show_name + " - " + episode_name +
-						 " (S" + season_number.padLeft('0', 2) +
-						 "E" + episode_number.padLeft('0', 2) + ")";
+		if (this.show_name || this.episode_name || this.season_number || this.episode_number) {
+			item.title = this.show_name + " - " + this.episode_name +
+						 " (S" + this.season_number.padLeft('0', 2) +
+						 "E" + this.episode_number.padLeft('0', 2) + ")";
 		}
 
-		if (description) {
+		if (this.description) {
 			// Set the description if it exists
 			// Replace HTML line breaks with Unicode line breaks
-			item.setProperty("DESCRIPTION", description.convertHTMLToPlainText());
+			item.setProperty("DESCRIPTION", this.description.convertHTMLToPlainText());
 		}
 
 		// Set genres to item
-		item.setCategories(categories.length, categories);
+		item.setCategories(this.categories.length, this.categories);
 
 		item.makeImmutable();
+		return item;
 	}
 };
 
 /**
  * Filter object
- * @parameter type is a property of Show
+ * @param type is a property of Show
  */
 function Filter(what, type, filter) {
 	this.what = what;
