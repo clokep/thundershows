@@ -227,7 +227,7 @@ calThunderShows.prototype = {
 				request.send(null);
 				return;
 			}
-			var filteredEvents = this.filterEvents(self.mEvents, aCount, aRangeStart, aRangeEnd);
+			var filteredEvents = this.filterEvents(this.mEvents, aCount, aRangeStart, aRangeEnd);
 			if (filteredEvents != null && filteredEvents.length > 0) {
 				aListener.onGetResult(this.superCalendar,
 									  Components.results.NS_OK,
@@ -257,7 +257,7 @@ calThunderShows.prototype = {
 		// Keep track of shows we want to display
 		var filters = this.getProperty("thundershows.filters");
 		var filteredEvents = new Array();
-/*
+
 		var displayPilots = this.getProperty("thundershows.display_pilots");
 		var useExceptions = this.getProperty("thundershows.use_exceptions");
 		var isAllDayEvent = this.getProperty("thundershows.all_day_events");
@@ -268,9 +268,9 @@ calThunderShows.prototype = {
 			for (var ithShow in shows) {
 				var show = shows[ithShow];
 
-				if ((!useExceptions && filters.indexOf(show.name) != "-1") ||
-					(useExceptions && filters.indexOf(show.name) == "-1") ||
-					(displayPilots && show.season = "1" && show.episode = "1") {
+				if ((!useExceptions && filters.indexOf(show.show_name) != "-1") ||
+					(useExceptions && filters.indexOf(show.show_name) == "-1") ||
+					(displayPilots && show.season == "1" && show.episode == "1")) {
 					// If we're looking for that show, add it as an event
 					// If we're using exceptions and it isn't found, add it
 					// If we want pilots and it is one (S01E01), add it
@@ -281,7 +281,7 @@ calThunderShows.prototype = {
 														 isAllDayEvent));
 				}
 			}
-		}*/
+		}
 		return filteredEvents;
 	},
 	
@@ -351,19 +351,27 @@ calThunderShows.prototype = {
 			// Handle multiple genres
 			var genres = aDom.evaluate(".//genres[@_type='array']/*", vevent, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 			while ((genre = genres.iterateNext())) {
-				categories.push(genre.textContent );
+				categories.push(genre.textContent);
 			}
 
 			// These need .stringValue or it must be added above
-			shows.push(new Show(uid, name, dtstart, timezone, dtend,
-					   network, episode_name, season_number, episode_number,
-					   description, categories));
+			dump(uid.stringValue + "\n" + show_name.stringValue + "\n" + dtstart.stringValue + "\n" + 
+					   timezone.stringValue + "\n" + dtend.stringValue + "\n" + network.stringValue + "\n" + 
+					   episode_name.stringValue + "\n" + season_number.stringValue + "\n" + episode_number.stringValue + "\n" + 
+					   description.stringValue + "\n" + categories);
+			shows.push(new Show(uid.stringValue, show_name.stringValue, dtstart.stringValue,
+					   timezone.stringValue, dtend.stringValue, network.stringValue,
+					   episode_name.stringValue, season_number.stringValue, episode_number.stringValue,
+					   description.stringValue, categories));
 		}
 
 		// Set known shows property with all shows found
 		this.setProperty("thundershows.known_shows", known_shows.sort().join('\u001A'));
 		// Set known networks property with all networks found
 		this.setProperty("thundershows.known_networks", JSON.stringify(known_networks));
-		return events;
+dump("end");
+dump(shows.length);
+dump(shows);
+		return shows;
 	}
 };

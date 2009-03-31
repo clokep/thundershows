@@ -215,10 +215,10 @@ AssociativeArray.prototype = {
 /**
  * Show object
  */
-function Show(uid, name, start_time, timezone, end_time, network, episode_name,
+function Show(uid, show_name, start_time, timezone, end_time, network, episode_name,
 			  season_number, episode_number, description, /* Array */ genres) {
 	this.uid = uid;
-	this.name = name;
+	this.show_name = show_name;
 	this.start_time = start_time;
 	this.end_time = end_time;
 	this.network = network;
