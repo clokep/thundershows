@@ -1,7 +1,16 @@
 0.4 xx/xx/2009
- = Version bump for Thunderbird 3.0 Beta 2
+ = Version bump for Thunderbird 3.0 Beta 2/Thunderbird 3.0 Beta 3pre
  + Sort auto-complete suggestions alphabetically
- + Ability to always display pilot (S01E01) episodes
+ + Ability to always display pilot (S01E01) episodes, part of Issue 16
+   (http://code.google.com/p/thundershows/issues/detail?id=16)
+ + Ability to use an exceptions list, part of Issue 16
+   (http://code.google.com/p/thundershows/issues/detail?id=16)
+ = Fixed bug with HTML showing in descriptions, Issue 14
+   (http://code.google.com/p/thundershows/issues/detail?id=14)
+ + Rewrote data structures for Shows and Filters, part of Issue 12
+   (http://code.google.com/p/thundershows/issues/detail?id=12)
+ + Can mark events as "All Day" events, Issue 18
+   (http://code.google.com/p/thundershows/issues/detail?id=18)
 
 0.3	02/18/2009
  + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue

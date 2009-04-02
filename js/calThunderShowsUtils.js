@@ -187,7 +187,7 @@ String.prototype.convertHTMLToPlainText = function() {
 	output = output.replace(/&amp;/, "&"); // Ampersand
 
 	// Clean up a bit
-	output = output.replace(/[\r\n]{3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
+	output = output.replace(/(?:\r\n){3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
 	return output;
 };
 
@@ -220,6 +220,7 @@ function Show(uid, show_name, start_time, timezone, end_time, network, episode_n
 	this.uid = uid;
 	this.show_name = show_name;
 	this.start_time = start_time;
+	this.timezone = timezone;
 	this.end_time = end_time;
 	this.network = network;
 	this.episode_name = episode_name;
@@ -229,16 +230,20 @@ function Show(uid, show_name, start_time, timezone, end_time, network, episode_n
 	this.genres = genres;
 }
 Show.prototype = {
-	toICalEvent: function _toCalIEvent(calendar, aRangeStart, aRangeEnd, offset, isAllDayEvent) {
+	toICalEvent: function _toCalIEvent(aCalendar, aRangeStart, aRangeEnd, offset, isAllDayEvent) {
+		/*dump(this.show_name + "\n" + this.start_time + "\n" + this.timezone + "\n" + this.end_time + "\n"
+			 + this.network + "\n" + this.episode_name + "\n" + this.season_number + "\n" +
+			 this.episode_number + "\n" + this.description + "\n" + this.genres);
+		return;*/
 		var item = createEvent();
-		item.calendar = calendar;
+		item.calendar = aCalendar;
 
 		// Parse dates
 		try {
-			item.startDate = fromRFC3339(this.dtstart + "Z"); // Assume UTC time
+			item.startDate = fromRFC3339(this.start_time + "Z"); // Assume UTC time
 			// Seems to be UTC even though EST in XML file, manually set it to UTC
-			//item.endDate = (dtend ? fromRFC3339(dtend + "Z").getInTimezone(UTC()) : item.startDate.clone());
-			item.endDate = (this.dtend ? fromRFC3339(this.dtend + "Z") : item.startDate.clone()); // Assume UTC time
+			//item.endDate = (end_time ? fromRFC3339(end_time + "Z").getInTimezone(UTC()) : item.startDate.clone());
+			item.endDate = (this.end_time ? fromRFC3339(this.end_time + "Z") : item.startDate.clone()); // Assume UTC time
 			item.setProperty("DTSTAMP", now()); // calUtils.js
 
 			if (isAllDayEvent) {
@@ -284,7 +289,9 @@ Show.prototype = {
 		}
 
 		// Set genres to item
-		item.setCategories(this.categories.length, this.categories);
+		// Don't need to check if it exists:
+		//   This will always exist with at least "TV Shows" in it
+		item.setCategories(this.genres.length, this.genres);
 
 		item.makeImmutable();
 		return item;

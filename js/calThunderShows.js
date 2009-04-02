@@ -268,12 +268,14 @@ calThunderShows.prototype = {
 			for (var ithShow in shows) {
 				var show = shows[ithShow];
 
+				dump(show.show_name);
 				if ((!useExceptions && filters.indexOf(show.show_name) != "-1") ||
 					(useExceptions && filters.indexOf(show.show_name) == "-1") ||
 					(displayPilots && show.season == "1" && show.episode == "1")) {
 					// If we're looking for that show, add it as an event
 					// If we're using exceptions and it isn't found, add it
 					// If we want pilots and it is one (S01E01), add it
+					dump("Match");
 					filteredEvents.push(show.toICalEvent(this,
 														 aRangeStart,
 														 aRangeEnd,
@@ -355,10 +357,10 @@ calThunderShows.prototype = {
 			}
 
 			// These need .stringValue or it must be added above
-			dump(uid.stringValue + "\n" + show_name.stringValue + "\n" + dtstart.stringValue + "\n" + 
+			/*dump(uid.stringValue + "\n" + show_name.stringValue + "\n" + dtstart.stringValue + "\n" + 
 					   timezone.stringValue + "\n" + dtend.stringValue + "\n" + network.stringValue + "\n" + 
 					   episode_name.stringValue + "\n" + season_number.stringValue + "\n" + episode_number.stringValue + "\n" + 
-					   description.stringValue + "\n" + categories);
+					   description.stringValue + "\n" + categories);*/
 			shows.push(new Show(uid.stringValue, show_name.stringValue, dtstart.stringValue,
 					   timezone.stringValue, dtend.stringValue, network.stringValue,
 					   episode_name.stringValue, season_number.stringValue, episode_number.stringValue,
@@ -369,9 +371,7 @@ calThunderShows.prototype = {
 		this.setProperty("thundershows.known_shows", known_shows.sort().join('\u001A'));
 		// Set known networks property with all networks found
 		this.setProperty("thundershows.known_networks", JSON.stringify(known_networks));
-dump("end");
-dump(shows.length);
-dump(shows);
+
 		return shows;
 	}
 };
