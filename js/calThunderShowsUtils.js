@@ -230,7 +230,7 @@ function Show(uid, show_name, start_time, timezone, end_time, network, episode_n
 	this.genres = genres;
 }
 Show.prototype = {
-	toICalEvent: function _toCalIEvent(aCalendar, aRangeStart, aRangeEnd, offset, isAllDayEvent) {
+	toICalEvent: function _toCalIEvent(aCalendar, aRangeStart, aRangeEnd, aOffset, isAllDayEvent) {
 		/*dump(this.show_name + "\n" + this.start_time + "\n" + this.timezone + "\n" + this.end_time + "\n"
 			 + this.network + "\n" + this.episode_name + "\n" + this.season_number + "\n" +
 			 this.episode_number + "\n" + this.description + "\n" + this.genres);
@@ -247,15 +247,33 @@ Show.prototype = {
 			item.setProperty("DTSTAMP", now()); // calUtils.js
 
 			if (isAllDayEvent) {
+				//dump("Start: " + item.startDate + "\n" + item.endDate);
 				// Handle all day events
 				item.startDate = offsetDateTime(item.startDate, -24*60*60);
-				item.endDate = offsetDateTime(item.endDate, -24*60*60);
+				item.startDate.hour = 0;
+				item.startDate.minute = 0;
+				item.startDate.second = 0;
+				// From: calendar/base/public/calIEvent.idl
+				//   Note that for all-day events, non-inclusive means that this
+				//   will be set to the day after the last day of the event.
+				item.endDate = item.startDate.clone();
+				item.endDate.resetTo(item.endDate.year,
+									 item.endDate.month,
+									 item.endDate.day + 1,
+									 item.endDate.hour,
+									 item.endDate.minute,
+									 item.endDate.second,
+									 item.endDate.timezone);
+				// Setting hour/minute/second is illegal operation if isDate is
+				// true
+				// See: calendar/base/public/calIDateTime.idl
 				item.startDate.isDate = true;
 				item.endDate.isDate = true;
-			} else if (offset != null) {
+				//dump("End: " + item.startDate + "\n" + item.endDate);
+			} else if (aOffset != null) {
 				// Show times are from EST, if PST or MST we must offset this
-				item.startDate = offsetDateTime(item.startDate, parseInt(offset));
-				item.endDate = offsetDateTime(item.endDate, parseInt(offset));
+				item.startDate = offsetDateTime(item.startDate, parseInt(aOffset));
+				item.endDate = offsetDateTime(item.endDate, parseInt(aOffset));
 			}
 		} catch (e) {
 			WARN("Event was skipped, could not convert dates: " + e);
