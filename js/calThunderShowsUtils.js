@@ -174,10 +174,11 @@ String.prototype.convertHTMLToPlainText = function() {
 	var output = this.toString();
 	// HTML Tags
 	output = output.replace(/<br *\/?>/g, "\r\n"); // Line breaks
-	output = output.replace(/<(em|i)>(.+)<\/\1>/g, "/$2/"); // Italics
-	output = output.replace(/<(strong|b)>(.+)<\/\1>/g, "*$2*"); // Bold
-	output = output.replace(/<u>(.+)<\/\1>/g, "_$2_"); // Underline
-	output = output.replace(/<a.+(?:href="(.+)")?.+>(.+)<\/a>/g, "$2 (Source: $1)"); // Links
+	output = output.replace(/<(em|i)>([\w\W]+?)<\/\1>/g, "/$2/"); // Italics
+	output = output.replace(/<(strong|b)>([\w\W]+?)<\/\1>/g, "*$2*"); // Bold
+	output = output.replace(/<u>([\w\W]+?)<\/\1>/g, "_$2_"); // Underline
+	dump(output);
+	output = output.replace(/<a.+?(?:href="(.+)")?.*?>([\w\W]+)<\/a>/g, "$2 (Source: $1)"); // Links
 	
 	output = output.replace(/<sup>(.+)<\/\1>/g, "\u02C4$2\u02C4"); // Superscript
 	output = output.replace(/<sup>(.+)<\/\1>/g, "\u02C5$2\u02C5"); // Subscript
@@ -187,7 +188,7 @@ String.prototype.convertHTMLToPlainText = function() {
 	output = output.replace(/&amp;/, "&"); // Ampersand
 
 	// Clean up a bit
-	output = output.replace(/(?:\r\n){3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
+	output = output.replace(/[(?:\r\n)]{3,}/g, "\r\n\r\n"); // Max of two line breaks in a row
 	return output;
 };
 
