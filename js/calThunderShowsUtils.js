@@ -16,6 +16,7 @@
  * The Initial Developer of the Original Code is
  *  Patrick Cloke
  *  Philipp Kewisch <mozilla@kewis.ch> (fromRFC3339 function)
+ *  Chris Pederick (http://chrispederick.com/work/web-developer/)
  * Portions created by the Initial Developer are Copyright (C) 2008
  * the Initial Developer. All Rights Reserved.
  *
@@ -39,94 +40,6 @@ function dump(aMessage) {
 	var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 									.getService(Components.interfaces.nsIConsoleService);
 	consoleService.logStringMessage("ThunderShows: " + aMessage);
-}
-
-/**
- * fromRFC3339
- * Convert a RFC3339 compliant Date string to a calIDateTime.
- * This function was taken from the Provider for Google Calendar
- *
- * @param aStr		  The RFC3339 compliant Date String
- * @return			  A calIDateTime object
- */
-function fromRFC3339(aStr) {
-	// We always want to use the default timezone for the ThunderShows Provider.
-	var aTimezone = calendarDefaultTimezone();
-
-	// XXX I have not covered leapseconds (matches[8]), this might need to
-	// be done. The only reference to leap seconds I found is bug 227329.
-
-	// Create a DateTime instance (calUtils.js)
-	var dateTime = createDateTime();
-
-	// Killer regex to parse RFC3339 dates
-	var re = new RegExp("^([0-9]{4})-([0-9]{2})-([0-9]{2})" +
-		"([Tt ]([0-9]{2}):([0-9]{2}):([0-9]{2})(\\.[0-9]+)?)?" + // This is edited (i.e. non-standard) to match [Tt ] instead of [Tt]
-		"(([Zz]|([+-])([0-9]{2}):([0-9]{2})))?");
-
-	var matches = re.exec(aStr);
-
-	if (!matches) {
-		return null;
-	}
-
-	// Set usual date components
-	dateTime.isDate = (matches[4]==null);
-
-	dateTime.year = matches[1];
-	dateTime.month = matches[2] - 1; // Jan is 0
-	dateTime.day = matches[3];
-
-	if (!dateTime.isDate) {
-		dateTime.hour = matches[5];
-		dateTime.minute = matches[6];
-		dateTime.second = matches[7];
-	}
-
-	// Timezone handling
-	if (matches[9] == "Z") {
-		// If the dates timezone is "Z", then this is UTC, no matter
-		// what timezone was passed
-		dateTime.timezone = UTC();
-	} else if (matches[9] == null) {
-		// We have no timezone info, only a date. We have no way to
-		// know what timezone we are in, so lets assume we are in the
-		// timezone of our local calendar, or whatever was passed.
-
-		dateTime.timezone = aTimezone;
-	} else {
-		var offset_in_s = (matches[11] == "-" ? -1 : 1) *
-			( (matches[12] * 3600) + (matches[13] * 60) );
-
-		// try local timezone first
-		dateTime.timezone = aTimezone;
-
-		// If offset does not match, go through timezones. This will
-		// give you the first tz in the alphabet and kill daylight
-		// savings time, but we have no other choice
-		if (dateTime.timezoneOffset != offset_in_s) {
-			// TODO A patch to Bug 363191 should make this more efficient.
-
-			var tzService = getTimezoneService();
-			// Enumerate timezones, set them, check their offset
-			var enumerator = tzService.timezoneIds;
-			while (enumerator.hasMore()) {
-				var id = enumerator.getNext();
-				dateTime.timezone = tzService.getTimezone(id);
-				if (dateTime.timezoneOffset == offset_in_s) {
-					// This is our last step, so go ahead and return
-					return dateTime;
-				}
-			}
-			// We are still here: no timezone was found
-			dateTime.timezone = UTC();
-			if (!dateTime.isDate) {
-				dateTime.hour += (matches[11] == "-" ? -1 : 1) * matches[12];
-				dateTime.minute += (matches[11] == "-" ? -1 : 1) * matches[13];
-			}
-		}
-	}
-	return dateTime;
 }
 
 /**
@@ -177,7 +90,6 @@ String.prototype.convertHTMLToPlainText = function() {
 	output = output.replace(/<(em|i)>([\w\W]+?)<\/\1>/g, "/$2/"); // Italics
 	output = output.replace(/<(strong|b)>([\w\W]+?)<\/\1>/g, "*$2*"); // Bold
 	output = output.replace(/<u>([\w\W]+?)<\/\1>/g, "_$2_"); // Underline
-	dump(output);
 	output = output.replace(/<a.+?(?:href="(.+)")?.*?>([\w\W]+)<\/a>/g, "$2 (Source: $1)"); // Links
 	
 	output = output.replace(/<sup>(.+)<\/\1>/g, "\u02C4$2\u02C4"); // Superscript
@@ -241,10 +153,12 @@ Show.prototype = {
 
 		// Parse dates
 		try {
-			item.startDate = fromRFC3339(this.start_time + "Z"); // Assume UTC time
+			//item.startDate = fromRFC3339(this.start_time + "Z"); // Assume UTC time
+			item.startDate = cal.fromRFC3339(this.start_time.replace(' ', 'T') + "Z"); // Assume UTC time
 			// Seems to be UTC even though EST in XML file, manually set it to UTC
 			//item.endDate = (end_time ? fromRFC3339(end_time + "Z").getInTimezone(UTC()) : item.startDate.clone());
-			item.endDate = (this.end_time ? fromRFC3339(this.end_time + "Z") : item.startDate.clone()); // Assume UTC time
+			//item.endDate = (this.end_time ? fromRFC3339(this.end_time + "Z") : item.startDate.clone()); // Assume UTC time
+			item.endDate = (this.end_time ? cal.fromRFC3339(this.end_time.replace(' ', 'T') + "Z") : item.startDate.clone()); // Assume UTC time
 			item.setProperty("DTSTAMP", now()); // calUtils.js
 
 			if (isAllDayEvent) {
@@ -319,10 +233,128 @@ Show.prototype = {
 
 /**
  * Filter object
- * @param type is a property of Show
  */
-function Filter(what, type, filter) {
-	this.what = what;
+function Filter(isExclusion, property, type, expression) {
+	this.isExclusion = isExclusion;
+	this.property = property;
 	this.type = type;
-	this.filter = filter;
+	this.expression = expression;
+}
+Filter.prototype = {
+	/*
+	 * Returns whether the give show matches the object
+	 * @param	aShow	An instance of a Show object
+	 * @return	bool
+	 */
+	match: function _match(aShow) {
+		return false;
+	}
+};
+
+
+
+
+
+var props = {"username" : "", "password" : "", "sub_login" : "Account Login"};
+var url = "http://on-my.tv/";
+var params = "";
+for (var i in props) {
+	if (params != "") {
+		params += "&";
+	}
+	params += i + "=" + encodeURIComponent(props[i]);
+}
+dump(params);
+var http = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+					 .createInstance(Components.interfaces.nsIJSXMLHttpRequest);
+http.open("POST", url, true);
+
+var cookie = webdeveloper_getCookies("." + url.substr("http://".length), "/", false)[0];
+var cookie_str;
+if (cookie) {
+	cookie_str = cookie.name + "=" + encodeURIComponent(cookie.value);
+	dump(cookie_str);
+	http.setRequestHeader("Cookie", cookie_str);
+}
+
+//Send the proper header information along with the request
+http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+http.setRequestHeader("Content-length", params.length);
+http.setRequestHeader("Connection", "close");
+http.onload = function() {
+	dump(http.status + " " + http.statusText);
+	dump(http.responseText);
+}
+http.send(params);
+
+
+
+var request = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"]
+						.createInstance(Components.interfaces.nsIJSXMLHttpRequest);
+request.open("GET", "http://next.seven.days.on-my.tv/?xml", true);
+if (cookie) {
+	dump("XML: " + cookie_str);
+	request.setRequestHeader("Cookie", cookie_str);
+}
+request.onload = function() {
+	if (request.responseXML && request.responseXML.documentElement.nodeName != "parsererror") {
+		dump("XML!");
+	}
+	dump(request.responseText);
+}
+// Send the request, forcing text/xml as a mime type. Until bug
+// 102699 is fixed, this is needed to get a DOM tree. The downside
+// is that pages that cannot be parsed as xml cannot be read.
+request.overrideMimeType('text/xml');
+request.send(null);
+
+
+// From the Web Developer extension (http://chrispederick.com/work/web-developer/)
+// From /chrome/content/webdeveloper/common/cookie.js
+// Get the cookies
+function webdeveloper_getCookies(host, path, sort)
+{
+    var cookies = new Array();
+
+    // If the host is set
+    if(host)
+    {
+        var cookie            = null;
+        var cookieEnumeration = Components.classes["@mozilla.org/cookiemanager;1"].getService(Components.interfaces.nsICookieManager).enumerator;
+        var cookieHost        = null;
+        var cookiePath        = null;
+
+        // Loop through the cookies
+        while(cookieEnumeration.hasMoreElements())
+        {
+            cookie = cookieEnumeration.getNext().QueryInterface(Components.interfaces.nsICookie);
+
+            cookieHost = cookie.host;
+            cookiePath = cookie.path;
+
+            // If there is a host and path for this cookie
+            if(cookieHost && cookiePath)
+            {
+                // If the cookie host starts with '.'
+                if(cookieHost.charAt(0) == ".")
+                {
+                    cookieHost = cookieHost.substring(1);
+                }
+
+                // If the host and cookie host and path and cookie path match
+                if((host == cookieHost || host.indexOf("." + cookieHost) != -1) && (path == cookiePath || path.indexOf(cookiePath) == 0))
+                {
+                    cookies.push(cookie);
+                }
+            }
+        }
+
+        // If sorting cookies
+        if(sort)
+        {
+            //cookies.sort(webdeveloper_sortCookies);
+        }
+    }
+
+    return cookies;
 }
