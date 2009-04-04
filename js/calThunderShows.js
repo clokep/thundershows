@@ -51,11 +51,11 @@ calThunderShows.prototype = {
 	},
 
 	/*
-	 * member variables
+	 * Member variables
 	 * For use for only one session
 	 */
 	mEvents: null,
-	mLastUpdate: 0, // Never updated yet
+	mLastUpdate: 0, // Never updated
 
 	/*
 	 * implement calICalendar
