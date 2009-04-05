@@ -134,21 +134,21 @@ AssociativeArray.prototype = {
 
 /**
  * Creates a new Show
- * @class								Represents a show.
- * @property	{uid} aUid				A unique identifier
- * @property	{String} aShowName		The name of the show
- * @property	{String} aStartTime		The start time as a string (i.e. 2009-04-04 00:30:00)
- * @property 	{String} aTimezone		The timezone string (i.e. UTC)
- * @property	{String} aEndTime		The end time as a string (i.e. 2009-04-04 01:00:00)
- * @property	{String} aNetwork		The network name
- * @property	{String} aEpisodeName	The name of the episode
- * @property	{int} aSeasonNumber		What season the show is in
- * @property	{int} aEpisodeNumber	What episode (in the current season) the show is in
- * @property	{String} aDescription	A description of the episode
- * @property	{Array{@link String}}	aGenres	An array of the genres for the show
+ * @class									Represents a show.
+ * @property	{uid} aUid					A unique identifier
+ * @property	{String} aShowName			The name of the show
+ * @property	{String} aStartTime			The start time as a string (i.e. 2009-04-04 00:30:00)
+ * @property 	{String} aTimezone			The timezone string (i.e. UTC)
+ * @property	{String} aEndTime			The end time as a string (i.e. 2009-04-04 01:00:00)
+ * @property	{String} aNetwork			The network name
+ * @property	{String} aEpisodeName		The name of the episode
+ * @property	{int} aSeasonNumber			What season the show is in
+ * @property	{int} aEpisodeNumber		What episode (in the current season) the show is in
+ * @property	{String} aDescription		A description of the episode
+ * @property	{Array} {String} aGenres	An array of the genres for the show
  */
 function Show(aUid, aShowName, aStartTime, aTimezone, aEndTime, aNetwork, aEpisodeName,
-			  aSeasonNumber, aEpisodeNumber, aDescription, /* Array */ aGenres) {
+			  aSeasonNumber, aEpisodeNumber, aDescription, aGenres) {
 	this.uid = aUid;
 	this.showName = aShowName;
 	this.startTime = aStartTime;
@@ -250,22 +250,29 @@ function Filter(aName, aProperty, aInclude, aType, aExpression, aEnabled) {
 	this.name = aName;
 	this.property = aProperty;
 	this.include = aInclude;
-	this.type = aType,
+	this.type = aType;
 	this.expression = aExpression;
 	this.enabled = aEnabled;
 }
+Filter.EQUALS = 1;
+Filter.LESS_THAN = 1;
+Filter.LESS_THAN_EQUALS = 2;
+Filter.GREATER_THAN = 3;
+Filter.GREATER_THAN_EQUALS = 4;	
+Filter.CONTAINS = 5;
+Filter.REGEX = 6;
 Filter.prototype = {
 	/* Constants */
 	/**
 	 * @constant
 	 */
-	const EQUALS: 0,
-	const LESS_THAN: 1,
-	const LESS_THAN_EQUALS: 2,
-	const GREATER_THAN: 3,
-	const GREATER_THAN_EQUALS: 4,	
-	const CONTAINS: 5,
-	const REGEX: 6,
+	EQUALS: 0,
+	LESS_THAN: 1,
+	LESS_THAN_EQUALS: 2,
+	GREATER_THAN: 3,
+	GREATER_THAN_EQUALS: 4,	
+	CONTAINS: 5,
+	REGEX: 6,
 
 	/* Members */
 	name: null,
@@ -273,14 +280,104 @@ Filter.prototype = {
 	include: null,
 	type: null,
 	expression: null,
-	enabled: null,
-
-	/*
-	 * Returns whether the give show matches the object
-	 * @param	aShow	An instance of a Show object
-	 * @return	bool
-	 */
-	match: function _match(aShow) {
-		return false;
-	}
+	enabled: null
 };
+/**
+ * Returns whether the given show matches the given filter
+ * @param	{Filter} aFilter	The filter to match
+ * @param	{Show} aShow		The show to run the filter on
+ * @return	{bool}				Whether the show matches the filter
+ */
+Filter.match = function (aFilter, aShow) {
+	switch (aFilter.type) {
+		case Filter.EQUALS:
+			return aShow[aFilter.property] == aFilter.expression;
+		case Filter.LESS_THAN:
+			return aShow[aFilter.property] < aFilter.expression;
+		case Filter.LESS_THAN_EQUALS:
+			return aShow[aFilter.property] <= aFilter.expression;
+		case Filter.GREATER_THAN:
+			return aShow[aFilter.property] > aFilter.expression;
+		case Filter.GREATER_THAN_EQUALS:
+			return aShow[aFilter.property] >= aFilter.expression;
+		case Filter.CONTAINS:
+			return aFilter.expression.indexOf(aShow[aFilter.property]) != "-1";
+		case Filter.REGEX:
+			var isMatch = false;
+			try {
+				isMatch = aShow[aFilter.property].match(new RegExp(aFilter.expression));
+			} catch (e) {
+				WARN("Error with regex: " + e);
+			}
+			return isMatch != null;
+		default:
+			return null;
+	}
+	return false;
+};
+/**
+ * <p>Takes all of the filters and all of the shows and returns the shows that
+ * match.</p>
+ *
+ * <p>Note: This needs an implied "include *" after the last filter if the last
+ * filter is an exclude. This needs an "exclude *" if the last filter is an
+ * include.</p>
+ *
+ * <p>"include *" == "exclude not *" == "exclude \0"
+ * <br />
+ * "include \0" == "exclude not \0" == "exclude *"</p>
+ *
+ * @param	{Array} {Filter} aFilters
+ * @param	{Array} {Shows} aShows
+ */
+Filter.filterAll = function(aFilters, aShows) {
+	var output = new Array();
+	for (var aShowKey in aShows) {
+		for (var aFilterKey in aFilters) {
+			if (!aFilters[aFilterKey].enabled) {
+				// Filter is disabled, skip it
+				continue;
+			}
+			var isMatch = Filter.match(aFilters[aFilterKey], aShows[aShowKey]);
+			var isInclude = aFilters[aFilterKey].include;
+			dump(aFilters[aFilterKey].expression + " " + aShows[aShowKey].showName + " " + isMatch + " " + isInclude);
+			if (isInclude && isMatch) {
+				// The show matches the filter and we want to include it
+				output.push(aShows[aShowKey]);
+				dump("included");
+				break;
+			} else if (!isInclude && isMatch) {
+				// The show matches the filer and we want to exclude it (i.e.
+				// skip the rest of the filters)
+				dump("excluded");
+				break;
+			}
+		}
+		dump("fell through");
+	}
+	return output;
+}
+
+var tempFilters = new Array();
+tempFilters.push(new Filter("1", "showName", true, Filter.EQUALS, "House", true));
+tempFilters.push(new Filter("2", "showName", true, Filter.EQUALS, "Test", true));
+tempFilters.push(new Filter("3", "showName", false, Filter.EQUALS, "Temp", true));
+tempFilters.push(new Filter("4", "showName", false, Filter.EQUALS, "Blah", true));
+tempFilters.push(new Filter("5", "showName", true, Filter.EQUALS, "House", true));
+// Pilot
+tempFilters.push(new Filter("6", "seasonNumber", false, Filter.GREATER_THAN, "1", true));
+tempFilters.push(new Filter("7", "episodeNumber", false, Filter.GREATER_THAN, "1", true));
+tempFilters.push(new Filter("implied", "showName", true, Filter.REGEX, ".*", true));
+
+var tempShows = new Array();
+tempShows.push(new Show("1", "House", "2009-04-04 00:30:00", "UTC", "2009-04-04 01:00:00", "FOX", "Ep Name", "1", "2", "Descript", Array("Genre 1","Genre 2")));
+tempShows.push(new Show("2", "HIMYM", "2009-04-04 00:30:00", "UTC", "2009-04-04 01:00:00", "FOX", "Ep Name", "1", "2", "Descript", Array("Genre 1","Genre 2")));
+tempShows.push(new Show("3", "Test", "2009-05-04 00:30:00", "UTC", "2009-05-04 01:00:00", "FOX", "Ep Name", "1", "2", "Descript", Array("Genre 1","Genre 2")));
+tempShows.push(new Show("4", "Boop", "2009-04-04 00:30:00", "UTC", "2009-04-04 01:00:00", "FOX", "Ep Name", "3", "2", "Descript", Array("Genre 1","Genre 2")));
+tempShows.push(new Show("5", "Blah", "2009-04-04 00:30:00", "UTC", "2009-04-04 01:00:00", "FOX", "Ep Name", "1", "2", "Descript", Array("Genre 1","Genre 2")));
+tempShows.push(new Show("6", "Pilot", "2009-04-04 00:30:00", "UTC", "2009-04-04 01:00:00", "FOX", "Ep Name", "1", "1", "Descript", Array("Genre 1","Genre 2")));
+
+var outputShows = Filter.filterAll(tempFilters, tempShows);
+for (var i in outputShows) {
+	dump(outputShows[i].uid);
+}
