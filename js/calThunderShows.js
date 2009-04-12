@@ -267,13 +267,13 @@ calThunderShows.prototype = {
 			filters = filters.split("\u001A");
 			for (var ithShow in shows) {
 				var show = shows[ithShow];
-				if ((!useExceptions && filters.indexOf(show.show_name) != "-1") ||
-					(useExceptions && filters.indexOf(show.show_name) == "-1") ||
-					(displayPilots && show.season == "1" && show.episode == "1")) {
+				if ((!useExceptions && filters.indexOf(show.showName) != "-1") ||
+					(useExceptions && filters.indexOf(show.showName) == "-1") ||
+					(displayPilots && show.seasonNumber == "1" && show.episodeNumber == "1")) {
 					// If we're looking for that show, add it as an event
 					// If we're using exceptions and it isn't found, add it
 					// If we want pilots and it is one (S01E01), add it
-					filteredEvents.push(show.toICalEvent(this,
+					filteredEvents.push(show.toCalIEvent(this,
 														 aRangeStart,
 														 aRangeEnd,
 														 offset,

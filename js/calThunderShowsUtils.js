@@ -43,7 +43,11 @@
  * @license			<a href="http://www.mozilla.org/MPL/">MPL</a>
  */
 
- 
+/**
+ * Dump a message to the Thunderbird console.
+ *
+ * @param	{String} aMessage	The string to print
+ */
 function dump(aMessage) {
 	var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 								   .getService(Components.interfaces.nsIConsoleService);
@@ -114,6 +118,7 @@ String.prototype.convertHTMLToPlainText = function() {
 
 /**
  * Make sure that the built in functions do not get overwritten
+ * @deprecated	Since version 0.4
  */
 function AssociativeArray() {}
 AssociativeArray.prototype = {
@@ -135,20 +140,36 @@ AssociativeArray.prototype = {
 /**
  * Creates a new Show
  * @class									Represents a show.
- * @property	{uid} aUid					A unique identifier
- * @property	{String} aShowName			The name of the show
- * @property	{String} aStartTime			The start time as a string (i.e. 2009-04-04 00:30:00)
- * @property 	{String} aTimezone			The timezone string (i.e. UTC)
- * @property	{String} aEndTime			The end time as a string (i.e. 2009-04-04 01:00:00)
- * @property	{String} aNetwork			The network name
- * @property	{String} aEpisodeName		The name of the episode
- * @property	{int} aSeasonNumber			What season the show is in
- * @property	{int} aEpisodeNumber		What episode (in the current season) the show is in
- * @property	{String} aDescription		A description of the episode
- * @property	{Array} {String} aGenres	An array of the genres for the show
+ * @property	{uid} uid					A unique identifier
+ * @property	{String} showName			The name of the show
+ * @property	{String} startTime			The start time as a string (i.e. 2009-04-04 00:30:00)
+ * @property 	{String} timezone			The timezone string (i.e. UTC)
+ * @property	{String} endTime			The end time as a string (i.e. 2009-04-04 01:00:00)
+ * @property	{String} network			The network name
+ * @property	{String} episodeName		The name of the episode
+ * @property	{int} seasonNumber			What season the show is in
+ * @property	{int} episodeNumber		What episode (in the current season) the show is in
+ * @property	{String} description		A description of the episode
+ * @property	{String[]} genres			An array of the genres for the show
+ *
+ * @param		{uid} aUid					A unique identifier
+ * @param		{String} aShowName			The name of the show
+ * @param		{String} aStartTime			The start time as a string (i.e. 2009-04-04 00:30:00)
+ * @param 		{String} aTimezone			The timezone string (i.e. UTC)
+ * @param		{String} aEndTime			The end time as a string (i.e. 2009-04-04 01:00:00)
+ * @param		{String} aNetwork			The network name
+ * @param		{String} aEpisodeName		The name of the episode
+ * @param		{int} aSeasonNumber			What season the show is in
+ * @param		{int} aEpisodeNumber		What episode (in the current season) the show is in
+ * @param		{String} aDescription		A description of the episode
+ * @param		{String[]} aGenres			An array of the genres for the show
  */
 function Show(aUid, aShowName, aStartTime, aTimezone, aEndTime, aNetwork, aEpisodeName,
 			  aSeasonNumber, aEpisodeNumber, aDescription, aGenres) {
+	/**
+	 * The unique user id
+	 * @type uid
+	 */
 	this.uid = aUid;
 	this.showName = aShowName;
 	this.startTime = aStartTime;
@@ -162,7 +183,17 @@ function Show(aUid, aShowName, aStartTime, aTimezone, aEndTime, aNetwork, aEpiso
 	this.genres = aGenres;
 }
 Show.prototype = {
-	toICalEvent: function _toCalIEvent(aCalendar, aRangeStart, aRangeEnd, aOffset, isAllDayEvent) {
+	/**
+	 * Convert the Show instance to a calIEvent (as given by
+	 * calendar/base/public/calIEvent.idl).
+	 *
+	 * @param	{calICalendar} aCalendar	The calICalendar the event will be a part of
+	 * @param	{calIDateTime} aRangeStart	(inclusive) range start or null (open range)
+	 * @param	{calIDateTime} aRangeEnd	(exclusive) range end or null (open range)
+	 * @param	{int} aOffset				Time to offset all events (i.e. hours for a timezone)
+	 * @param	{bool} isAllDayEvent		true if the event is all day, false if it has a time attached to it
+	 */
+	toCalIEvent: function _toCalIEvent(aCalendar, aRangeStart, aRangeEnd, aOffset, isAllDayEvent) {
 		var item = createEvent();
 		item.calendar = aCalendar;
 
@@ -174,7 +205,6 @@ Show.prototype = {
 			item.setProperty("DTSTAMP", now()); // calUtils.js
 
 			if (isAllDayEvent) {
-				//dump("Start: " + item.startDate + "\n" + item.endDate);
 				// Handle all day events
 				item.startDate = offsetDateTime(item.startDate, -24*60*60);
 				item.startDate.hour = 0;
@@ -196,7 +226,6 @@ Show.prototype = {
 				// See: calendar/base/public/calIDateTime.idl
 				item.startDate.isDate = true;
 				item.endDate.isDate = true;
-				//dump("End: " + item.startDate + "\n" + item.endDate);
 			} else if (aOffset != null) {
 				// Show times are from EST, if PST or MST we must offset this
 				item.startDate = offsetDateTime(item.startDate, parseInt(aOffset));
@@ -221,6 +250,7 @@ Show.prototype = {
 			item.setProperty("LOCATION", this.network);
 		}
 
+		// This needs to be handled better (i.e. what if we're missing parts of the data)
 		if (this.showName || this.episodeName || this.seasonNumber || this.episodeNumber) {
 			item.title = this.showName + " - " + this.episodeName +
 						 " (S" + this.seasonNumber.padLeft('0', 2) +
@@ -244,7 +274,21 @@ Show.prototype = {
 };
 
 /**
- * Filter object
+ * Creates a new Filter
+ *
+ * @class									Represents a filter.
+ * @property	{String} name				The name of the filter
+ * @property	{String} property			A property to match from a {@link Show}
+ * @property	{bool} include				true if matched shows are included, false if they are excluded
+ * @property	{int} type					Matches a type of filter (i.e. {@link Filter.EQUALS}, {@link Filter.LESS_THAN})
+ * @property	{String|int} expression	The filter expression to match
+ * @property	{bool} enabled				true if the filter is enabled, false otherwise
+ * @param		{String} aName				The name of the filter
+ * @param		{String} aProperty			A property to match from a {@link Show}
+ * @param		{bool} aInclude				true if matched shows are included, false if they are excluded
+ * @param		{int} aType					Matches a type of filter (i.e. {@link Filter.EQUALS}, {@link Filter.LESS_THAN})
+ * @param		{String|int} aExpression	The filter expression to match
+ * @param		{bool} aEnabled				true if the filter is enabled, false otherwise
  */
 function Filter(aName, aProperty, aInclude, aType, aExpression, aEnabled) {
 	this.name = aName;
@@ -254,34 +298,49 @@ function Filter(aName, aProperty, aInclude, aType, aExpression, aEnabled) {
 	this.expression = aExpression;
 	this.enabled = aEnabled;
 }
-Filter.EQUALS = 1;
-Filter.LESS_THAN = 1;
-Filter.LESS_THAN_EQUALS = 2;
-Filter.GREATER_THAN = 3;
-Filter.GREATER_THAN_EQUALS = 4;	
-Filter.CONTAINS = 5;
-Filter.REGEX = 6;
-Filter.prototype = {
-	/* Constants */
-	/**
-	 * @constant
-	 */
-	EQUALS: 0,
-	LESS_THAN: 1,
-	LESS_THAN_EQUALS: 2,
-	GREATER_THAN: 3,
-	GREATER_THAN_EQUALS: 4,	
-	CONTAINS: 5,
-	REGEX: 6,
 
-	/* Members */
-	name: null,
-	property: null,
-	include: null,
-	type: null,
-	expression: null,
-	enabled: null
-};
+/**
+ * A filter type, true when the property value exactly equals the filter expression
+ * @static
+ */
+Filter.EQUALS = 1;
+
+/**
+ * A filter type, true when the property value is less than the filter expression
+ * @static
+ */
+Filter.LESS_THAN = 1;
+
+/**
+ * A filter type, true when the property value is less than or exactly equals the filter expression
+ * @static
+ */
+Filter.LESS_THAN_EQUALS = 2;
+
+/**
+ * A filter type, true when the property value is greater thanexactly equals the filter expression
+ * @static
+ */
+Filter.GREATER_THAN = 3;
+
+/**
+ * A filter type, true when the property value is greater than or exactly equals the filter expression
+ * @static
+ */
+Filter.GREATER_THAN_EQUALS = 4;
+
+/**
+ * A filter type, true when the property value contains the filter expression
+ * @static
+ */
+Filter.CONTAINS = 5;
+
+/**
+ * A filter type, true when the property value matches the filter expression
+ * @static
+ */
+Filter.REGEX = 6;
+
 /**
  * Returns whether the given show matches the given filter
  * @param	{Filter} aFilter	The filter to match
@@ -327,8 +386,8 @@ Filter.match = function (aFilter, aShow) {
  * <br />
  * "include \0" == "exclude not \0" == "exclude *"</p>
  *
- * @param	{Array} {Filter} aFilters
- * @param	{Array} {Shows} aShows
+ * @param	{Filter[]} aFilters
+ * @param	{Shows[]} aShows
  */
 Filter.filterAll = function(aFilters, aShows) {
 	var output = new Array();
@@ -358,7 +417,7 @@ Filter.filterAll = function(aFilters, aShows) {
 	return output;
 }
 
-var tempFilters = new Array();
+/*var tempFilters = new Array();
 tempFilters.push(new Filter("1", "showName", true, Filter.EQUALS, "House", true));
 tempFilters.push(new Filter("2", "showName", true, Filter.EQUALS, "Test", true));
 tempFilters.push(new Filter("3", "showName", false, Filter.EQUALS, "Temp", true));
@@ -380,4 +439,4 @@ tempShows.push(new Show("6", "Pilot", "2009-04-04 00:30:00", "UTC", "2009-04-04 
 var outputShows = Filter.filterAll(tempFilters, tempShows);
 for (var i in outputShows) {
 	dump(outputShows[i].uid);
-}
+}*/
