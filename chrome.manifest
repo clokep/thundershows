@@ -1,4 +1,8 @@
-content thundershows chrome/content/
-overlay chrome://calendar/content/calendarCreation.xul chrome://thundershows/content/calendarCreation.xul
-overlay chrome://calendar/content/calendar-properties-dialog.xul chrome://thundershows/content/calendar-properties-dialog.xul
-locale thundershows en-US chrome/locale/en-US/
+content	thundershows												chrome/content/
+overlay	chrome://calendar/content/calendarCreation.xul				chrome://thundershows/content/calendarCreation.xul
+overlay	chrome://calendar/content/calendar-properties-dialog.xul	chrome://thundershows/content/calendar-properties-dialog.xul
+overlay	chrome://messenger/content/messenger.xul					chrome://thundershows/content/messenger.xul
+#overlay	chrome://messenger/content/messenger.xul				chrome://thundershows/content/messenger.js
+locale	thundershows en-US											chrome/locale/en-US/
+skin    thundershows classic/1.0									chrome/skin/
+style	chrome://calendar/content/calendar-properties-dialog.xul	chrome://thundershows/skin/richtree.css

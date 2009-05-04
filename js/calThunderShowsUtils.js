@@ -140,6 +140,8 @@ AssociativeArray.prototype = {
 /**
  * Creates a new Show
  * @class									Represents a show.
+ * @requires	Filter
+ * @since		0.4
  * @property	{uid} uid					A unique identifier
  * @property	{String} showName			The name of the show
  * @property	{String} startTime			The start time as a string (i.e. 2009-04-04 00:30:00)
@@ -277,12 +279,15 @@ Show.prototype = {
  * Creates a new Filter
  *
  * @class									Represents a filter.
+ * @requires	Show
+ * @since		0.4
  * @property	{String} name				The name of the filter
  * @property	{String} property			A property to match from a {@link Show}
  * @property	{bool} include				true if matched shows are included, false if they are excluded
  * @property	{int} type					Matches a type of filter (i.e. {@link Filter.EQUALS}, {@link Filter.LESS_THAN})
  * @property	{String|int} expression	The filter expression to match
  * @property	{bool} enabled				true if the filter is enabled, false otherwise
+ *
  * @param		{String} aName				The name of the filter
  * @param		{String} aProperty			A property to match from a {@link Show}
  * @param		{bool} aInclude				true if matched shows are included, false if they are excluded

@@ -36,7 +36,7 @@
    - ***** END LICENSE BLOCK ***** -->
 <!DOCTYPE overlay SYSTEM "chrome://thundershows/locale/calendar-properties-dialog.dtd">
 <overlay id="cTS_calendar-properties-dialog"
-		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<dialog id="calendar-properties-dialog-2"
 			ondialogaccept="cTS_onAcceptDialog(); return onAcceptDialog();"
 			onload="cTS_onLoad(); onLoad();"> <!-- This assumes cTS_onAcceptDialog() returns true //-->
@@ -103,24 +103,92 @@
 					</groupbox>
 					<groupbox>
 						<caption label="&thundershows-offset-caption.label;"/>
-						<menulist id="thundershows-offset-selector"
-								  disable-with-calendar="true"
-								  thundershows-only-property="true">
-							<menupopup>
-								<menuitem label="&thundershows-west-coast-offset.label;"
-										  value="10800"/>  <!-- 3 Hours in seconds //-->
-								<menuitem label="&thundershows-east-coast-offset.label;"
-										  value="0"/>
-							</menupopup>
-						</menulist>
-						<checkbox id="thundershows-all-day-events-checkbox"
-								  label="&thundershows-all-day-events.label;"
-								  oncommand="cTS_toggleAllDayEvents()"
-								  disable-with-calendar="true"
-								  thundershows-only-property="true"/>
+						<hbox>
+							<label value="&thundershows-offset.label;"
+								   control="thundershows-offset-picker"/>
+							<textbox id="thundershows-offset-picker"
+									 label="&thundershows-offset.label;"
+									 type="number"
+									 min="0"
+									 max="23"
+									 size="3"
+									 wraparound="true"
+									 flex="1"
+									 disable-with-calendar="true"
+									 thundershows-only-property="true"/>
+							<checkbox id="thundershows-all-day-events-checkbox"
+									  label="&thundershows-all-day-events.label;"
+									  oncommand="cTS_toggleAllDayEvents()"
+									  flex="1"
+									  disable-with-calendar="true"
+									  thundershows-only-property="true"/>
+						</hbox>
+						<description>
+							&thundershows-offset-description.label;
+						</description>
 					</groupbox>
+					
+					<!-- Start For Testing //-->
+
+<groupbox>
+	<vbox style="overflow-y: auto; overflow-x: hidden;">
+		<hbox>
+			<checkbox label="Enabled" checked="false"/>
+			<textbox value="Name"/>
+			<checkbox label="Include" checked="false"/>
+			<menulist crop="end">
+				<menupopup>
+					<menuitem label="Show Name"/>
+					<menuitem label="Episode Name"/>
+					<menuitem label="Series Number"/>
+					<menuitem label="Episode Number"/>
+					<menuitem label="Network Name"/>
+				</menupopup>
+			</menulist>
+			<menulist crop="end">
+				<menupopup>
+					<menuitem label="Equals"/>
+					<menuitem label="Less Than"/>
+					<menuitem label="Less Than or Equals"/>
+					<menuitem label="Greater Than"/>
+					<menuitem label="Greater Than or Equals"/>
+				</menupopup>
+			</menulist>
+			<textbox value="Filter"/>
+		</hbox>
+		<hbox>
+			<checkbox label="Enabled" checked="false"/>
+			<textbox value="Name"/>
+			<checkbox label="Include" checked="false"/>
+			<menulist crop="end">
+				<menupopup>
+					<menuitem label="Show Name"/>
+					<menuitem label="Episode Name"/>
+					<menuitem label="Series Number"/>
+					<menuitem label="Episode Number"/>
+					<menuitem label="Network Name"/>
+				</menupopup>
+			</menulist>
+			<menulist crop="end">
+				<menupopup>
+					<menuitem label="Equals"/>
+					<menuitem label="Less Than"/>
+					<menuitem label="Less Than or Equals"/>
+					<menuitem label="Greater Than"/>
+					<menuitem label="Greater Than or Equals"/>
+				</menupopup>
+			</menulist>
+			<textbox value="Filter"/>
+		</hbox>
+	</vbox>
+</groupbox>
+
+					<!-- End For Testing //-->
+
 				</tabpanel>
 			</tabpanels>
 		</tabbox>
 	</dialog>
+
+	<script type="application/x-javascript" src="chrome://thundershows/content/bindings/richtree.js" />
 </overlay>
