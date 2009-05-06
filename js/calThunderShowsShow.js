@@ -34,6 +34,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+// To load as a module
+var EXPORTED_SYMBOLS = ["Show"];
+ 
 /**
  * Creates a new Show
  * @class									Represents a show.

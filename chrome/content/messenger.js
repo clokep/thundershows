@@ -34,6 +34,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+Components.utils.import("resource://thundershows/calThunderShowsFilter.js");
+
 function dump(aMessage) {
 	var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 								   .getService(Components.interfaces.nsIConsoleService);
@@ -43,20 +45,57 @@ function dump(aMessage) {
 window.addEventListener("load",  function () {cTS_startUp();}, false);
 window.addEventListener("unload", function () {cTS_shutDown();},  false);
 
-// 
 function cTS_startUp() {
+	// Array of Thundershows Calendars
+	var thunderShowsCals = Array();
+
+	// Array of all registered calendars
 	let cals = getCalendarManager().getCalendars({});
 	for each (let calendar in cals) {
 		if (calendar) {
 			if (calendar.type == "thundershows") {
-				dump("Got it");
+				// If ThunderShows calendar add it to the array
+				thunderShowsCals.push(calendar);
 			}
 		}
 	}
 
+	// Can probably be replaced with the following once STEEL lands
+	// Application.extensions.get("{11b7da5a-8458-4cf6-a067-f75c19562317}");
+	// See comm-central/source/mozilla/toolkit/mozapps/extensions/public/nsIExtensionManager.idl
 
-	//getCalendars(out PRUint32 count,[array, size_is(count), retval] out calICalendar aCalendars);
+	// Get the extension manager
+	var extmgr = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager);
+	// Find ThunderShows
+	var extension = extmgr.getItemForID("{11b7da5a-8458-4cf6-a067-f75c19562317}");
+	if (extension != null) {
+		// If extension exists
+		var currentVersion = extension.version;
+		//var lastInstalledVersion = getSafePref("thundershows.lastInstalledVersion", "0.3");
 
+		var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+									   .getService(Components.interfaces.nsIVersionComparator);
+		if (versionChecker.compare(currentVersion, "0.3") > 0) {
+			// Current version is newer than 0.3
+			for each (let calendar in thunderShowsCals) {
+				// Get current filters
+				var filters = calendar.getProperty("thundershows.filters");
+				// Set up array for new filters
+				var newFilters = new Array();
+				if (filters != null) {
+					// If filters exist, separate them
+					filters = filters.split("\u001A");
+					// For each filter change from a flat string to a Filter object
+					for each (let aFilter in filters) {
+						newFilters.push(new Filter(aFilter, "showName", true, Filter.EQUALS, aFilter, true));
+					}
+					// Save new filters to the calendar
+					dump(JSON.stringify(newFilters));
+					//calendar.setProperty("thundershows.filters", JSON.stringify(newFilters));
+				}
+			}
+		}
+	}
 }
 
 function cTS_shutDown() {}

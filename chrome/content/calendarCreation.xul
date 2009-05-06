@@ -36,7 +36,7 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 <!DOCTYPE overlay SYSTEM "chrome://thundershows/locale/calendarCreation.dtd">
-<overlay id="calendarCreation"
+<overlay id="cTS_calendarCreation"
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="chrome://thundershows/content/calendarCreation.js">
 		//Let my editor syntax highlight

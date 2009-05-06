@@ -111,7 +111,7 @@ function cTS_onLoad() {
 }
 
 /**
- * Called when the dialog is accepted, to save settings
+ * Called when the dialog is accepted to save settings
  * Note: this does not replace the standard onAcceptDialog()
  */
 function cTS_onAcceptDialog() {

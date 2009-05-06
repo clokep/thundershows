@@ -33,6 +33,9 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
  * ***** END LICENSE BLOCK ***** */
+
+// To load as a module
+var EXPORTED_SYMBOLS = ["Filter"];
  
 /**
  * Creates a new Filter
