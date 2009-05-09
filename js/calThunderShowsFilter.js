@@ -153,8 +153,9 @@ Filter.match = function (aFilter, aShow) {
  * <br />
  * "include \0" == "exclude not \0" == "exclude *"</p>
  *
- * @param	{Filter[]} aFilters
- * @param	{Shows[]} aShows
+ * @param	{Filter[]} aFilters	Filter objects to match
+ * @param	{Show[]} aShows		Show objects to check Filter objects against
+ & @return	{Show[]}			Show objects that match Filter objects
  */
 Filter.filterAll = function(aFilters, aShows) {
 	var output = new Array();
@@ -182,6 +183,24 @@ Filter.filterAll = function(aFilters, aShows) {
 		dump("fell through");
 	}
 	return output;
+}
+/**
+ * Takes a saved set of filters and returns an Array of Filter objects
+ *
+ * @param	{String} aSavedFilterSet	A String from Filter.save
+ * @return	{Filter[]}					An Array of Filter objects
+ */
+Filter.load = function(aSavedFilterSet) {
+	return JSON.parse(aSavedFilterSet);
+}
+/**
+ * Saves a set of filters to a String
+ *
+ * @param	{Filter[]} aFilterSet	An Array of Filter objects to save
+ * @return	{String}				A String representing the Filter objects
+ */
+Filter.save = function(aFilterSet) {
+	return JSON.stringify(aFilterSet);
 }
 
 /*var tempFilters = new Array();

@@ -35,6 +35,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 Components.utils.import("resource://thundershows/calThunderShowsFilter.js");
+//Components.utils.import("resource://calendar/modules/calUtils.jsm");
 
 function dump(aMessage) {
 	var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
@@ -70,32 +71,66 @@ function cTS_startUp() {
 	var extension = extmgr.getItemForID("{11b7da5a-8458-4cf6-a067-f75c19562317}");
 	if (extension != null) {
 		// If extension exists
-		var currentVersion = extension.version;
-		//var lastInstalledVersion = getSafePref("thundershows.lastInstalledVersion", "0.3");
+		var extensionVersion = extension.version;
 
 		var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
 									   .getService(Components.interfaces.nsIVersionComparator);
-		if (versionChecker.compare(currentVersion, "0.3") > 0) {
-			// Current version is newer than 0.3
-			for each (let calendar in thunderShowsCals) {
+		// Update each calendar
+		// Note that this should be able to handle multiple levels of upgrade at the same time
+		// I.e. 0.3 --> 0.5, not just 0.3 --> 0.4, this is done by iteratively updating each one
+		for each (let calendar in thunderShowsCals) {
+			//var calendarVersion = calendar.getProperty("thundershows.version");
+			var calendarVersion = "0.3";
+
+			var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+										   .getService(Components.interfaces.nsIVersionComparator);
+			// Update calendar
+			// Note that calendar should be able to handle multiple levels of upgrade at the same time
+			// I.e. 0.3 --> 0.5, not just 0.3 --> 0.4, calendar is done by iteratively updating each one
+			if (versionChecker.compare(calendarVersion, "0.4") < 0) {
+				dump("Upgrading");
+				// Last updated version is older than 0.4
+				// API changes from 0.3 --> 0.4 must be done manually
+
 				// Get current filters
 				var filters = calendar.getProperty("thundershows.filters");
-				// Set up array for new filters
-				var newFilters = new Array();
 				if (filters != null) {
+					// Set up array for new filters
+					var newFilters = new Array();
+
 					// If filters exist, separate them
 					filters = filters.split("\u001A");
+
 					// For each filter change from a flat string to a Filter object
 					for each (let aFilter in filters) {
 						newFilters.push(new Filter(aFilter, "showName", true, Filter.EQUALS, aFilter, true));
 					}
+
 					// Save new filters to the calendar
-					dump(JSON.stringify(newFilters));
-					//calendar.setProperty("thundershows.filters", JSON.stringify(newFilters));
+					dump(Filter.save(newFilters));
+					//calendar.setProperty("thundershows.filters", Filter.save(newFilters));
 				}
+				
+				// Get current known shows
+				var knownShows = calendar.getProperty("thundershows.known_shows");
+				if (knownShows != null) {
+					// If known shows exist, separate them into an Array
+					knownShows = knownShows.split("\u001A");
+					// Save new knownShows to the calendar
+					dump(JSON.stringify(knownShows));
+					//calendar.setProperty("thundershows.known_shows", JSON.stringify(knownShows));
+				}
+
 			}
+			/*if (versionChecker.compare(calendarVersion, "0.5") < 0) {
+				// Last updated version is older than 0.5
+				// API changes from 0.4 --> 0.5 must be done manually
+			}*/
+			dump("Done upgrading");
+			// Update calendar version to extension version
+			//calendar.setProperty("thundershows.version", extensionVersion);
 		}
-	}
+	} // End if extension exists
 }
 
 function cTS_shutDown() {}

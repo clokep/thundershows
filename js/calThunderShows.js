@@ -37,6 +37,8 @@
  
 function calThunderShows() {
 	this.initProviderBase();
+	// Initiate some of our own things now
+	//this.update();
 }
 
 calThunderShows.prototype = {
@@ -84,7 +86,7 @@ calThunderShows.prototype = {
 		// For complete list see http://mxr.mozilla.org/comm-central/source/calendar/base/public/calICalendar.idl
 		switch (aName) {
 			// This provider is generally readonly, no matter what is set in the
-			// internal prefrences. Therefore return true for the readOnly property.
+			// internal preferences. Therefore return true for the readOnly property.
 			case "readOnly":
 				return true;
 			// Unsupported capabilities
@@ -97,6 +99,15 @@ calThunderShows.prototype = {
 		}
 
 		return this.__proto__.__proto__.getProperty.apply(this, arguments);
+	},
+	
+	/**
+	 * Allows a default value to be associated with a property
+	 * Do not have to check if a value exists
+	 */
+	getPropertySafe: function cTS_getPropertySafe(aName, aDefaultValue) {
+		var property = this.getProperty(aName);
+		return (property != null) ? property : aDefaultValue;
 	},
 
 	setProperty: function cTS_setProperty(aName, aValue) {
@@ -255,7 +266,13 @@ calThunderShows.prototype = {
 	 */
 	filterEvents: function cTS_filterEvents(shows, aCount, aRangeStart, aRangeEnd) {
 		// Keep track of shows we want to display
-		var filters = this.getProperty("thundershows.filters");
+		//dump(this.getProperty("thundershows.filters"));
+		var filters = Filter.load(this.getProperty("thundershows.filters"));
+		/*if (filters.length == 0) {
+			// No filters, can't match any shows
+			return new Array();
+		}*/
+
 		var filteredEvents = new Array();
 
 		var displayPilots = this.getProperty("thundershows.display_pilots");
@@ -263,22 +280,20 @@ calThunderShows.prototype = {
 		var isAllDayEvent = this.getProperty("thundershows.all_day_events");
 		var offset = this.getProperty("thundershows.offset");
 
-		if (filters != null) {
-			filters = filters.split("\u001A");
-			for (var ithShow in shows) {
-				var show = shows[ithShow];
-				if ((!useExceptions && filters.indexOf(show.showName) != "-1") ||
-					(useExceptions && filters.indexOf(show.showName) == "-1") ||
-					(displayPilots && show.seasonNumber == "1" && show.episodeNumber == "1")) {
-					// If we're looking for that show, add it as an event
-					// If we're using exceptions and it isn't found, add it
-					// If we want pilots and it is one (S01E01), add it
-					filteredEvents.push(show.toCalIEvent(this,
-														 aRangeStart,
-														 aRangeEnd,
-														 offset,
-														 isAllDayEvent));
-				}
+		for (var ithShow in shows) {
+			var show = shows[ithShow];
+			if ((!useExceptions && filters.indexOf(show.showName) != "-1") ||
+				(useExceptions && filters.indexOf(show.showName) == "-1") ||
+				(displayPilots && show.seasonNumber == "1" && show.episodeNumber == "1")) {
+				// If we're looking for that show, add it as an event
+				// If we're using exceptions and it isn't found, add it
+				// If we want pilots and it is one (S01E01), add it
+				filteredEvents.push(Show.toCalIEvent(show,
+													 this,
+													 aRangeStart,
+													 aRangeEnd,
+													 offset,
+													 isAllDayEvent));
 			}
 		}
 		return filteredEvents;
@@ -289,10 +304,10 @@ calThunderShows.prototype = {
 	 */
 	convertXMLToShows: function cTS_convertXMLToEvents(aDom) {
 		// Keep track of all shows we've ever seen
-		var known_shows = this.getProperty("thundershows.known_shows");
-		known_shows = (known_shows != null) ? known_shows.split("\u001A") : new Array();
+		var known_shows = JSON.parse(this.getPropertySafe("thundershows.known_shows", "[]"));
+		//known_shows = (known_shows != null) ? JSON.parse(known_shows) : new Array();
 		// Keep track of all networks
-		var known_networks = this.getProperty("thundershows.ksnown_networks");
+		var known_networks = this.getProperty("thundershows.known_networks", new AssociativeArray());
 		known_networks = (known_networks != null) ? JSON.parse(known_networks) : new AssociativeArray();
 
 		// Use xpath to get all elements with class TVEpisode
@@ -353,11 +368,7 @@ calThunderShows.prototype = {
 				categories.push(genre.textContent);
 			}
 
-			// These need .stringValue or it must be added above
-			/*dump(uid.stringValue + "\n" + show_name.stringValue + "\n" + dtstart.stringValue + "\n" + 
-					   timezone.stringValue + "\n" + dtend.stringValue + "\n" + network.stringValue + "\n" + 
-					   episode_name.stringValue + "\n" + season_number.stringValue + "\n" + episode_number.stringValue + "\n" + 
-					   description.stringValue + "\n" + categories);*/
+			// These need .stringValue since the Show object expects String objects
 			shows.push(new Show(uid.stringValue, show_name.stringValue, dtstart.stringValue,
 					   timezone.stringValue, dtend.stringValue, network.stringValue,
 					   episode_name.stringValue, season_number.stringValue, episode_number.stringValue,
@@ -365,10 +376,77 @@ calThunderShows.prototype = {
 		}
 
 		// Set known shows property with all shows found
-		this.setProperty("thundershows.known_shows", known_shows.sort().join('\u001A'));
+		this.setProperty("thundershows.known_shows", JSON.stringify(known_shows.sort()));
 		// Set known networks property with all networks found
 		this.setProperty("thundershows.known_networks", JSON.stringify(known_networks));
 
 		return shows;
+	},
+	
+	/**
+	 * This function updates this calendar to be compatible with the newest version of ThunderShows Provider
+	 */
+	update: function cTS_update() {
+		// Can probably be replaced with the following once STEEL lands
+		// Application.extensions.get("{11b7da5a-8458-4cf6-a067-f75c19562317}");
+		// See comm-central/source/mozilla/toolkit/mozapps/extensions/public/nsIExtensionManager.idl
+
+		// Get the extension manager
+		var extmgr = Components.classes["@mozilla.org/extensions/manager;1"].getService(Components.interfaces.nsIExtensionManager);
+		// Find ThunderShows
+		var extension = extmgr.getItemForID("{11b7da5a-8458-4cf6-a067-f75c19562317}");
+		if (extension != null) {
+			// If extension exists (this isn't be neccessary -- must exist for the calendar to load?)
+			var extensionVersion = extension.version;
+			//var calendarVersion = this.getProperty("thundershows.version");
+			var calendarVersion = "0.3";
+
+			var versionChecker = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+										   .getService(Components.interfaces.nsIVersionComparator);
+			// Update calendar
+			// Note that this should be able to handle multiple levels of upgrade at the same time
+			// I.e. 0.3 --> 0.5, not just 0.3 --> 0.4, this is done by iteratively updating each one
+			if (versionChecker.compare(calendarVersion, "0.4") < 0) {
+				// Last updated version is older than 0.4
+				// API changes from 0.3 --> 0.4 must be done manually
+
+				// Get current filters
+				var filters = this.getProperty("thundershows.filters");
+				if (filters != null) {
+					// Set up array for new filters
+					var newFilters = new Array();
+
+					// If filters exist, separate them
+					filters = filters.split("\u001A");
+
+					// For each filter change from a flat string to a Filter object
+					for each (let aFilter in filters) {
+						newFilters.push(new Filter(aFilter, "showName", true, Filter.EQUALS, aFilter, true));
+					}
+
+					// Save new filters to the calendar
+					dump(Filter.save(newFilters));
+					//this.setProperty("thundershows.filters", Filter.save(newFilters));
+				}
+				
+				// Get current known shows
+				var knownShows = this.getProperty("thundershows.known_shows");
+				if (knownShows != null) {
+					// If known shows exist, separate them into an Array
+					knownShows = knownShows.split("\u001A");
+					// Save new knownShows to the calendar
+					dump(JSON.stringify(knownShows));
+					//this.setProperty("thundershows.known_shows", JSON.stringify(knownShows));
+				}
+
+			}
+			/*if (versionChecker.compare(calendarVersion, "0.5") < 0) {
+				// Last updated version is older than 0.5
+				// API changes from 0.4 --> 0.5 must be done manually
+			}*/
+		}
+		
+		// Update calendar version to extension version
+		//this.setProperty("thundershows.version", extensionVersion);
 	}
 };
