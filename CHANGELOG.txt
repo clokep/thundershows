@@ -1,5 +1,6 @@
 0.4 xx/xx/2009
  = Version bump for Thunderbird 3.0 Beta 2/Thunderbird 3.0 Beta 3pre
+ - Dropped support for Thunderbird 2.0, requires Thunderbird 3.0b2 or higher
  + Sort auto-complete suggestions alphabetically
  + Ability to always display pilot (S01E01) episodes, part of Issue 16
    (http://code.google.com/p/thundershows/issues/detail?id=16)
@@ -7,10 +8,18 @@
    (http://code.google.com/p/thundershows/issues/detail?id=16)
  = Fixed bug with HTML showing in descriptions, Issue 14
    (http://code.google.com/p/thundershows/issues/detail?id=14)
- + Rewrote data structures for Shows and Filters, part of Issue 12
+ + Rewrote data structures for Shows and Filters/no longer using flat strings as
+   storage, part of Issue 12
    (http://code.google.com/p/thundershows/issues/detail?id=12)
  + Can mark events as "All Day" events, Issue 18
    (http://code.google.com/p/thundershows/issues/detail?id=18)
+ + The API has been heavily commented using JSDoc Toolkit
+   (http://code.google.com/p/jsdoc-toolkit/), see Issue 21
+   (http://code.google.com/p/thundershows/issues/detail?id=21)
+ + Advanced filters (can filter by many properties in many ways), based off
+   Issue 5 (http://code.google.com/p/thundershows/issues/detail?id=5)
+ = Allow arbitrary time offsets for shows (not just East/West coast), Issue 22
+   (http://code.google.com/p/thundershows/issues/detail?id=22)
 
 0.3	02/18/2009
  + Added auto-complete suggestions for show filters (Thunderbird 3 only), Issue
