@@ -171,16 +171,13 @@ Filter.filterAll = function(aFilters, aShows) {
 			if (isInclude && isMatch) {
 				// The show matches the filter and we want to include it
 				output.push(aShows[aShowKey]);
-				dump("included");
 				break;
 			} else if (!isInclude && isMatch) {
 				// The show matches the filer and we want to exclude it (i.e.
 				// skip the rest of the filters)
-				dump("excluded");
 				break;
 			}
 		}
-		dump("fell through");
 	}
 	return output;
 }
