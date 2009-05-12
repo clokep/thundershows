@@ -38,7 +38,6 @@
 function calThunderShows() {
 	this.initProviderBase();
 	// Initiate some of our own things now
-	//this.update();
 	this.initThunderShowsCalendar();
 }
 
@@ -63,15 +62,13 @@ calThunderShows.prototype = {
 	 * Member variables
 	 * For use for only one session
 	 */
+	mObserver: null,
 	mEvents: null,
 	mLastUpdate: 0, // Never updated
 
 	/*
 	 * implement calICalendar
 	 */
-
-
-
 	get type cTS_getType() {
 		// This is a shortname for the provider, used as unique identification.
 		// This string should also be used in the UI overlay to add the
@@ -163,7 +160,7 @@ calThunderShows.prototype = {
 		}
 	},
 
-	deleteItem: function cHC_deleteItem(aItem, aListener) {
+	deleteItem: function cTS_deleteItem(aItem, aListener) {
 		// Deleting events is not implemented, but we need to tell the listener
 		// about it, if there is one.
 
@@ -416,27 +413,38 @@ calThunderShows.prototype = {
 			// Note that this should be able to handle multiple levels of upgrade at the same time
 			// I.e. 0.3 --> 0.5, not just 0.3 --> 0.4, this is done by iteratively updating each one
 			if (versionChecker.compare(calendarVersion, "0.4pre") < 0) {
+				dump("Updating to 0.4pre");
 				// Last updated version is older than 0.4pre
 				// API changes from 0.3.* --> 0.4pre must be done manually
 
+				// Convert filters
 				// Get current filters
-				var filters = this.getProperty("thundershows.filters");
-				if (filters != null) {
-					// Set up array for new filters
-					var newFilters = new Array();
+				var filters = this.getPropertySafe("thundershows.filters", "");
+				// Get whether exceptions are used
+				var useExceptions = this.getPropertySafe("thundershows.use_exceptions", false);
+				// Set up array for new filters
+				var newFilters = new Array();
 
-					// If filters exist, separate them
-					filters = filters.split("\u001A");
-
-					// For each filter change from a flat string to a Filter object
-					for each (let aFilter in filters) {
-						newFilters.push(new Filter(aFilter, "showName", true, Filter.EQUALS, aFilter, true));
-					}
-
-					// Save new filters to the calendar
-					this.setProperty("thundershows.filters", Filter.save(newFilters));
+				// If filters exist, separate them
+				filters = filters.split("\u001A");
+				// For each filter change from a flat string to a Filter object
+				for each (let aFilter in filters) {
+					newFilters.push(new Filter(aFilter, "showName", !useExceptions, Filter.EQUALS, aFilter, true));
 				}
-				// Need to transform other filters (pilots, etc.)
+
+				// Convert pilot option
+				var displayPilots = this.getPropertySafe("thundershows.display_pilots", false);
+				if (displayPilots) {
+					// Exclude any season # greater than 1
+					newFilters.push(new Filter("Exclude Season  # > 1", "seasonNumber", false, Filter.GREATER_THAN, "1", true));
+					// Exclude any episode # greater than 1
+					newFilters.push(new Filter("Exclude Episode # > 1", "episodeNumber", false, Filter.GREATER_THAN, "1", true));
+				}
+
+				// Save new filters to the calendar
+				this.setProperty("thundershows.filters", Filter.save(newFilters));
+				this.deleteProperty("thundershows.use_exceptions");
+				this.deleteProperty("thundershows.display_pilots");
 				
 				// Get current known shows
 				var knownShows = this.getProperty("thundershows.known_shows");

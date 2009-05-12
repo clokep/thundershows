@@ -145,9 +145,9 @@ Filter.match = function (aFilter, aShow) {
  * <p>Takes all of the filters and all of the shows and returns the shows that
  * match.</p>
  *
- * <p>Note: This needs an implied "include *" after the last filter if the last
- * filter is an exclude. This needs an "exclude *" if the last filter is an
- * include.</p>
+ * <p>Note: This includes an implied "include *" after the last filter if the
+ * last filter is an exclude. This includes an "exclude *" if the last filter is
+ * an include.</p>
  *
  * <p>"include *" == "exclude not *" == "exclude \0"
  * <br />
@@ -158,16 +158,30 @@ Filter.match = function (aFilter, aShow) {
  & @return	{Show[]}			Show objects that match Filter objects
  */
 Filter.filterAll = function(aFilters, aShows) {
+	if (aFilters[aFilters.length - 1].include) {
+		// The last filter is an include, exclude everything after
+		// Possible bug: If last filter is disabled
+		aFilters.push(new Filter("Exclude All", "showName", false, Filter.REGEX, ".*", true));
+	} else {
+		// The last filter is an exclude, include everything after
+		aFilters.push(new Filter("Include All", "showName", true, Filter.REGEX, ".*", true));
+	}
+
 	var output = new Array();
+
 	for (var aShowKey in aShows) {
+		// Each show
 		for (var aFilterKey in aFilters) {
+			// Try each filter
 			if (!aFilters[aFilterKey].enabled) {
 				// Filter is disabled, skip it
 				continue;
 			}
+			// Whether the filter matches the show
 			var isMatch = Filter.match(aFilters[aFilterKey], aShows[aShowKey]);
+			// Include or exclude mode
 			var isInclude = aFilters[aFilterKey].include;
-			dump(aFilters[aFilterKey].expression + " " + aShows[aShowKey].showName + " " + isMatch + " " + isInclude);
+
 			if (isInclude && isMatch) {
 				// The show matches the filter and we want to include it
 				output.push(aShows[aShowKey]);
