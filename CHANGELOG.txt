@@ -1,6 +1,7 @@
 0.4 xx/xx/2009
- = Version bump for Thunderbird 3.0 Beta 2/Thunderbird 3.0 Beta 3pre
- - Dropped support for Thunderbird 2.0, requires Thunderbird 3.0b2 or higher
+ = Version bump for Thunderbird 3.0b2/Thunderbird 3.0b3pre
+ = Version bump for Thunderbird 3.1a1pre
+ - Dropped support for Thunderbird 2.0, now requires Thunderbird 3.0b2 or higher
  + Sort auto-complete suggestions alphabetically
  + Ability to always display pilot (S01E01) episodes, part of Issue 16
    (http://code.google.com/p/thundershows/issues/detail?id=16)
