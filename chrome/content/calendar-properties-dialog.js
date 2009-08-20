@@ -122,6 +122,7 @@ function cTS_onAcceptDialog() {
 	if (gCalendar.type == "thundershows") {
 		// Save filters
 		var filters = Filter.save(gFilters);
+		alert(filters);
 		gCalendar.setProperty("thundershows.filters", filters);
 
 		// Save offset settings
@@ -210,12 +211,17 @@ function cTS_saveFilter() {
 	var filterType = document.getElementById("thundershows-filter-type");
 	var filterExpression = document.getElementById("thundershows-filter-expression");
 
+	// Update filterList
+	filterList.selectedItem.label = filterName.value;
+
 	// Set the filter item from the current values
 	gFilters[index].name = filterName.value;
 	gFilters[index].include = filterInclude.checked;
 	gFilters[index].property = filterProperty.selectedItem.value;
 	gFilters[index].type = filterType.selectedIndex;
 	gFilters[index].expression = filterExpression.value;
+
+	alert("Save");
 }
 
 /**
@@ -237,7 +243,7 @@ function cTS_removeFilter() {
 		// Choose the row above to select, unless the top row was removed
 		index--;
 	}
-	// 
+
 	// Simulate selecting the item (selects that item)
 	filterList.getItemAtIndex(index).click();
 }

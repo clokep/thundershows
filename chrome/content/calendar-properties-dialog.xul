@@ -90,6 +90,7 @@
 								<row id="thundershows-filter-name-row" align="center">
 									<caption label="&thundershows-filter-name.label;"/>
 									<textbox id="thundershows-filter-name"
+											 oncut="cTS_saveFilter();"
 											 onpaste="cTS_saveFilter();"
 											 onkeyup="cTS_saveFilter();"
 											 disable-with-calendar="true"
@@ -102,6 +103,7 @@
 											  label="&thundershows-filter-include.label;"
 											  onclick="cTS_saveFilter();"
 											  onkeyup="cTS_saveFilter();"
+											  onmouseup="cTS_saveFilter();"
 											  disable-with-calendar="true"
 											  thundershows-only-property="true"/>
 								</row>
@@ -109,8 +111,7 @@
 									<caption label="&thundershows-filter-property.label;"/>
 									<menulist id="thundershows-filter-property"
 											  crop="end"
-											  onclick="cTS_saveFilter();"
-											  onkeyup="cTS_saveFilter();"
+											  oncommand="cTS_saveFilter();"
 											  disable-with-calendar="true"
 											  thundershows-only-property="true">
 										<menupopup>
@@ -131,8 +132,7 @@
 									<caption label="&thundershows-filter-type.label;"/>
 									<menulist id="thundershows-filter-type"
 											  crop="end"
-											  onclick="cTS_saveFilter();"
-											  onkeyup="cTS_saveFilter();"
+											  oncommand="cTS_saveFilter();"
 											  disable-with-calendar="true"
 											  thundershows-only-property="true">
 										<menupopup> <!-- Index should match the value of Filter.EQUALS, etc. //-->
@@ -149,6 +149,7 @@
 								<row id="thundershows-filter-expression-row" align="center">
 									<caption label="&thundershows-filter-expression.label;"/>
 									<textbox id="thundershows-filter-expression"
+											 oncut="cTS_saveFilter();"
 											 onpaste="cTS_saveFilter();"
 											 onkeyup="cTS_saveFilter();"
 											 type="autocomplete"
