@@ -413,7 +413,6 @@ calThunderShows.prototype = {
 			// Note that this should be able to handle multiple levels of upgrade at the same time
 			// I.e. 0.3 --> 0.5, not just 0.3 --> 0.4, this is done by iteratively updating each one
 			if (versionChecker.compare(calendarVersion, "0.4pre") < 0) {
-				dump("Updating to 0.4pre");
 				// Last updated version is older than 0.4pre
 				// API changes from 0.3.* --> 0.4pre must be done manually
 

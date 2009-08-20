@@ -54,16 +54,10 @@ function cTS_onLoad() {
 	defaultOptions.parentNode.removeChild(defaultOptions);
 
 	gCalendar = window.arguments[0].calendar;
+
 	// We only want to run if its a ThunderShows Provider calendar
 	if (gCalendar.type == "thundershows") {
-		// Always show pilots
-		var displayPilots = gCalendar.getProperty("thundershows.display_pilots");
-		document.getElementById("thundershows-display-pilots-checkbox").checked = displayPilots;
-
-		// Use exceptions
-		var useExceptions = gCalendar.getProperty("thundershows.use_exceptions");
-		document.getElementById("thundershows-use-exceptions-checkbox").checked = useExceptions;
-	
+	return;
 		// Populate filter list
 		var filterList = document.getElementById("thundershows-filter-list");
 		var filters = gCalendar.getProperty("thundershows.filters");

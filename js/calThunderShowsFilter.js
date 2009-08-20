@@ -47,7 +47,7 @@ var EXPORTED_SYMBOLS = ["Filter"];
  * @property	{String} property			A property to match from a {@link Show}
  * @property	{bool} include				true if matched shows are included, false if they are excluded
  * @property	{int} type					Matches a type of filter (i.e. {@link Filter.EQUALS}, {@link Filter.LESS_THAN})
- * @property	{String|int} expression	The filter expression to match
+ * @property	{String|int} expression		The filter expression to match
  * @property	{bool} enabled				true if the filter is enabled, false otherwise
  *
  * @param		{String} aName				The name of the filter

@@ -37,12 +37,25 @@
 <!ENTITY default-options.label "Basic">
 <!ENTITY thundershows-options.label "ThunderShows Provider">
 <!ENTITY thundershows-filter-caption.label "Filter Settings">
-<!ENTITY thundershows-display-pilots.label "Always Shows Pilot Episodes (S01E01)">
-<!ENTITY thundershows-use-exceptions.label "Show All Shows (Except Those Listed Below)">
 <!ENTITY thundershows-filter-list.label "Show Name Filter">
 <!ENTITY thundershows-add-filter.label "Add filter">
 <!ENTITY thundershows-edit-filter.label "Edit filter">
 <!ENTITY thundershows-remove-filter.label "Remove filter">
+<!ENTITY thundershows-filter-name.label "Filter Name:">
+<!ENTITY thundershows-filter-include.label "Include">
+<!ENTITY thundershows-filter-property.label "Filter Property:">
+<!ENTITY thundershows-filter-property-show-name.label "Show Name">
+<!ENTITY thundershows-filter-property-episode-name.label "Episode Name">
+<!ENTITY thundershows-filter-property-season-number.label "Season Number">
+<!ENTITY thundershows-filter-property-episode-number.label "Episode Number">
+<!ENTITY thundershows-filter-property-network-name.label "Network Name">
+<!ENTITY thundershows-filter-type.label "Filter Type:">
+<!ENTITY thundershows-filter-type-equals.label "Equals">
+<!ENTITY thundershows-filter-type-less-than.label "Less Than">
+<!ENTITY thundershows-filter-type-less-than-equals.label "Less Than or Equals">
+<!ENTITY thundershows-filter-type-greater-than.label "Greater Than">
+<!ENTITY thundershows-filter-type-greater-than-equals.label "Greater Than or Equals">
+<!ENTITY thundershows-filter-expression.label "Filter Expression:">
 <!ENTITY thundershows-offset-caption.label "Offset Settings">
 <!ENTITY thundershows-offset.label "Hours to Offset">
 <!ENTITY thundershows-offset-description.label "This refers to the number of hours AFTER the East Coast show times have aired. In general East Coast (Eastern/Central Time) should use 0 hours, West Coast (Pacific/Mountain Time) should use 3 hours. Other locations may vary. This value is ignored if &quot;All Day&quot; Events are used.">

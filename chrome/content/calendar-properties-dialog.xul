@@ -57,14 +57,6 @@
 				<tabpanel id="thundershows-properties-panel" orient="vertical">
 					<groupbox>
 						<caption label="&thundershows-filter-caption.label;"/>
-						<checkbox id="thundershows-display-pilots-checkbox"
-								  label="&thundershows-display-pilots.label;"
-								  disable-with-calendar="true"
-								  thundershows-only-property="true"/>
-						<checkbox id="thundershows-use-exceptions-checkbox"
-								  label="&thundershows-use-exceptions.label;"
-								  disable-with-calendar="true"
-								  thundershows-only-property="true"/>
 						<listbox id="thundershows-filter-list"
 								 rows="5"
 								 flex="1"
@@ -76,14 +68,6 @@
 							</listhead>
 						</listbox>
 						<hbox>
-							<textbox id="thundershows-edit-filter-textbox"
-									 type="autocomplete"
-									 autocompletesearch="show-filters"
-									 autocompletesearchparam=""
-									 completedefaultindex="true"
-									 flex="1"
-									 disable-with-calendar="true"
-									 thundershows-only-property="true"/>
 							<button id="thundershows-add-filter"
 									label="&thundershows-add-filter.label;"
 									oncommand="cTS_addFilter();"
@@ -100,6 +84,59 @@
 									disable-with-calendar="true"
 									thundershows-only-property="true"/>
 						</hbox>
+						<grid id="thundershows-filter-grid">
+							<!-- Trying to follow the format on the "Basic" tab //-->
+							<columns>
+								<column/>
+								<column flex="1"/>
+							</columns>
+							<rows id="calendar-filter-rows">
+								<row id="thundershows-filter-name-row" align="center">
+									<caption label="&thundershows-filter-name.label;"/>
+									<textbox id="thundershows-filter-name" flex="1"/>
+									<!--<checkbox id="thundershows-filter-enabled" label="Enabled" checked="false"/> Add this to listbox //-->
+								</row>
+								<row id="thundershows-filter-include-row" align="center">
+									<spacer/>
+									<checkbox id="thundershows-filter-include" label="&thundershows-filter-include.label;" checked="true"/>
+								</row>
+								<row id="thundershows-filter-property-row" align="center">
+									<caption label="&thundershows-filter-property.label;"/>
+									<menulist id="thundershows-filter-property" crop="end">
+										<menupopup>
+											<menuitem label="&thundershows-filter-property-show-name.label;"/>
+											<menuitem label="&thundershows-filter-property-episode-name.label;"/>
+											<menuitem label="&thundershows-filter-property-season-number.label;"/>
+											<menuitem label="&thundershows-filter-property-episode-number.label;"/>
+											<menuitem label="&thundershows-filter-property-network-name.label;"/>
+										</menupopup>
+									</menulist>
+								</row>
+								<row id="thundershows-filter-type-row" align="center">
+									<caption label="&thundershows-filter-type.label;"/>
+									<menulist id="thundershows-filter-type" crop="end">
+										<menupopup>
+											<menuitem label="&thundershows-filter-type-equals.label;"/>
+											<menuitem label="&thundershows-filter-type-less-than.label;"/>
+											<menuitem label="&thundershows-filter-type-less-than-equals.label;"/>
+											<menuitem label="&thundershows-filter-type-greater-than.label;"/>
+											<menuitem label="&thundershows-filter-type-greater-than-equals.label;"/>
+										</menupopup>
+									</menulist>
+								</row>
+								<row id="thundershows-filter-expression-row" align="center">
+									<caption label="&thundershows-filter-expression.label;"/>
+									<textbox id="thundershows-filter-expression"
+											 type="autocomplete"
+											 autocompletesearch="show-filters"
+											 autocompletesearchparam=""
+											 completedefaultindex="true"
+											 flex="1"
+											 disable-with-calendar="true"
+											 thundershows-only-property="true"/>
+								</row>
+							</rows>
+						</grid>
 					</groupbox>
 					<groupbox>
 						<caption label="&thundershows-offset-caption.label;"/>
