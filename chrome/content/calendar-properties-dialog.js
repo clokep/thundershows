@@ -81,6 +81,10 @@ function cTS_onLoad() {
 			// Go back to the first item
 			filterList.ensureIndexIsVisible(0);
 		}
+		// Select default item to fill in fields (simulates a click)
+		if (filterList.itemCount > 0) {
+			filterList.getItemAtIndex(0).click();
+		}
 
 		// Set offset setting
 		// All day events have an offset of ""
@@ -99,9 +103,8 @@ function cTS_onLoad() {
 		offsetPicker.disabled = allDayEvents;
 
 		// Populate autocomplete list
-		// Possibly just fire a "click" event on the first item?
-		//var editFilter = document.getElementById("thundershows-edit-filter-textbox");
-		//editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
+		var filterExpression = document.getElementById("thundershows-filter-expression");
+		filterExpression.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
 	} else {
 		// Disable elements that are only available to ThunderShows Provider
 		var els = document.getElementsByAttribute("thundershows-only-property", "true");
@@ -136,7 +139,7 @@ function cTS_onAcceptDialog() {
 
 /**
  * Called when the filter list is clicked on
- * Sets the textbox text to the list item's value
+ * Sets the form objects to the list item's associated Filter values
  */
 function cTS_selectFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
@@ -166,13 +169,11 @@ function cTS_selectFilter() {
 
 /**
  * Called when the add filter button is clicked
- * Checks if filter is already in the list and adds it if not
- * Clears the textbox
- * Selects newest item
+ * Adds a new empty filter
+ * Selects the new filter item
  */
 function cTS_addFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
-	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 
 	// Create new Filter
 	gFilters[filterList.getRowCount()] = new Filter("New Filter",
@@ -181,19 +182,22 @@ function cTS_addFilter() {
 													Filter.EQUALS,
 													"",
 													false);
+
 	// Add filter
 	filterList.appendItem("New Filter", filterList.getRowCount());
+
 	// Show last item
 	// Ensures that the items value and label are defined (see bug 250123)
 	filterList.ensureIndexIsVisible(filterList.getRowCount() - 1);
-	// Select last item
-	// Note that this doesn't actually simulate a "click"
-	filterList.selectedIndex = filterList.getRowCount() - 1;
+
+	// Simulate clicking last item (selects last item)
+	filterList.getItemAtIndex(filterList.getRowCount() - 1).click();
 }
 
 /**
  * Called when the edit filter button is clicked
- * Sets the currently selected list item's value to the textbox value
+ * Sets the currently selected list item's associated Filter properties to the
+ * form properties for editing by the user.
  */
 function cTS_saveFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
@@ -217,7 +221,7 @@ function cTS_saveFilter() {
 /**
  * Called when the remove filter button is clicked
  * Removes the currently selected list item
- * Selects the item above it
+ * Selects the item above it (if it exists)
  */
 function cTS_removeFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
@@ -228,17 +232,14 @@ function cTS_removeFilter() {
 	// Remove from filters list
 	delete gFilters[index];
 
-	// Clear the input form box
-	// This should be unnecessary if we're selecting a new item below
-	document.getElementById("thundershows-filter-expression").reset();
-
 	// Choose a new item to select
 	if (index > 0) {
 		// Choose the row above to select, unless the top row was removed
 		index--;
 	}
-	// Select that item
-	filterList.selectedItem = filterList.getItemAtIndex(index);
+	// 
+	// Simulate selecting the item (selects that item)
+	filterList.getItemAtIndex(index).click();
 }
 
 /**

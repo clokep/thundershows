@@ -61,6 +61,7 @@
 								 rows="5"
 								 flex="1"
 								 onclick="cTS_selectFilter();"
+								 onkeyup="cTS_selectFilter();"
 								 disable-with-calendar="true"
 								 thundershows-only-property="true">
 							<listhead>
@@ -73,12 +74,6 @@
 									oncommand="cTS_addFilter();"
 									disable-with-calendar="true"
 									thundershows-only-property="true"/>
-							<!-- This should be replaced with functions on when any of the XUL elements change it saves automagically
-							<button id="thundershows-save-filter"
-									label="&thundershows-save-filter.label;"
-									oncommand="cTS_saveFilter();"
-									disable-with-calendar="true"
-									thundershows-only-property="true"/>//-->
 							<button id="thundershows-remove-filter"
 									label="&thundershows-remove-filter.label;"
 									oncommand="cTS_removeFilter();"
@@ -94,16 +89,30 @@
 							<rows id="calendar-filter-rows">
 								<row id="thundershows-filter-name-row" align="center">
 									<caption label="&thundershows-filter-name.label;"/>
-									<textbox id="thundershows-filter-name" flex="1"/>
+									<textbox id="thundershows-filter-name"
+											 onpaste="cTS_saveFilter();"
+											 onkeyup="cTS_saveFilter();"
+											 disable-with-calendar="true"
+											 thundershows-only-property="true"/> <!-- Does not handle drag and dropping text //-->
 									<!--<checkbox id="thundershows-filter-enabled" label="Enabled" checked="false"/> Add this to listbox //-->
 								</row>
 								<row id="thundershows-filter-include-row" align="center">
 									<spacer/>
-									<checkbox id="thundershows-filter-include" label="&thundershows-filter-include.label;" checked="true"/>
+									<checkbox id="thundershows-filter-include"
+											  label="&thundershows-filter-include.label;"
+											  onclick="cTS_saveFilter();"
+											  onkeyup="cTS_saveFilter();"
+											  disable-with-calendar="true"
+											  thundershows-only-property="true"/>
 								</row>
 								<row id="thundershows-filter-property-row" align="center">
 									<caption label="&thundershows-filter-property.label;"/>
-									<menulist id="thundershows-filter-property" crop="end">
+									<menulist id="thundershows-filter-property"
+											  crop="end"
+											  onclick="cTS_saveFilter();"
+											  onkeyup="cTS_saveFilter();"
+											  disable-with-calendar="true"
+											  thundershows-only-property="true">
 										<menupopup>
 											<menuitem label="&thundershows-filter-property-show-name.label;"
 													  value="showName"/>
@@ -120,7 +129,12 @@
 								</row>
 								<row id="thundershows-filter-type-row" align="center">
 									<caption label="&thundershows-filter-type.label;"/>
-									<menulist id="thundershows-filter-type" crop="end">
+									<menulist id="thundershows-filter-type"
+											  crop="end"
+											  onclick="cTS_saveFilter();"
+											  onkeyup="cTS_saveFilter();"
+											  disable-with-calendar="true"
+											  thundershows-only-property="true">
 										<menupopup> <!-- Index should match the value of Filter.EQUALS, etc. //-->
 											<menuitem label="&thundershows-filter-type-equals.label;"/>
 											<menuitem label="&thundershows-filter-type-less-than.label;"/>
@@ -135,13 +149,14 @@
 								<row id="thundershows-filter-expression-row" align="center">
 									<caption label="&thundershows-filter-expression.label;"/>
 									<textbox id="thundershows-filter-expression"
+											 onpaste="cTS_saveFilter();"
+											 onkeyup="cTS_saveFilter();"
 											 type="autocomplete"
 											 autocompletesearch="show-filters"
 											 autocompletesearchparam=""
 											 completedefaultindex="true"
-											 flex="1"
 											 disable-with-calendar="true"
-											 thundershows-only-property="true"/>
+											 thundershows-only-property="true"/> <!-- Does not handle drag and dropping text //-->
 								</row>
 							</rows>
 						</grid>
