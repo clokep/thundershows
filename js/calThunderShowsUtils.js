@@ -110,6 +110,7 @@ String.prototype.convertHTMLToPlainText = function() {
 	// HTML Entities
 	output = output.replace(/&mdash;/, "\u2014"); // Em Dash
 	output = output.replace(/&amp;/, "&"); // Ampersand
+	output = output.replace(/&#39;/, "'"); // Apostrophe
 
 	// Clean up a bit
 	output = output.replace(/[(?:\r\n)]{3,}/g, "\r\n\r\n"); // Max of two line breaks in a row

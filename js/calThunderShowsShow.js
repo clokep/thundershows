@@ -154,9 +154,10 @@ Show.toCalIEvent = function(aShow, aCalendar, aRangeStart, aRangeEnd, aOffset, i
 
 	// aShow needs to be handled better (i.e. what if we're missing parts of the data)
 	if (aShow.showName || aShow.episodeName || aShow.seasonNumber || aShow.episodeNumber) {
-		item.title = aShow.showName + " - " + aShow.episodeName +
-					 " (S" + aShow.seasonNumber.padLeft('0', 2) +
-					 "E" + aShow.episodeNumber.padLeft('0', 2) + ")";
+		item.title = aShow.showName.convertHTMLToPlainText() + " - "
+					 + aShow.episodeName.convertHTMLToPlainText() + " (S"
+					 + aShow.seasonNumber.padLeft('0', 2) + "E"
+					 + aShow.episodeNumber.padLeft('0', 2) + ")";
 	}
 
 	if (aShow.description) {
