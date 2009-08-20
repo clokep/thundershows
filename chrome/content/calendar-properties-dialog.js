@@ -38,6 +38,13 @@
  * The calendar to modify, is retrieved from window.arguments[0].calendar
  */
 var gCalendar;
+/**
+ * Filter list to modify, retrieved from gCalendar (if it is of type
+ * "thundershows")
+ */
+var gFilters;
+
+Components.utils.import("resource://thundershows/calThunderShowsFilter.js");
 
 /**
  * Initialization function, populate fields, etc.
@@ -54,18 +61,17 @@ function cTS_onLoad() {
 	defaultOptions.parentNode.removeChild(defaultOptions);
 
 	gCalendar = window.arguments[0].calendar;
-
+	
 	// We only want to run if its a ThunderShows Provider calendar
 	if (gCalendar.type == "thundershows") {
-	return;
 		// Populate filter list
 		var filterList = document.getElementById("thundershows-filter-list");
-		var filters = gCalendar.getProperty("thundershows.filters");
-		if (filters != null) {
+		gFilters = gCalendar.getProperty("thundershows.filters");
+		if (gFilters != null) {
 			// Can only do it if filters exist
-			filters = filters.split("\u001A");
-			for (var i in filters) {
-				filterList.appendItem(filters[i], filters[i]);
+			gFilters = Filter.load(gFilters);
+			for (var i in gFilters) {
+				filterList.appendItem(gFilters[i].name, i);
 				// Show the most recent item
 				// Ensures that the items value and label are defined
 				// (see bug 250123)
@@ -93,8 +99,9 @@ function cTS_onLoad() {
 		offsetPicker.disabled = allDayEvents;
 
 		// Populate autocomplete list
-		var editFilter = document.getElementById("thundershows-edit-filter-textbox");
-		editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
+		// Possibly just fire a "click" event on the first item?
+		//var editFilter = document.getElementById("thundershows-edit-filter-textbox");
+		//editFilter.attributes.getNamedItem("autocompletesearchparam").value = gCalendar.getProperty("thundershows.known_shows");
 	} else {
 		// Disable elements that are only available to ThunderShows Provider
 		var els = document.getElementsByAttribute("thundershows-only-property", "true");
@@ -110,21 +117,9 @@ function cTS_onLoad() {
  */
 function cTS_onAcceptDialog() {
 	if (gCalendar.type == "thundershows") {
-		// Save display pilot episodes settings
-		var displayPilots = document.getElementById("thundershows-display-pilots-checkbox");
-		gCalendar.setProperty("thundershows.display_pilots", displayPilots.checked);
-
-		// Save use exceptions settings
-		var useExceptions = document.getElementById("thundershows-use-exceptions-checkbox");
-		gCalendar.setProperty("thundershows.use_exceptions", useExceptions.checked);
-
 		// Save filters
-		var filters = new Array();
-		var filterList = document.getElementById("thundershows-filter-list");
-		for (var i = 0; i < filterList.getRowCount(); i++) {
-			filters.push(filterList.getItemAtIndex(i).value);
-		}
-		gCalendar.setProperty("thundershows.filters", filters.join('\u001A'));
+		var filters = Filter.save(gFilters);
+		gCalendar.setProperty("thundershows.filters", filters);
 
 		// Save offset settings
 		var offsetPicker = document.getElementById("thundershows-offset-picker");
@@ -145,9 +140,28 @@ function cTS_onAcceptDialog() {
  */
 function cTS_selectFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
-	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
+	// Currently selected item
+	var index = filterList.selectedItem.value;
+	
+	var filterName = document.getElementById("thundershows-filter-name");
+	var filterInclude = document.getElementById("thundershows-filter-include");
+	var filterProperty = document.getElementById("thundershows-filter-property");
+	var filterType = document.getElementById("thundershows-filter-type");
+	var filterExpression = document.getElementById("thundershows-filter-expression");
+
 	// Set the edit filter textbox to the selected value
-	editFilter.value = filterList.selectedItem.value;
+	filterName.value = gFilters[index].name;
+	filterInclude.checked = gFilters[index].include;
+	for (var i = 0; i < filterProperty.itemCount; i++) {
+		// We need to check each value from the filter property against the
+		// stored value since its a string
+		if (filterProperty.getItemAtIndex(i).value == gFilters[index].property) {
+			filterProperty.selectedIndex = i;
+			break;
+		}
+	}
+	filterType.selectedIndex = gFilters[index].type;
+	filterExpression.value = gFilters[index].expression;
 }
 
 /**
@@ -160,32 +174,44 @@ function cTS_addFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
 	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
 
+	// Create new Filter
+	gFilters[filterList.getRowCount()] = new Filter("New Filter",
+													"showName",
+													true,
+													Filter.EQUALS,
+													"",
+													false);
 	// Add filter
-	if (editFilter.value != "" && !doesFilterExist(editFilter.value)) {
-		// Only add the filter if it isn't empty && doesn't exist already
-		filterList.appendItem(editFilter.value, editFilter.value);
-		editFilter.reset();
-		// Select last item
-		filterList.selectedIndex = filterList.getRowCount() - 1;
-		// Show last item
-		// Ensures that the items value and label are defined (see bug 250123)
-		filterList.ensureIndexIsVisible(filterList.getRowCount() - 1);
-	}
+	filterList.appendItem("New Filter", filterList.getRowCount());
+	// Show last item
+	// Ensures that the items value and label are defined (see bug 250123)
+	filterList.ensureIndexIsVisible(filterList.getRowCount() - 1);
+	// Select last item
+	// Note that this doesn't actually simulate a "click"
+	filterList.selectedIndex = filterList.getRowCount() - 1;
 }
 
 /**
  * Called when the edit filter button is clicked
  * Sets the currently selected list item's value to the textbox value
  */
-function cTS_editFilter() {
+function cTS_saveFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
-	var editFilter = document.getElementById("thundershows-edit-filter-textbox");
-	var selectedItem = filterList.selectedItem;
+	// Currently selected item
+	var index = filterList.selectedItem.value;
+	
+	var filterName = document.getElementById("thundershows-filter-name");
+	var filterInclude = document.getElementById("thundershows-filter-include");
+	var filterProperty = document.getElementById("thundershows-filter-property");
+	var filterType = document.getElementById("thundershows-filter-type");
+	var filterExpression = document.getElementById("thundershows-filter-expression");
 
-	// Edit the filter
-	if (editFilter.value != "" && !doesFilterExist(editFilter.value)) {
-		selectedItem.label = selectedItem.value = editFilter.value;
-	}
+	// Set the filter item from the current values
+	gFilters[index].name = filterName.value;
+	gFilters[index].include = filterInclude.checked;
+	gFilters[index].property = filterProperty.selectedItem.value;
+	gFilters[index].type = filterType.selectedIndex;
+	gFilters[index].expression = filterExpression.value;
 }
 
 /**
@@ -196,32 +222,23 @@ function cTS_editFilter() {
 function cTS_removeFilter() {
 	var filterList = document.getElementById("thundershows-filter-list");
 	// Remove the selected item
-	var selectedIndex = filterList.selectedIndex;
-	filterList.removeItemAt(selectedIndex);
-	
-	// Clear the edit box
-	document.getElementById("thundershows-edit-filter-textbox").reset();
+	var index = filterList.selectedIndex;
+	filterList.removeItemAt(index);
+
+	// Remove from filters list
+	delete gFilters[index];
+
+	// Clear the input form box
+	// This should be unnecessary if we're selecting a new item below
+	document.getElementById("thundershows-filter-expression").reset();
 
 	// Choose a new item to select
-	if (selectedIndex > 0) {
+	if (index > 0) {
 		// Choose the row above to select, unless the top row was removed
-		selectedIndex--;
+		index--;
 	}
-	filterList.selectedItem = filterList.getItemAtIndex(selectedIndex);
-}
-
-/**
- * Check if a filter already exists in the list
- * Returns true or false
- */
-function doesFilterExist(aFilter) {
-	var filterList = document.getElementById("thundershows-filter-list");
-	for (var i = 0; i < filterList.getRowCount(); i++) {
-		if (filterList.getItemAtIndex(i).value == aFilter) {
-			return true;
-		}
-	}
-	return false;
+	// Select that item
+	filterList.selectedItem = filterList.getItemAtIndex(index);
 }
 
 /**

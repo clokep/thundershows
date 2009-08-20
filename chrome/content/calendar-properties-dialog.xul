@@ -73,11 +73,12 @@
 									oncommand="cTS_addFilter();"
 									disable-with-calendar="true"
 									thundershows-only-property="true"/>
-							<button id="thundershows-edit-filter"
-									label="&thundershows-edit-filter.label;"
-									oncommand="cTS_editFilter();"
+							<!-- This should be replaced with functions on when any of the XUL elements change it saves automagically
+							<button id="thundershows-save-filter"
+									label="&thundershows-save-filter.label;"
+									oncommand="cTS_saveFilter();"
 									disable-with-calendar="true"
-									thundershows-only-property="true"/>
+									thundershows-only-property="true"/>//-->
 							<button id="thundershows-remove-filter"
 									label="&thundershows-remove-filter.label;"
 									oncommand="cTS_removeFilter();"
@@ -104,23 +105,30 @@
 									<caption label="&thundershows-filter-property.label;"/>
 									<menulist id="thundershows-filter-property" crop="end">
 										<menupopup>
-											<menuitem label="&thundershows-filter-property-show-name.label;"/>
-											<menuitem label="&thundershows-filter-property-episode-name.label;"/>
-											<menuitem label="&thundershows-filter-property-season-number.label;"/>
-											<menuitem label="&thundershows-filter-property-episode-number.label;"/>
-											<menuitem label="&thundershows-filter-property-network-name.label;"/>
+											<menuitem label="&thundershows-filter-property-show-name.label;"
+													  value="showName"/>
+											<menuitem label="&thundershows-filter-property-episode-name.label;"
+													  value="episodeName"/>
+											<menuitem label="&thundershows-filter-property-season-number.label;"
+													  value="seasonNumber"/>
+											<menuitem label="&thundershows-filter-property-episode-number.label;"
+													  value="episodeNumber"/>
+											<menuitem label="&thundershows-filter-property-network-name.label;"
+													  value="network"/>
 										</menupopup>
 									</menulist>
 								</row>
 								<row id="thundershows-filter-type-row" align="center">
 									<caption label="&thundershows-filter-type.label;"/>
 									<menulist id="thundershows-filter-type" crop="end">
-										<menupopup>
+										<menupopup> <!-- Index should match the value of Filter.EQUALS, etc. //-->
 											<menuitem label="&thundershows-filter-type-equals.label;"/>
 											<menuitem label="&thundershows-filter-type-less-than.label;"/>
 											<menuitem label="&thundershows-filter-type-less-than-equals.label;"/>
 											<menuitem label="&thundershows-filter-type-greater-than.label;"/>
 											<menuitem label="&thundershows-filter-type-greater-than-equals.label;"/>
+											<menuitem label="&thundershows-filter-type-contains.label;"/>
+											<menuitem label="&thundershows-filter-type-regex.label;"/>
 										</menupopup>
 									</menulist>
 								</row>

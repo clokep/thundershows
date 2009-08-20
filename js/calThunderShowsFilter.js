@@ -70,7 +70,7 @@ function Filter(aName, aProperty, aInclude, aType, aExpression, aEnabled) {
  * A filter type, true when the property value exactly equals the filter expression
  * @static
  */
-Filter.EQUALS = 1;
+Filter.EQUALS = 0;
 
 /**
  * A filter type, true when the property value is less than the filter expression

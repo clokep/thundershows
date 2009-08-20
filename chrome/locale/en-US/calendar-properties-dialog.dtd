@@ -55,6 +55,8 @@
 <!ENTITY thundershows-filter-type-less-than-equals.label "Less Than or Equals">
 <!ENTITY thundershows-filter-type-greater-than.label "Greater Than">
 <!ENTITY thundershows-filter-type-greater-than-equals.label "Greater Than or Equals">
+<!ENTITY thundershows-filter-type-contains.label "Contains">
+<!ENTITY thundershows-filter-type-regex.label "Regex">
 <!ENTITY thundershows-filter-expression.label "Filter Expression:">
 <!ENTITY thundershows-offset-caption.label "Offset Settings">
 <!ENTITY thundershows-offset.label "Hours to Offset">
