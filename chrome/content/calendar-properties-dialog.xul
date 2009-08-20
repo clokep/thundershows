@@ -164,64 +164,6 @@
 							&thundershows-offset-description.label;
 						</description>
 					</groupbox>
-					
-					<!-- Start For Testing //-->
-
-<groupbox>
-	<vbox style="overflow-y: auto; overflow-x: hidden;">
-		<hbox>
-			<checkbox label="Enabled" checked="false"/>
-			<textbox value="Name"/>
-			<checkbox label="Include" checked="false"/>
-			<menulist crop="end">
-				<menupopup>
-					<menuitem label="Show Name"/>
-					<menuitem label="Episode Name"/>
-					<menuitem label="Series Number"/>
-					<menuitem label="Episode Number"/>
-					<menuitem label="Network Name"/>
-				</menupopup>
-			</menulist>
-			<menulist crop="end">
-				<menupopup>
-					<menuitem label="Equals"/>
-					<menuitem label="Less Than"/>
-					<menuitem label="Less Than or Equals"/>
-					<menuitem label="Greater Than"/>
-					<menuitem label="Greater Than or Equals"/>
-				</menupopup>
-			</menulist>
-			<textbox value="Filter"/>
-		</hbox>
-		<hbox>
-			<checkbox label="Enabled" checked="false"/>
-			<textbox value="Name"/>
-			<checkbox label="Include" checked="false"/>
-			<menulist crop="end">
-				<menupopup>
-					<menuitem label="Show Name"/>
-					<menuitem label="Episode Name"/>
-					<menuitem label="Series Number"/>
-					<menuitem label="Episode Number"/>
-					<menuitem label="Network Name"/>
-				</menupopup>
-			</menulist>
-			<menulist crop="end">
-				<menupopup>
-					<menuitem label="Equals"/>
-					<menuitem label="Less Than"/>
-					<menuitem label="Less Than or Equals"/>
-					<menuitem label="Greater Than"/>
-					<menuitem label="Greater Than or Equals"/>
-				</menupopup>
-			</menulist>
-			<textbox value="Filter"/>
-		</hbox>
-	</vbox>
-</groupbox>
-
-					<!-- End For Testing //-->
-
 				</tabpanel>
 			</tabpanels>
 		</tabbox>
