@@ -280,10 +280,10 @@ calThunderShows.prototype = {
 		}
 
 		// These properties still need to be taken into account
-		var displayPilots = this.getProperty("thundershows.display_pilots");
-		var useExceptions = this.getProperty("thundershows.use_exceptions");
-		var isAllDayEvent = this.getProperty("thundershows.all_day_events");
-		var offset = this.getProperty("thundershows.offset");
+		//var displayPilots = this.getProperty("thundershows.display_pilots");
+		//var useExceptions = this.getProperty("thundershows.use_exceptions");
+		var offset = this.getPropertySafe("thundershows.offset", 0);
+		var isAllDayEvent = this.getPropertySafe("thundershows.all_day_events", false);
 		
 		// This filters all the shows to just the ones we want
 		var filteredShows = Filter.filterAll(filters, aShows);
@@ -308,10 +308,9 @@ calThunderShows.prototype = {
 	convertXMLToShows: function cTS_convertXMLToEvents(aDom) {
 		// Keep track of all shows we've ever seen
 		var known_shows = JSON.parse(this.getPropertySafe("thundershows.known_shows", "[]"));
-		//var known_shows = new Array();
-		//known_shows = (known_shows != null) ? JSON.parse(known_shows) : new Array();
+
 		// Keep track of all networks
-		var known_networks = this.getProperty("thundershows.known_networks", new AssociativeArray());
+		var known_networks = this.getProperty("thundershows.known_networks");
 		known_networks = (known_networks != null) ? JSON.parse(known_networks) : new AssociativeArray();
 
 		// Use xpath to get all elements with class TVEpisode
@@ -446,13 +445,11 @@ calThunderShows.prototype = {
 				this.deleteProperty("thundershows.display_pilots");
 				
 				// Get current known shows
-				var knownShows = this.getProperty("thundershows.known_shows");
-				if (knownShows != null) {
-					// If known shows exist, separate them into an Array
-					knownShows = knownShows.split("\u001A");
-					// Save new knownShows to the calendar
-					this.setProperty("thundershows.known_shows", JSON.stringify(knownShows));
-				}
+				var knownShows = this.getPropertySafe("thundershows.known_shows", "");
+				// Separate them into an Array
+				knownShows = knownShows.split("\u001A");
+				// Save new knownShows to the calendar
+				this.setProperty("thundershows.known_shows", JSON.stringify(knownShows));
 
 			}
 			/*if (versionChecker.compare(calendarVersion, "0.5") < 0) {

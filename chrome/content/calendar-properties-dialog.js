@@ -220,8 +220,6 @@ function cTS_saveFilter() {
 	gFilters[index].property = filterProperty.selectedItem.value;
 	gFilters[index].type = filterType.selectedIndex;
 	gFilters[index].expression = filterExpression.value;
-
-	alert("Save");
 }
 
 /**
