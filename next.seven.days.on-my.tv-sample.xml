@@ -1,0 +1,1223 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<tvdata _type="array">
+	<episodes _type="array">
+		<entry _class="TVEpisode" _originalKey="0" _type="object">
+			<id _type="string"><![CDATA[49300]]></id>
+			<show_id _type="string"><![CDATA[390]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 01:00:00]]></date>
+			<name _type="string"><![CDATA[Comfort Food]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/pushing-daisies/comfort-food/episode/1227335/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Ned brings back to life Colonel Likkin, who was mysteriously deep fried to death.  His world-famous original recipe has gone missing and Likkin asks Ned to find who stole it.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Pushing Daisies]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="1" _type="object">
+			<id _type="string"><![CDATA[49477]]></id>
+			<show_id _type="string"><![CDATA[424]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 01:00:00]]></date>
+			<name _type="string"><![CDATA[A Hard Day's Fight]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/little-mosque-on-the-prairie/a-hard-days-fight/episode/1240210/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[J.J. is called back to Dubai and this development threatens to cause problems for the relationship between him and Rayyan.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Little Mosque on the Prairie]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="2" _type="object">
+			<id _type="string"><![CDATA[49437]]></id>
+
+			<show_id _type="string"><![CDATA[393]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 02:00:00]]></date>
+			<name _type="string"><![CDATA[Evil...and his brother Ziggy]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/life/evil...and-his-brother-ziggy/episode/1239510/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[A sheriff's deputy is found dead on an Indian reservation, Crews and Reese are in the middle of a turf war between Tribal police and the county sheriff's department. The team learns that the victim was not well-liked on the reservation. Meanwhile, Crews attends a fundraiser thrown by Mickey Rayborn, one of Crews suspect involved in the conspiracy against him.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Life]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="3" _type="object">
+			<id _type="string"><![CDATA[49479]]></id>
+			<show_id _type="string"><![CDATA[382]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 02:00:00]]></date>
+			<name _type="string"><![CDATA[Crime and Punishment]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/private-practice/crime-and-punishment/episode/1240182/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[TBA]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 21:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Private Practice]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="4" _type="object">
+			<id _type="string"><![CDATA[49357]]></id>
+			<show_id _type="string"><![CDATA[430]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[4]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 03:00:00]]></date>
+
+			<name _type="string"><![CDATA[Today Show]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/top-chef/today-show/episode/1237677/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Rocco DiSpirito has hung up his dancing shoes just in time to help determine which of the chefs will win the really grand prize of a demonstration on the <em>Today Show</em>, but tonight speed may be the deciding factor in the challenges, and not everyone will measure up.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Top Chef]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="5" _type="object">
+			<id _type="string"><![CDATA[49482]]></id>
+			<show_id _type="string"><![CDATA[473]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 03:00:00]]></date>
+			<name _type="string"><![CDATA[Automated Pizza Delivery]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/prototype-this/automated-pizza-delivery/episode/1240045/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[The engineers attempt to create a fully automatic pizza delivery system, employing robots, blimps and a self-driving car, which will be tested by a crossing of the Bay Bridge.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Prototype This!]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="6" _type="object">
+
+			<id _type="string"><![CDATA[49577]]></id>
+			<show_id _type="string"><![CDATA[197]]></show_id>
+			<season _type="string"><![CDATA[19]]></season>
+			<episode _type="string"><![CDATA[5]]></episode>
+			<date _type="string"><![CDATA[2008-12-04 03:00:00]]></date>
+			<name _type="string"><![CDATA[Knock Off]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/law-and-order/knock-off/episode/1241802/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[A tourist is murdered and the detectives suspect that corrupt law enforcement officers are involved. Meanwhile, a new District Attorney is nominated for the upcoming election.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-03 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Law & Order]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="7" _type="object">
+			<id _type="string"><![CDATA[49420]]></id>
+			<show_id _type="string"><![CDATA[214]]></show_id>
+
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[12]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 01:00:00]]></date>
+			<name _type="string"><![CDATA[Reading Is A Fundamental Case]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/my-name-is-earl/reading-is-a-fundamental-case/episode/1234884/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Earl helps his old friend Raynard who lives in the wild.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[My Name Is Earl]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="8" _type="object">
+			<id _type="string"><![CDATA[49468]]></id>
+			<show_id _type="string"><![CDATA[303]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-05 01:00:00]]></date>
+			<name _type="string"><![CDATA[Bad Amanda]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/ugly-betty/bad-amanda/episode/1237687/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Amanda and Betty are forced to work together for an article called "How I Blew Ten Grand Without Spending a Dime."]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[Ugly Betty]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="9" _type="object">
+			<id _type="string"><![CDATA[33290]]></id>
+			<show_id _type="string"><![CDATA[147]]></show_id>
+			<season _type="string"><![CDATA[9]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 02:00:00]]></date>
+			<name _type="string"><![CDATA[Young Man With A Horn]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/csi/young-man-with-a-horn/episode/1216124/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[The CSIs discover a link between the death of a popular young singer and a murder that happened over 50 years ago.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[C.S.I.]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="10" _type="object">
+			<id _type="string"><![CDATA[49433]]></id>
+			<show_id _type="string"><![CDATA[171]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 02:00:00]]></date>
+			<name _type="string"><![CDATA[All By Myself]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/greys-anatomy/all-by-myself/episode/1236489/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Cristina is awarded the first solo surgery among the residents, but she has to relinquish it and choose her replacement; Mark performs a cutting-edge procedure to restore a patient's speech, impressing Lexie in the process; and Callie can't figure out if Sadie (Melissa George) is flirting with her or just being friendly.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Greys Anatomy]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="11" _type="object">
+			<id _type="string"><![CDATA[49498]]></id>
+
+			<show_id _type="string"><![CDATA[348]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[6]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 02:00:00]]></date>
+			<name _type="string"><![CDATA[Barbarian's Lair]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/cities-of-the-underworld/barbarians-lair/episode/1240549/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[After the fall of the Roman Empire, Europe was plunged into chaos for centuries, with vicious carnage and rampant disease regularly raging through the streets. However, below the streets was another world designed to keep the people alive and the enemy guessing]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Cities of the Underworld]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="12" _type="object">
+			<id _type="string"><![CDATA[49562]]></id>
+			<show_id _type="string"><![CDATA[224]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 02:00:00]]></date>
+			<name _type="string"><![CDATA[The Surplus]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-office/the-surplus/episode/1240989/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[With a $4,300 surplus to spend, the workers fight amongst themselves in order to get what they want. Andy and Angela go to Schrute Farms to work on wedding plans.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 21:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Office (US)]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="13" _type="object">
+			<id _type="string"><![CDATA[49475]]></id>
+			<show_id _type="string"><![CDATA[110]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[5]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 02:30:00]]></date>
+
+			<name _type="string"><![CDATA[Reunion]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/30-rock/reunion/episode/1240062/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Liz is forced to take Jack to her high school reunion. Don Geiss awakens from his coma and makes his choice for the new GE CEO.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 21:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[30 Rock]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="14" _type="object">
+			<id _type="string"><![CDATA[37591]]></id>
+			<show_id _type="string"><![CDATA[158]]></show_id>
+			<season _type="string"><![CDATA[15]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 03:00:00]]></date>
+			<name _type="string"><![CDATA[Let it Snow]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/er/let-it-snow/episode/1227381/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[Neela must testify in court and defend her actions regarding a patient who died. Sarah and Alex defy Sam and sneak off to a party, with dire consequences. A snowstorm strands Banfield and Morris at a Nebraska medical conference.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[ER]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="15" _type="object">
+
+			<id _type="string"><![CDATA[49555]]></id>
+			<show_id _type="string"><![CDATA[449]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 03:00:00]]></date>
+			<name _type="string"><![CDATA[Titans]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/eleventh-hour/titans/episode/1240816/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[At a college in Oklahoma two students unexplainably die of "the bends" even though they hadn't been in the water.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Eleventh Hour]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="16" _type="object">
+			<id _type="string"><![CDATA[49426]]></id>
+			<show_id _type="string"><![CDATA[325]]></show_id>
+
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[15]]></episode>
+			<date _type="string"><![CDATA[2008-12-05 03:30:00]]></date>
+			<name _type="string"><![CDATA[Kangamangus]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-sarah-silverman-program/kangamangus/episode/1225708/summary.html]]></summary_url>
+			<episode_summary _type="string" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-04 22:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Sarah Silverman Program]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="17" _type="object">
+			<id _type="string"><![CDATA[49516]]></id>
+			<show_id _type="string"><![CDATA[392]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[3]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-05 22:00:00]]></date>
+			<name _type="string"><![CDATA[Tramps Like Us]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-it-crowd-2006/tramps-like-us/episode/1240650/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[When a sexual harrassment case ends wrongly - Roy turns to the streets, Moss gets a bump on the head, and Jen is looking for something new to do.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 17:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[IT Crowd]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="18" _type="object">
+			<id _type="string"><![CDATA[49348]]></id>
+			<show_id _type="string"><![CDATA[465]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[7]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 01:00:00]]></date>
+			<name _type="string"><![CDATA[Heroes and Villains]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/crusoe/heroes-and-villains/episode/1237685/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Now that the mutineers' ship has been fixed, he must think of a new plan to get on it and off the island, once someone discloses his plan to the ship's captain.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Crusoe]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="19" _type="object">
+			<id _type="string"><![CDATA[49413]]></id>
+			<show_id _type="string"><![CDATA[169]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 01:00:00]]></date>
+			<name _type="string"><![CDATA[Pieces of You]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/ghost-whisperer/pieces-of-you/episode/1229226/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Melinda discovers the secret behind a girl who has been missing for 12 years.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Ghost Whisperer]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="20" _type="object">
+			<id _type="string"><![CDATA[46400]]></id>
+
+			<show_id _type="string"><![CDATA[259]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[17]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 02:00:00]]></date>
+			<name _type="string"><![CDATA[Infection]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/stargate-atlantis/infection/episode/1208274/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Sheppard and Lorne investigate a Wraith Hive Ship that has been infected with a strange disease.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Stargate Atlantis]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="21" _type="object">
+			<id _type="string"><![CDATA[49572]]></id>
+			<show_id _type="string"><![CDATA[421]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+
+			<episode _type="string"><![CDATA[38]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 02:00:00]]></date>
+			<name _type="string"><![CDATA[Cesar goes to Vegas]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/dog-whisperer/cesar-goes-to-vegas/episode/1241630/summary.html]]></summary_url>
+			<episode_summary _type="NULL" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 21:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Dog Whisperer]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="22" _type="object">
+			<id _type="string"><![CDATA[49578]]></id>
+			<show_id _type="string"><![CDATA[415]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 02:00:00]]></date>
+
+			<name _type="string"><![CDATA[Chapter Seventeen: Bye, Bye Baby]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/lipstick-jungle/chapter-seventeen-bye-bye-baby/episode/1238296/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Nico and Kirby try to adjust their lives with baby Charlie in the picture and they realize that their relationship is now at a crossroads. Victory tries to land a new multi-million dollar account. Wendy is running into difficulties in getting her new project off the ground.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Lipstick Jungle]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="23" _type="object">
+			<id _type="string"><![CDATA[34601]]></id>
+			<show_id _type="string"><![CDATA[467]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 03:00:00]]></date>
+			<name _type="string"><![CDATA[The Future Is Free]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/crash/the-future-is-free/episode/1234319/summary.html]]></summary_url>
+
+			<episode_summary _type="string" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Crash]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="24" _type="object">
+
+			<id _type="string"><![CDATA[49375]]></id>
+			<show_id _type="string"><![CDATA[356]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 03:00:00]]></date>
+			<name _type="string"><![CDATA[Requiem]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/sanctuary/requiem/episode/1238202/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Magnus and Will set off to the Bermuda Triangle to answer a distress call they received from one of the abnormal species living there. They use their sonar equipment to try and contact the abnormals in their underwater home but find they are too late.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Sanctuary]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="25" _type="object">
+			<id _type="string"><![CDATA[49403]]></id>
+			<show_id _type="string"><![CDATA[222]]></show_id>
+
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-06 03:00:00]]></date>
+			<name _type="string"><![CDATA[Conspiracy Theory]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/numb3rs/conspiracy-theory/episode/1238530/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[The headquarters of a popular charity organization is bombed.  However, what seems like an act of terror may turn out to be something else, when Don, Charlie, and the team begin to unravel mysteries behind the organization itself.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-05 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Numb3rs]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="26" _type="object">
+			<id _type="string"><![CDATA[49501]]></id>
+			<show_id _type="string"><![CDATA[471]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[12]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-06 19:30:00]]></date>
+			<name _type="string"><![CDATA[To Kill The King]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/merlin-uk/to-kill-the-king/episode/1240358/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[When Gwen's father Tom helps a renegade sorcerer turn lead into gold, he is arrested and faces trial for sorcery. Despite pleas from both Arthur and Morgana, Uther is adamant- Tom will be tried and, if found guilty, will be executed. Morgana tries to help Tom escape but tragedy ensues... and Morgana becomes hellbent on revenge.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-06 14:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[Merlin]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="27" _type="object">
+			<id _type="string"><![CDATA[41138]]></id>
+			<show_id _type="string"><![CDATA[474]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[7]]></episode>
+			<date _type="string"><![CDATA[2008-12-07 01:00:00]]></date>
+			<name _type="string"><![CDATA[Identity]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/legend-of-the-seeker/identity/episode/1234615/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Visions of the Seeker's death prompt a sorceress named Shota to temporarily exchange Richard's identity with that of a merchant's son.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-06 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Legend of the Seeker]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="28" _type="object">
+			<id _type="string"><![CDATA[49496]]></id>
+			<show_id _type="string"><![CDATA[242]]></show_id>
+			<season _type="string"><![CDATA[34]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-07 04:30:00]]></date>
+			<name _type="string"><![CDATA[John Malkovich/T.I.]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/saturday-night-live/john-malkovich-t.i./episode/1240349/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[This is the 10th episode of the 34th season. Information is subject to change.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-06 23:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Saturday Night Live]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="29" _type="object">
+			<id _type="string"><![CDATA[49449]]></id>
+
+			<show_id _type="string"><![CDATA[308]]></show_id>
+			<season _type="string"><![CDATA[12]]></season>
+			<episode _type="string"><![CDATA[6]]></episode>
+			<date _type="string"><![CDATA[2008-12-07 20:00:00]]></date>
+			<name _type="string"><![CDATA[Series 12 Episode 6]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/top-gear-uk/series-12-episode-6/episode/1238257/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Question: did Communists ever build a good car? A question literally several people have asked - ever. To find out, Jeremy, James and Richard go to the former American airbase at Greenham Common, Berkshire, England.<br />
+<br />
+Richard drives the Veritas; the latest sports car to come from Germany. Meanwhile Jeremy gives the humble Ford Fiesta a rather thorough going-over.<br />
+<br />
+The Mayor of London, Boris Johnson, is the Star in a Reasonably Priced Car.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 15:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Top Gear]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="30" _type="object">
+			<id _type="string"><![CDATA[49384]]></id>
+			<show_id _type="string"><![CDATA[297]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+
+			<episode _type="string"><![CDATA[6]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 01:00:00]]></date>
+			<name _type="string"><![CDATA[The Chimes At Midnight]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/brotherhood/the-chimes-at-midnight/episode/1238297/summary.html]]></summary_url>
+			<episode_summary _type="NULL" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 20:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Brotherhood]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="31" _type="object">
+			<id _type="string"><![CDATA[49440]]></id>
+			<show_id _type="string"><![CDATA[249]]></show_id>
+			<season _type="string"><![CDATA[20]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 01:00:00]]></date>
+
+			<name _type="string"><![CDATA[The Burns and the Bees]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-simpsons/the-burns-and-the-bees/episode/1237972/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Mr. Burns wins a professional basketball team in a poker game at the annual billionaire's retreat. In an effort to lure fans he decides to build a state-of-the-art facility, but the stadium site is on the last remaining bee colony in Springfield and Lisa leads the charge to block Burns' building.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Simpsons]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="32" _type="object">
+			<id _type="string"><![CDATA[49519]]></id>
+			<show_id _type="string"><![CDATA[115]]></show_id>
+			<season _type="string"><![CDATA[13]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 01:00:00]]></date>
+			<name _type="string"><![CDATA[You Look Like Peter Pan]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-amazing-race/you-look-like-peter-pan/episode/1240893/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[The final three teams race for the finish line Portland, Oregon in the race's finale. Former alliance members battle for position as the race comes down to the wire. Teams face the usual difficulties with transportation, as well as the increased pressure of the final leg. Andrew Lappitt and Dan Honig struggle for victory despite never having won a leg. Nick and Starr Spangler look to cap a long streak of victories by winning the million dollar prize. Finally, Ken and Tina Greene look to take the top spot, while struggling to solidify their faltering relationship in the process.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Amazing Race]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="33" _type="object">
+
+			<id _type="string"><![CDATA[36841]]></id>
+			<show_id _type="string"><![CDATA[307]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 02:00:00]]></date>
+			<name _type="string"><![CDATA[I Had a Dream]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/dexter/i-had-a-dream/episode/1231059/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Dexter has hard times distancing himself from Miguel, after all he's still Dexter's Best Man. Rita has her own dilemma now that she knows Miguel's been seeing another woman.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Dexter]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="34" _type="object">
+			<id _type="string"><![CDATA[49246]]></id>
+			<show_id _type="string"><![CDATA[153]]></show_id>
+
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 02:00:00]]></date>
+			<name _type="string"><![CDATA[A Vision's Just a Vision]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/desperate-housewives/a-visions-just-a-vision/episode/1236601/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Lynette takes extreme measures to protect her son. Carlos realizes the extent of Gaby's sacrifices for their family. Bree wants to prove to Andrew that she has accepted him for who he is. Katherine finds happiness, as Susan and Mike recognize the fate of their relationship. Meanwhile, Dave starts to lose his grip.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Desperate Housewives]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="35" _type="object">
+			<id _type="string"><![CDATA[49256]]></id>
+			<show_id _type="string"><![CDATA[472]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-08 02:00:00]]></date>
+			<name _type="string"><![CDATA[Cloak of Darkness]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/star-wars-the-clone-wars/cloak-of-darkness/episode/1235629/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[After handing over a captured Nute Gunray to Captain Argyus and his Senate Commandos, Luminara Unduli and Ahsoka Tano must thwart a Separatist boarding, lead by Asajj Ventress.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[The Clone Wars]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="36" _type="object">
+			<id _type="string"><![CDATA[49499]]></id>
+			<show_id _type="string"><![CDATA[348]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[7]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 02:00:00]]></date>
+			<name _type="string"><![CDATA[Land of Manson]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/cities-of-the-underworld/land-of-manson/episode/1240550/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[He was the mastermind of the most notorious murders in U.S. history. He terrified the world and plunged the city of Los Angeles into a state of paranoia and fear. He's Charles Manson, and the deserts around Los Angeles were his home--where he hoped the underground would be his haven. But Manson and his followers weren't the only dangers lurking beneath the streets of LA.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Cities of the Underworld]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="37" _type="object">
+			<id _type="string"><![CDATA[49305]]></id>
+			<show_id _type="string"><![CDATA[133]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 03:00:00]]></date>
+			<name _type="string"><![CDATA[Just A Sliver]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/brothers-and-sisters/just-a-sliver/episode/1227105/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[The Walkers encounter some conflicts in the schedules on Thankgiving; leaving Nora & Sarah alone to celebrate; Elizabeth endures a medical emergency that brings the family together.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Brothers & Sisters]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="38" _type="object">
+			<id _type="string"><![CDATA[49511]]></id>
+
+			<show_id _type="string"><![CDATA[376]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 03:00:00]]></date>
+			<name _type="string"><![CDATA[Blues From Laurel Canyon]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/californication/blues-from-laurel-canyon/episode/1236219/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Ashby throws a party for Mia for her book being published. Charlie wants a divorce. Becca is distraught after catching Damien two-timing on her.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-07 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Californication]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="39" _type="object">
+			<id _type="string"><![CDATA[44246]]></id>
+			<show_id _type="string"><![CDATA[407]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+
+			<episode _type="string"><![CDATA[12]]></episode>
+			<date _type="string"><![CDATA[2008-12-08 16:35:00]]></date>
+			<name _type="string"><![CDATA[Enemy of the Bane - Part 2]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-sarah-jane-adventures/enemy-of-the-bane---part-2/episode/1225543/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Luke's dreams are being tormented by visions of Mrs. Wormwood. The Sontarans are back for revenge. Sarah Jane must once agian call on an old friend.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 11:35:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Sarah Jane Adventures]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="40" _type="object">
+			<id _type="string"><![CDATA[33712]]></id>
+			<show_id _type="string"><![CDATA[387]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 01:00:00]]></date>
+
+			<name _type="string"><![CDATA[Chuck Versus the Delorean]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/chuck/chuck-versus-the-delorean/episode/1231668/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Sarah teams up with her father, a con artist.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Chuck]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="41" _type="object">
+			<id _type="string"><![CDATA[49505]]></id>
+			<show_id _type="string"><![CDATA[410]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[12]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 01:00:00]]></date>
+			<name _type="string"><![CDATA[Alpine Fields]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/terminator-the-sarah-connor-chronicles/alpine-fields/episode/1240397/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[Sarah and Cameron attempt to save a family whose fate links in with Derek in the future. Jesse fights for her life.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Sarah Connor Chronicles]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="42" _type="object">
+
+			<id _type="string"><![CDATA[49514]]></id>
+			<show_id _type="string"><![CDATA[378]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[13]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 01:00:00]]></date>
+			<name _type="string"><![CDATA[O Brother, Where Bart Thou?]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/gossip-girl/o-brother-where-bart-thou/episode/1240713/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[A sudden tragedy strikes the lives of every teen and parent on the Upper East Side.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Gossip Girl]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="43" _type="object">
+			<id _type="string"><![CDATA[49520]]></id>
+			<show_id _type="string"><![CDATA[402]]></show_id>
+
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 01:00:00]]></date>
+			<name _type="string"><![CDATA[The Vartabedian Conundrum]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-big-bang-theory/the-vartabedian-conundrum/episode/1240791/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Leonard seeks Penny's counsel when his relationship with Stephanie takes off faster than he'd like.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Big Bang Theory]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="44" _type="object">
+			<id _type="string"><![CDATA[49500]]></id>
+			<show_id _type="string"><![CDATA[179]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-09 01:30:00]]></date>
+			<name _type="string"><![CDATA[The Fight]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/how-i-met-your-mother/the-fight/episode/1240398/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Ted&mdash;to prove he's not a milquetoast&mdash;and Barney&mdash;to impress Robin&mdash;pick a fight with a group of guys sitting in the gang's favorite booth at MacLaren's.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 20:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[How I Met Your Mother]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="45" _type="object">
+			<id _type="string"><![CDATA[38817]]></id>
+			<show_id _type="string"><![CDATA[176]]></show_id>
+			<season _type="string"><![CDATA[3]]></season>
+			<episode _type="string"><![CDATA[12]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+			<name _type="string"><![CDATA[Our Father]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/heroes/our-father/episode/1230822/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Hiro and Claire unite in their bid to stop Arthur by traveling back in time. Peter and the Haitian must face Sylar in order to get to Arthur.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Heroes]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="46" _type="object">
+			<id _type="string"><![CDATA[48900]]></id>
+			<show_id _type="string"><![CDATA[422]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+			<name _type="string"><![CDATA[Unacceptable Risk]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-border/unacceptable-risk/episode/1235058/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[When a U.K. Tamil gang member enters the country for his son's life-saving surgery, ICS must deal with escalating gang violence.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[The Border]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="47" _type="object">
+			<id _type="string"><![CDATA[49405]]></id>
+
+			<show_id _type="string"><![CDATA[451]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[12]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+			<name _type="string"><![CDATA[All About the Ripple Effect]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/privileged/all-about-the-ripple-effect/episode/1238535/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Just as she's finally beginning to adjust to having a relationship with her father, Megan receives an unexpected visit from her mother. Meanwhile, Sage fights her feelings for Luis, and Will finds it difficult to comprehend Megan's family issues.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Privileged]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="48" _type="object">
+			<id _type="string"><![CDATA[49427]]></id>
+			<show_id _type="string"><![CDATA[276]]></show_id>
+			<season _type="string"><![CDATA[6]]></season>
+
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+			<name _type="string"><![CDATA[He Smelled the Ham, He Got Excited]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/two-and-a-half-men/he-smelled-the-ham-he-got-excited/episode/1238813/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Alan contemplates retiring when Evelyn states that she'll take care of Jake's college education.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Two and a Half Men]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="49" _type="object">
+			<id _type="string"><![CDATA[49504]]></id>
+			<show_id _type="string"><![CDATA[231]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[14]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+
+			<name _type="string"><![CDATA[Just Business]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/prison-break/just-business/episode/1233186/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Gretchen and Self wind up with Scylla (and a buyer).<br />
+Michael battles with the Company for Scylla.<br />
+Mahone asks some familiar faces for help.<br />
+T-Bag takes a couple of hostages.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Prison Break]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="50" _type="object">
+			<id _type="string"><![CDATA[49586]]></id>
+			<show_id _type="string"><![CDATA[475]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 02:00:00]]></date>
+			<name _type="string"><![CDATA[Who is the better jew?]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/kenny-vs.-spenny/who-is-the-better-jew/episode/1231648/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[In an episode, that some may find antisemitic, Kenny who speaks Hebrew, take son Spenny as they try to see who can be the better Jew. Kenny, able to speak the language, feels he has an advantage over Spenny, who was raised secular.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Kenny vs. Spenny]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="51" _type="object">
+
+			<id _type="string"><![CDATA[49409]]></id>
+			<show_id _type="string"><![CDATA[148]]></show_id>
+			<season _type="string"><![CDATA[7]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 03:00:00]]></date>
+			<name _type="string"><![CDATA[The Deluca Motel]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/csi-miami/the-deluca-motel/episode/1233653/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Horatio delves into Delko's past to find the killer who targets the motel Delko is staying at.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[C.S.I. Miami]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="52" _type="object">
+			<id _type="string"><![CDATA[49455]]></id>
+			<show_id _type="string"><![CDATA[459]]></show_id>
+
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[8]]></episode>
+			<date _type="string"><![CDATA[2008-12-09 03:00:00]]></date>
+			<name _type="string"><![CDATA[Love In All The Wrong Places]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/my-own-worst-enemy/love-in-all-the-wrong-places/episode/1239787/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[While on a mission in Angola, Edward and Raymond find long time American hostages. Mavis and Alistair Trumbull can't agree on exactly how they want to go about bringing them home.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[My Own Worst Enemy]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="53" _type="object">
+			<id _type="string"><![CDATA[49594]]></id>
+			<show_id _type="string"><![CDATA[322]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[20]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-09 03:00:00]]></date>
+			<name _type="string"><![CDATA[Episode 18]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-hills/episode-18/episode/1242018/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Whitney gets an incredible job opportunity in New York.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-08 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[The Hills]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="54" _type="object">
+			<id _type="string"><![CDATA[49490]]></id>
+			<show_id _type="string"><![CDATA[178]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-10 01:00:00]]></date>
+			<name _type="string"><![CDATA[Joy to the World]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/house/joy-to-the-world/episode/1240256/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[House and his team deal with a bullied girl who collapses during her school's Christmas program. Meanwhile, Foreman and Thirteen grow closer during the Huntington's disease drug trials, House gives a patient a gift, the staff wonder who gave House a special gift, and Cuddy gets an unexpected gift.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-09 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[House]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="55" _type="object">
+			<id _type="string"><![CDATA[49506]]></id>
+			<show_id _type="string"><![CDATA[113]]></show_id>
+			<season _type="string"><![CDATA[8]]></season>
+			<episode _type="string"><![CDATA[3]]></episode>
+			<date _type="string"><![CDATA[2008-12-10 02:00:00]]></date>
+			<name _type="string"><![CDATA[Andy's Proposal]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/according-to-jim/andys-proposal/episode/1240775/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Jim convinces Andy to propose to Emily before it's too late, but when he stumbles upon Emily having dinner with some man, he quickly rethinks his advice.]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-09 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[According to Jim]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="56" _type="object">
+			<id _type="string"><![CDATA[49554]]></id>
+
+			<show_id _type="string"><![CDATA[414]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[28]]></episode>
+			<date _type="string"><![CDATA[2008-12-10 02:00:00]]></date>
+			<name _type="string"><![CDATA[Gourd Maker]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/dirty-jobs/gourd-maker/episode/1239867/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[Lake cleaner and gourd maker.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-09 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Dirty Jobs]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="57" _type="object">
+			<id _type="string"><![CDATA[49216]]></id>
+			<show_id _type="string"><![CDATA[288]]></show_id>
+			<season _type="string"><![CDATA[7]]></season>
+
+			<episode _type="string"><![CDATA[0]]></episode>
+			<date _type="string"><![CDATA[2008-12-10 03:00:00]]></date>
+			<name _type="string"><![CDATA[Cloudy With a Chance of Gettysburg]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/without-a-trace/cloudy-with-a-chance-of-gettysburg/episode/1217069/summary.html]]></summary_url>
+			<episode_summary _type="string" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-09 22:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Without a Trace]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="58" _type="object">
+			<id _type="string"><![CDATA[49402]]></id>
+			<show_id _type="string"><![CDATA[199]]></show_id>
+			<season _type="string"><![CDATA[10]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-10 03:00:00]]></date>
+
+			<name _type="string"><![CDATA[Smut]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/law-and-order-special-victims-unit/smut/episode/1238514/summary.html]]></summary_url>
+			<episode_summary _type="NULL" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-09 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Law & Order: SVU]]></show_name>
+
+		</entry>
+		<entry _class="TVEpisode" _originalKey="59" _type="object">
+			<id _type="string"><![CDATA[49301]]></id>
+			<show_id _type="string"><![CDATA[390]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 01:00:00]]></date>
+			<name _type="string"><![CDATA[The Legend of Merle McQuoddy]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/pushing-daisies/the-legend-of-merle-mcquoddy/episode/1229659/summary.html]]></summary_url>
+
+			<episode_summary _type="string"><![CDATA[The Papen County Lighthouse keeper, Nora McQuoddy, is discovered dead, and her son hires Emerson to find the killer. Meanwhile, Charles Charles pays a visit.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Pushing Daisies]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="60" _type="object">
+
+			<id _type="string"><![CDATA[49502]]></id>
+			<show_id _type="string"><![CDATA[217]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 01:00:00]]></date>
+			<name _type="string"><![CDATA[Unidentified Funk]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/the-new-adventures-of-old-christine/unidentified-funk/episode/1240115/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[The parent company of Christine and Barb's gym franchise comes for an inspection and discovers that they have broken a contractual clause, risking the entire business.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 20:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Old Christine]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="61" _type="object">
+			<id _type="string"><![CDATA[49513]]></id>
+			<show_id _type="string"><![CDATA[462]]></show_id>
+
+			<season _type="string"><![CDATA[1]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 01:30:00]]></date>
+			<name _type="string"><![CDATA[Gary Goes First]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/gary-unmarried/gary-goes-first/episode/1240664/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[When Gary discovers that Allison is going to take the kids to their first concert, a not-so-friendly competition kicks off. Gary tries to out-do Allison by exposing the kids to other first experiences, such as Tommy's first shave and buying Louise her first bra.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 20:30:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Gary Unmarried]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="62" _type="object">
+			<id _type="string"><![CDATA[49411]]></id>
+			<show_id _type="string"><![CDATA[144]]></show_id>
+			<season _type="string"><![CDATA[4]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+
+			<date _type="string"><![CDATA[2008-12-11 02:00:00]]></date>
+			<name _type="string"><![CDATA[Brothers in Arms]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/criminal-minds/brothers-in-arms/episode/1238700/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[As a former cop, Morgan takes it personally when a serial killer specifically targets officers on the police force in Phoenix, Arizona.<br />
+<br />]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+
+			<show_name _type="string"><![CDATA[Criminal Minds]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="63" _type="object">
+			<id _type="string"><![CDATA[49438]]></id>
+			<show_id _type="string"><![CDATA[393]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[11]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 02:00:00]]></date>
+			<name _type="string"><![CDATA[Canyon Flowers]]></name>
+
+			<summary_url _type="string"><![CDATA[http://www.tv.com/life/canyon-flowers/episode/1239512/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[A food bank deliveryman is found dead, in a suburban home. The bizzare thing is that he was buried with flower petals around his head and from a distance the victim looks like a large flower. Crews and Reese believe that the murder is connected to a 70s cult. Meanwhile, Crews confronts Mickey Rayborn about his role in the conspiracy.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Life]]></show_name>
+		</entry>
+
+		<entry _class="TVEpisode" _originalKey="64" _type="object">
+			<id _type="string"><![CDATA[49480]]></id>
+			<show_id _type="string"><![CDATA[382]]></show_id>
+			<season _type="string"><![CDATA[2]]></season>
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 02:00:00]]></date>
+			<name _type="string"><![CDATA[Know When to Fold]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/private-practice/know-when-to-fold/episode/1240184/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[TBA]]></episode_summary>
+
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 21:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Private Practice]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="65" _type="object">
+			<id _type="string"><![CDATA[34899]]></id>
+
+			<show_id _type="string"><![CDATA[149]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[10]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 03:00:00]]></date>
+			<name _type="string"><![CDATA[The Triangle]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/csi-ny/the-triangle/episode/1233275/summary.html]]></summary_url>
+			<episode_summary _type="NULL" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[CSI: NY]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="66" _type="object">
+			<id _type="string"><![CDATA[49483]]></id>
+			<show_id _type="string"><![CDATA[473]]></show_id>
+			<season _type="string"><![CDATA[1]]></season>
+
+			<episode _type="string"><![CDATA[9]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 03:00:00]]></date>
+			<name _type="string"><![CDATA[Wearable Airbag]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/prototype-this/wearable-airbag/episode/1240046/summary.html]]></summary_url>
+			<episode_summary _type="string"><![CDATA[The team has two weeks to develop an airbag for high-rise construction workers that can sense the onset of free fall and deploy within a second.]]></episode_summary>
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 22:00:00]]></ep_tzfix_date>
+
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Prototype This!]]></show_name>
+		</entry>
+		<entry _class="TVEpisode" _originalKey="67" _type="object">
+			<id _type="string"><![CDATA[49486]]></id>
+			<show_id _type="string"><![CDATA[430]]></show_id>
+			<season _type="string"><![CDATA[5]]></season>
+			<episode _type="string"><![CDATA[5]]></episode>
+			<date _type="string"><![CDATA[2008-12-11 03:00:00]]></date>
+
+			<name _type="string"><![CDATA[Gail's Bridal Shower]]></name>
+			<summary_url _type="string"><![CDATA[http://www.tv.com/top-chef/gails-bridal-shower/episode/1240047/summary.html]]></summary_url>
+			<episode_summary _type="string" />
+			<ratetotal _type="string"><![CDATA[0]]></ratetotal>
+			<votes _type="string"><![CDATA[0]]></votes>
+			<timezone _type="string"><![CDATA[US/Eastern]]></timezone>
+			<ep_tzfix_date _type="string"><![CDATA[2008-12-10 22:00:00]]></ep_tzfix_date>
+			<errorcode _type="NULL" />
+			<show_name _type="string"><![CDATA[Top Chef]]></show_name>
+
+		</entry>
+	</episodes>
+</tvdata>
+
