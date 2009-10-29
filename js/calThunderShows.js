@@ -314,7 +314,7 @@ calThunderShows.prototype = {
 		known_networks = (known_networks != null) ? JSON.parse(known_networks) : new AssociativeArray();
 
 		// Use xpath to get all elements with class TVEpisode
-		var vevents = aDom.evaluate("//*[@_class='TVEpisode']", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+		var vevents = aDom.evaluate("//entry", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 
 		var vevent;
 		var shows = new Array();
