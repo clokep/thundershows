@@ -314,7 +314,7 @@ calThunderShows.prototype = {
 		known_networks = (known_networks != null) ? JSON.parse(known_networks) : new AssociativeArray();
 
 		// Use xpath to get all elements with class TVEpisode
-		var vevents = aDom.evaluate("//entry", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
+		var vevents = aDom.evaluate(".//entry", aDom, null, Components.interfaces.nsIDOMXPathResult.UNORDERED_NODE_ITERATOR_TYPE, null);
 
 		var vevent;
 		var shows = new Array();
@@ -402,7 +402,7 @@ calThunderShows.prototype = {
 		// Find ThunderShows
 		var extension = extmgr.getItemForID("{11b7da5a-8458-4cf6-a067-f75c19562317}");
 		if (extension != null) {
-			// If extension exists (this isn't be neccessary -- must exist for the calendar to load?)
+			// If extension exists (this shouldn't be neccessary, since the extension must exist for the calendar to load?)
 			var extensionVersion = extension.version;
 			var calendarVersion = this.getPropertySafe("thundershows.version", "0.3");
 

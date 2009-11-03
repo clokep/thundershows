@@ -68,6 +68,7 @@ function cTS_onLoad() {
 		var filterList = document.getElementById("thundershows-filter-list");
 		gFilters = gCalendar.getProperty("thundershows.filters");
 		if (gFilters != null) {
+			alert(gFilters); // DEBUG
 			// Can only do it if filters exist
 			gFilters = Filter.load(gFilters);
 			for (var i in gFilters) {
@@ -124,6 +125,7 @@ function cTS_onAcceptDialog() {
 		var filters = Filter.save(gFilters);
 		alert(filters);
 		gCalendar.setProperty("thundershows.filters", filters);
+		alert(gCalendar.getProperty("thundershows.filters"));
 
 		// Save offset settings
 		var offsetPicker = document.getElementById("thundershows-offset-picker");
