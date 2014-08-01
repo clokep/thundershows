@@ -1,13 +1,13 @@
-------------------------------------------
 Credits
-------------------------------------------
+=======
+
 A huge thanks to all contributors of this extensions!
 
 Philipp Kewisch
 	The author of the hCalendar Provider which served as a template for
 	ThunderShows, also the author of Provider for Google Calendar which
 	ThunderShows uses a function from
-Ingo Müller
+Ingo MÃ¼ller
 	The author of the ThunderBirthDay calendar provider which served as a
 	learning process reverse engineering the provider code
 	[http://ingomueller.net]
@@ -19,30 +19,26 @@ B. Agricola
 	to add a few fields to it for use)
 	[http://on-my.tv/]
 
-------------------------------------------
 Usage
-------------------------------------------
+=====
 
 1.  Create a new calendar and choose a remote calendar with "ThunderShows" as the provider
 2.  Go into the options of that calendar (right click > "Properties")
 3.  Choose the "ThunderShows Provider" tab
 4.  Add the shows you would like to have appear as events (see http://on-my.tv/show-select)
 
-------------------------------------------
 Known issues
-------------------------------------------
+============
 
-See: http://code.google.com/p/thundershows/issues/list?can=2&q=label%3AType-Defect
+See: https://bitbucket.org/clokep/thundershows/issues?kind=bug&status=open&status=new
 
-------------------------------------------
 Possible new features
-------------------------------------------
+=====================
 
-See: http://code.google.com/p/thundershows/issues/list?can=2&q=label%3AType-Enhancement
+See: https://bitbucket.org/clokep/thundershows/issues?kind=enhancement&status=new&status=open
 
-------------------------------------------
 Resources for developers
-------------------------------------------
+========================
 
 * http://www.ietf.org/rfc/rfc3339.txt -- RFC3339 Date/Time format
 * http://mxr.mozilla.org/comm-central/source/calendar/ -- Source code of Lightning
